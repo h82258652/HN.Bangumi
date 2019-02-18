@@ -4,19 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5C82A15C-A505-42D2-A31E-7A5B537AFFB9}</ProjectGuid>
-    <OutputType>winmdobj</OutputType>
+    <ProjectGuid>{6CD071E7-FE8E-47C3-BA4F-E5F5008F318E}</ProjectGuid>
+    <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HN.Bangumi.Uwp.BackgroundTasks</RootNamespace>
-    <AssemblyName>HN.Bangumi.Uwp.BackgroundTasks</AssemblyName>
+    <RootNamespace>HN.Bangumi.API</RootNamespace>
+    <AssemblyName>HN.Bangumi.API.Uwp</AssemblyName>
     <DefaultLanguage>zh-CN</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.16299.0</TargetPlatformVersion>
-    <TargetPlatformMinVersion>10.0.16299.0</TargetPlatformMinVersion>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.17763.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
-    <AllowCrossPlatformRetargeting>false</AllowCrossPlatformRetargeting>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -121,22 +120,25 @@
     <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Authorization\UwpAuthorizationProvider.cs" />
+    <Compile Include="BangumiClientBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RefreshTokenTask.cs" />
+    <Compile Include="UwpAccessTokenStorage.cs" />
+    <EmbeddedResource Include="Properties\HN.Bangumi.API.Uwp.rd.xml" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options">
+      <Version>2.2.0</Version>
+    </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.1.9</Version>
     </PackageReference>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\HN.Bangumi.API.Core\HN.Bangumi.API.Core.csproj">
       <Project>{4edf132f-64be-48f2-889e-0d5133a5e3ad}</Project>
       <Name>HN.Bangumi.API.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HN.Bangumi.API.Uwp.BackgroundTasks\HN.Bangumi.API.Uwp.BackgroundTasks.csproj">
-      <Project>{d5da721a-c0ef-4338-bd0c-c035006501ae}</Project>
-      <Name>HN.Bangumi.API.Uwp.BackgroundTasks</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">

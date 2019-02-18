@@ -5,5 +5,7 @@
         string AppKey { get; }
 
         string AppSecret { get; }
+
+        string RedirectUri { get; }
     }
 }
