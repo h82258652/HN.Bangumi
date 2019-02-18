@@ -21,6 +21,7 @@ namespace HN.Bangumi.Uwp.ViewModels
         {
             var containerBuilder = new ContainerBuilder();
 
+            containerBuilder.RegisterType<AppConfiguration>().As<IAppConfiguration>();
             containerBuilder.RegisterType<AppSettings>().As<IAppSettings>();
 
             containerBuilder.RegisterInstance(CreateNavigationService());
