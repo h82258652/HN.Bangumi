@@ -1,12 +1,25 @@
 ﻿using System;
 using System.Web;
 using System.Windows.Forms;
+using Microsoft.Win32;
 
 namespace HN.Bangumi.API.Authorization
 {
     public partial class AuthorizationDialog : Form
     {
         private readonly Uri _authorizationUri;
+
+        static AuthorizationDialog()
+        {
+            if (!Environment.Is64BitOperatingSystem)
+            {
+                Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION", Application.ExecutablePath, 11001);
+            }
+            else
+            {
+                Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION", Application.ExecutablePath, 11001);
+            }
+        }
 
         public AuthorizationDialog(Uri authorizationUri)
         {
@@ -38,7 +51,13 @@ namespace HN.Bangumi.API.Authorization
         private bool CheckUrlQuery(Uri url)
         {
             var queryString = url.Query;
-            queryString = queryString.Substring(queryString.LastIndexOf('?'));
+            var lastIndex = queryString.LastIndexOf('?');
+            if (lastIndex < 0)
+            {
+                return false;
+            }
+
+            queryString = queryString.Substring(lastIndex);
             var query = HttpUtility.ParseQueryString(queryString);
             var code = query.Get("code");
             if (code == null)

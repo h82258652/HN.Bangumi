@@ -30,6 +30,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HN.Bangumi.API.Uwp.Backgrou
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HN.Bangumi.API.Desktop", "src\HN.Bangumi.API.Desktop\HN.Bangumi.API.Desktop.csproj", "{2EB28AD3-8C76-4EB9-9766-F808A11DA4E0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tester", "src\Tester\Tester.csproj", "{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -270,6 +272,26 @@ Global
 		{2EB28AD3-8C76-4EB9-9766-F808A11DA4E0}.Release|x64.Build.0 = Release|Any CPU
 		{2EB28AD3-8C76-4EB9-9766-F808A11DA4E0}.Release|x86.ActiveCfg = Release|Any CPU
 		{2EB28AD3-8C76-4EB9-9766-F808A11DA4E0}.Release|x86.Build.0 = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|ARM.Build.0 = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|ARM64.ActiveCfg = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|ARM64.Build.0 = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|x64.Build.0 = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Debug|x86.Build.0 = Debug|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|ARM.ActiveCfg = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|ARM.Build.0 = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|ARM64.ActiveCfg = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|ARM64.Build.0 = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|x64.ActiveCfg = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|x64.Build.0 = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|x86.ActiveCfg = Release|Any CPU
+		{A1A3E2DF-9589-4DEE-AC3A-71AA41BAB650}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
