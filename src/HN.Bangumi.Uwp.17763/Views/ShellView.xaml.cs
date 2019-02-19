@@ -17,7 +17,7 @@ namespace HN.Bangumi.Uwp.Views
             }
             else
             {
-
+                var invokedItem = args.InvokedItem;
             }
         }
     }

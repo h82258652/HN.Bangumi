@@ -3,6 +3,7 @@ using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Views;
 using HN.Bangumi.Configuration;
+using HN.Bangumi.Uwp.Views;
 using HN.Bangumi.ViewModels;
 
 namespace HN.Bangumi.Uwp.ViewModels
@@ -33,6 +34,7 @@ namespace HN.Bangumi.Uwp.ViewModels
         private static INavigationService CreateNavigationService()
         {
             var navigationService = new NavigationService();
+            navigationService.Configure(ViewKeys.SettingViewKey, typeof(SettingView));
             return navigationService;
         }
     }

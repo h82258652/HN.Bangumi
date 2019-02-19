@@ -3,13 +3,12 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      mc:Ignorable="d"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      mc:Ignorable="d">
     <Grid>
         <NavigationView ItemInvoked="NavigationView_ItemInvoked">
-
-
-            <Frame x:Name="ContentFrame"></Frame>
+            <NavigationView.MenuItems />
+            <Frame x:Name="ContentFrame" />
         </NavigationView>
     </Grid>
 </Page>
