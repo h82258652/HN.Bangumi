@@ -8,6 +8,6 @@ namespace HN.Bangumi.Configuration
 
         public string AppSecret => "2b709137d48c1fb50895f2defd017cba";
 
-        public string RedirectUri => throw new NotImplementedException();
+        public string RedirectUri => "https://github.com/";
     }
 }
