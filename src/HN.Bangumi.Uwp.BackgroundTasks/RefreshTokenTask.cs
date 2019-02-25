@@ -9,7 +9,9 @@ namespace HN.Bangumi.Uwp.BackgroundTasks
     {
         public RefreshTokenTask()
         {
-            
+            var bangumiClientBuilder = new BangumiClientBuilder();
+            bangumiClientBuilder.WithConfig("", "", "");
+      
         }
 
         public void Run(IBackgroundTaskInstance taskInstance)
