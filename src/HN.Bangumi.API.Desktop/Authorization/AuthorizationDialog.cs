@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Web;
 using System.Windows.Forms;
+using CefSharp;
 using CefSharp.WinForms;
 
 namespace HN.Bangumi.API.Authorization
@@ -28,7 +29,7 @@ namespace HN.Bangumi.API.Authorization
         }
 
         public bool IsHttpError { get; private set; }
-        
+
         private bool CheckUrlQuery(Uri url)
         {
             var queryString = url.Query;
@@ -51,12 +52,12 @@ namespace HN.Bangumi.API.Authorization
             return true;
         }
 
-        private void WebBrowser_AddressChanged(object sender, CefSharp.AddressChangedEventArgs e)
+        private void WebBrowser_AddressChanged(object sender, AddressChangedEventArgs e)
         {
             CheckUrlQuery(new Uri(e.Address));
         }
 
-        private void WebBrowser_LoadError(object sender, CefSharp.LoadErrorEventArgs e)
+        private void WebBrowser_LoadError(object sender, LoadErrorEventArgs e)
         {
             if (CheckUrlQuery(new Uri(e.FailedUrl)))
             {
