@@ -1,6 +1,8 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using HN.Bangumi.API;
+using HN.Bangumi.API.Models;
 using HN.Bangumi.Configuration;
 
 namespace Tester
@@ -23,12 +25,21 @@ namespace Tester
                 .UseDefaultAuthorizationProvider()
                 .UseDefaultAccessTokenStorage()
                 .Build();
-
+            
             await client.SignInAsync();
 
             var isSignIn = client.IsSignIn;
 
             var userId = client.UserId;
+
+            try
+            {
+                var json = await client.UpdateStatus(850148, EpStatus.Watched);
+            }
+            catch (Exception ex)
+            {
+                Debugger.Break();
+            }
 
             Debugger.Break();
         }
