@@ -1,12 +1,18 @@
 ﻿using System;
+using Windows.ApplicationModel.Background;
 using HN.Bangumi.API;
 using Microsoft.Extensions.Options;
 
 namespace HN.Bangumi.Uwp.BackgroundTasks
 {
-    internal sealed class RefreshTokenTask : RefreshTokenTaskBase
+    public sealed class RefreshTokenTask : IBackgroundTask
     {
-        public RefreshTokenTask(IOptions<BangumiOptions> bangumiOptions, IAccessTokenStorage accessTokenStorage) : base(bangumiOptions, accessTokenStorage)
+        public RefreshTokenTask()
+        {
+            
+        }
+
+        public void Run(IBackgroundTaskInstance taskInstance)
         {
             throw new NotImplementedException();
         }
