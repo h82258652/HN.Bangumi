@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Net.Http;
+using System.Threading;
 using System.Threading.Tasks;
 using HN.Bangumi.API.Authorization;
+using HN.Bangumi.API.Http;
 using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 
 namespace HN.Bangumi.API
 {
@@ -27,6 +31,34 @@ namespace HN.Bangumi.API
                 }
 
                 return accessToken.UserId;
+            }
+        }
+
+        public Task<T> GetAsync<T>(string uri, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return SendAsync<T>(new HttpRequestMessage(HttpMethod.Get, uri), cancellationToken);
+        }
+
+        public Task<T> PostAsync<T>(string uri, HttpContent content, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return SendAsync<T>(new HttpRequestMessage(HttpMethod.Post, uri)
+            {
+                Content = content
+            }, cancellationToken);
+        }
+
+        public async Task<T> SendAsync<T>(HttpRequestMessage request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            using (var client = new BangumiHttpClient(_signInManager))
+            {
+                var response = await client.SendAsync(request, cancellationToken);
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<T>(json);
             }
         }
 
