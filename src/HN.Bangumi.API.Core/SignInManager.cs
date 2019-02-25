@@ -52,10 +52,12 @@ namespace HN.Bangumi.API
 
             accessToken = new AccessToken
             {
-                ExpiresAt = requestTime.AddSeconds(authorizationResult.ExiresIn).AddMinutes(-5),// 5 分钟用作缓冲
-                UserId = authorizationResult.UserId,
                 Value = authorizationResult.AccessToken,
-                RefreshToken = authorizationResult.RefreshToken
+                ExpiresAt = requestTime.AddSeconds(authorizationResult.ExiresIn).AddMinutes(-5),// 5 分钟用作缓冲
+                TokenType = authorizationResult.TokenType,
+                Scope = authorizationResult.Scope,
+                RefreshToken = authorizationResult.RefreshToken,
+                UserId = authorizationResult.UserId
             };
             _accessTokenStorage.Save(accessToken);
             return accessToken;
