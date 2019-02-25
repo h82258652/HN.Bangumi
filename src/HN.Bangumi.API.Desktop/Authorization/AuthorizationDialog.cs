@@ -1,26 +1,12 @@
 ﻿using System;
 using System.Web;
 using System.Windows.Forms;
-using Microsoft.Win32;
+using CefSharp.WinForms;
 
 namespace HN.Bangumi.API.Authorization
 {
     public partial class AuthorizationDialog : Form
     {
-        private readonly Uri _authorizationUri;
-
-        static AuthorizationDialog()
-        {
-            if (!Environment.Is64BitOperatingSystem)
-            {
-                Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Wow6432Node\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION", Application.ExecutablePath, 11001);
-            }
-            else
-            {
-                Registry.SetValue(@"HKEY_CURRENT_USER\SOFTWARE\Microsoft\Internet Explorer\MAIN\FeatureControl\FEATURE_BROWSER_EMULATION", Application.ExecutablePath, 11001);
-            }
-        }
-
         public AuthorizationDialog(Uri authorizationUri)
         {
             if (authorizationUri == null)
@@ -28,9 +14,11 @@ namespace HN.Bangumi.API.Authorization
                 throw new ArgumentNullException(nameof(authorizationUri));
             }
 
-            _authorizationUri = authorizationUri;
-
             InitializeComponent();
+            var webBrowser = new ChromiumWebBrowser(authorizationUri.ToString());
+            webBrowser.AddressChanged += WebBrowser_AddressChanged;
+            webBrowser.LoadError += WebBrowser_LoadError;
+            panel.Controls.Add(webBrowser);
         }
 
         public string AuthorizationCode
@@ -40,14 +28,7 @@ namespace HN.Bangumi.API.Authorization
         }
 
         public bool IsHttpError { get; private set; }
-
-        private void AuthorizationDialog_Shown(object sender, EventArgs e)
-        {
-            ((SHDocVw.WebBrowser)webBrowser.ActiveXInstance).NavigateError += WebBrowser_NavigateError;
-
-            webBrowser.Navigate(_authorizationUri);
-        }
-
+        
         private bool CheckUrlQuery(Uri url)
         {
             var queryString = url.Query;
@@ -70,14 +51,14 @@ namespace HN.Bangumi.API.Authorization
             return true;
         }
 
-        private void WebBrowser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        private void WebBrowser_AddressChanged(object sender, CefSharp.AddressChangedEventArgs e)
         {
-            CheckUrlQuery(e.Url);
+            CheckUrlQuery(new Uri(e.Address));
         }
 
-        private void WebBrowser_NavigateError(object pDisp, ref object URL, ref object Frame, ref object StatusCode, ref bool Cancel)
+        private void WebBrowser_LoadError(object sender, CefSharp.LoadErrorEventArgs e)
         {
-            if (CheckUrlQuery(new Uri((string)URL)))
+            if (CheckUrlQuery(new Uri(e.FailedUrl)))
             {
                 return;
             }

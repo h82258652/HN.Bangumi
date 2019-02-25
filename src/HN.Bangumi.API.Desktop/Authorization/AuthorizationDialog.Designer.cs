@@ -28,35 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.webBrowser = new System.Windows.Forms.WebBrowser();
+            this.panel = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
-            // webBrowser
+            // panel
             // 
-            this.webBrowser.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.webBrowser.Location = new System.Drawing.Point(0, 0);
-            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser.Name = "webBrowser";
-            this.webBrowser.Size = new System.Drawing.Size(597, 343);
-            this.webBrowser.TabIndex = 0;
-            this.webBrowser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.WebBrowser_Navigated);
+            this.panel.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel.Location = new System.Drawing.Point(0, 0);
+            this.panel.Name = "panel";
+            this.panel.Size = new System.Drawing.Size(1194, 686);
+            this.panel.TabIndex = 0;
             // 
             // AuthorizationDialog
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(12F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(597, 343);
-            this.Controls.Add(this.webBrowser);
+            this.ClientSize = new System.Drawing.Size(1194, 686);
+            this.Controls.Add(this.panel);
+            this.Margin = new System.Windows.Forms.Padding(6);
             this.Name = "AuthorizationDialog";
             this.ShowIcon = false;
             this.Text = "正在连接到服务";
-            this.Shown += new System.EventHandler(this.AuthorizationDialog_Shown);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.WebBrowser webBrowser;
+        private System.Windows.Forms.Panel panel;
     }
 }
