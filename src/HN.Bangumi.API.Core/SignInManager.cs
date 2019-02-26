@@ -12,9 +12,9 @@ namespace HN.Bangumi.API
         private readonly IAuthorizationProvider _authorizationProvider;
         private readonly BangumiOptions _bangumiOptions;
 
-        internal SignInManager(IOptions<BangumiOptions> bangumiOptions, IAuthorizationProvider authorizationProvider, IAccessTokenStorage accessTokenStorage)
+        internal SignInManager(IOptions<BangumiOptions> bangumiOptionsAccesser, IAuthorizationProvider authorizationProvider, IAccessTokenStorage accessTokenStorage)
         {
-            _bangumiOptions = bangumiOptions.Value;
+            _bangumiOptions = bangumiOptionsAccesser.Value;
             _authorizationProvider = authorizationProvider;
             _accessTokenStorage = accessTokenStorage;
         }
@@ -38,12 +38,12 @@ namespace HN.Bangumi.API
             return accessToken;
         }
 
-        internal async Task<AccessToken> SignInAndGetAccessTokenAsync()
+        internal async Task SignInAsync()
         {
             var accessToken = GetAccessToken();
             if (accessToken != null)
             {
-                return accessToken;
+                return;
             }
 
             var requestTime = DateTime.Now;
@@ -60,12 +60,6 @@ namespace HN.Bangumi.API
                 UserId = authorizationResult.UserId
             };
             _accessTokenStorage.Save(accessToken);
-            return accessToken;
-        }
-
-        internal Task SignInAsync()
-        {
-            return SignInAndGetAccessTokenAsync();
         }
 
         internal Task SignOutAsync()

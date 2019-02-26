@@ -13,9 +13,9 @@ namespace HN.Bangumi.API
         private readonly IAccessTokenStorage _accessTokenStorage;
         private readonly BangumiOptions _bangumiOptions;
 
-        protected RefreshTokenTaskBase(IOptions<BangumiOptions> bangumiOptions, IAccessTokenStorage accessTokenStorage)
+        protected RefreshTokenTaskBase(IOptions<BangumiOptions> bangumiOptionsAccesser, IAccessTokenStorage accessTokenStorage)
         {
-            _bangumiOptions = bangumiOptions.Value;
+            _bangumiOptions = bangumiOptionsAccesser.Value;
             _accessTokenStorage = accessTokenStorage;
         }
 

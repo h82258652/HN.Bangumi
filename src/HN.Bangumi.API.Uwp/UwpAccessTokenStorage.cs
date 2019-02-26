@@ -32,7 +32,6 @@ namespace HN.Bangumi.API
             if (accessTokenPasswordCredential == null ||
                 expiresAtPasswordCredential == null ||
                 tokenTypePasswordCredential == null ||
-                scopePasswordCredential == null ||
                 refreshTokenPasswordCredential == null ||
                 userIdPasswordCredential == null)
             {
@@ -42,7 +41,7 @@ namespace HN.Bangumi.API
             accessTokenPasswordCredential.RetrievePassword();
             expiresAtPasswordCredential.RetrievePassword();
             tokenTypePasswordCredential.RetrievePassword();
-            scopePasswordCredential.RetrievePassword();
+            scopePasswordCredential?.RetrievePassword();
             refreshTokenPasswordCredential.RetrievePassword();
             userIdPasswordCredential.RetrievePassword();
 
@@ -51,7 +50,7 @@ namespace HN.Bangumi.API
                 Value = accessTokenPasswordCredential.Password,
                 ExpiresAt = DateTime.Parse(expiresAtPasswordCredential.Password),
                 TokenType = tokenTypePasswordCredential.Password,
-                Scope = scopePasswordCredential.Password,
+                Scope = scopePasswordCredential?.Password,
                 RefreshToken = refreshTokenPasswordCredential.Password,
                 UserId = long.Parse(userIdPasswordCredential.Password)
             };
@@ -68,7 +67,10 @@ namespace HN.Bangumi.API
             passwordVault.Add(new PasswordCredential(BangumiPasswordVaultResourceName, "AccessToken", accessToken.Value));
             passwordVault.Add(new PasswordCredential(BangumiPasswordVaultResourceName, "ExpiresAt", accessToken.ExpiresAt.ToString("O")));
             passwordVault.Add(new PasswordCredential(BangumiPasswordVaultResourceName, "TokenType", accessToken.TokenType));
-            passwordVault.Add(new PasswordCredential(BangumiPasswordVaultResourceName, "Scope", accessToken.Scope));
+            if (accessToken.Scope != null)
+            {
+                passwordVault.Add(new PasswordCredential(BangumiPasswordVaultResourceName, "Scope", accessToken.Scope));
+            }
             passwordVault.Add(new PasswordCredential(BangumiPasswordVaultResourceName, "RefreshToken", accessToken.RefreshToken));
             passwordVault.Add(new PasswordCredential(BangumiPasswordVaultResourceName, "UserId", accessToken.UserId.ToString()));
         }

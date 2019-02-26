@@ -1,10 +1,20 @@
 ﻿<Application x:Class="HN.Bangumi.Uwp.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="using:WinRTXamlToolkit.Converters"
+             xmlns:localConverters="using:HN.Bangumi.Uwp.Converters"
              xmlns:viewModels="using:HN.Bangumi.Uwp.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
             <viewModels:ViewModelLocator x:Key="Locator" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="InversedBooleanToVisibilityConverter"
+                                                     IsInversed="True" />
+            <localConverters:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" />
+            <localConverters:IsNullToVisibilityConverter x:Key="IsNullToVisibilityConverter" />
+            <localConverters:IsNullToVisibilityConverter x:Key="InversedIsNullToVisibilityConverter"
+                                                         IsInversed="True" />
+            <localConverters:SubjectNameConverter x:Key="SubjectNameConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

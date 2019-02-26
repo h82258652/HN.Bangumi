@@ -1,4 +1,6 @@
-﻿namespace HN.Bangumi.Uwp.Views
+﻿using HN.Bangumi.ViewModels;
+
+namespace HN.Bangumi.Uwp.Views
 {
     public sealed partial class SettingView
     {
@@ -6,5 +8,7 @@
         {
             InitializeComponent();
         }
+
+        public SettingViewModel ViewModel => (SettingViewModel) DataContext;
     }
 }

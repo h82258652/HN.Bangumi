@@ -11,11 +11,13 @@ namespace HN.Bangumi.API
 {
     internal class BangumiClient : IBangumiClient
     {
+        private readonly IOptions<BangumiOptions> _bangumiOptionsAccesser;
         private readonly SignInManager _signInManager;
 
-        public BangumiClient(IOptions<BangumiOptions> bangumiOptions, IAuthorizationProvider authorizationProvider, IAccessTokenStorage accessTokenStorage)
+        public BangumiClient(IOptions<BangumiOptions> bangumiOptionsAccesser, IAuthorizationProvider authorizationProvider, IAccessTokenStorage accessTokenStorage)
         {
-            _signInManager = new SignInManager(bangumiOptions, authorizationProvider, accessTokenStorage);
+            _bangumiOptionsAccesser = bangumiOptionsAccesser;
+            _signInManager = new SignInManager(bangumiOptionsAccesser, authorizationProvider, accessTokenStorage);
         }
 
         public bool IsSignIn => _signInManager.IsSignIn;
@@ -54,7 +56,7 @@ namespace HN.Bangumi.API
                 throw new ArgumentNullException(nameof(request));
             }
 
-            using (var client = new BangumiHttpClient(_signInManager))
+            using (var client = new BangumiHttpClient(_signInManager, _bangumiOptionsAccesser))
             {
                 var response = await client.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();

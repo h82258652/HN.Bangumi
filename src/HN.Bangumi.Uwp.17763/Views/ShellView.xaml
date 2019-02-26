@@ -3,11 +3,61 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Shell}"
       mc:Ignorable="d">
     <Grid>
         <NavigationView ItemInvoked="NavigationView_ItemInvoked">
-            <NavigationView.MenuItems />
+            <NavigationView.AutoSuggestBox>
+                <AutoSuggestBox PlaceholderText="搜索"
+                                QueryIcon="Find"
+                                QuerySubmitted="AutoSuggestBox_QuerySubmitted" />
+            </NavigationView.AutoSuggestBox>
+            <NavigationView.PaneCustomContent>
+                <Grid>
+                    <Grid Visibility="{Binding Path=IsSignIn, Converter={StaticResource InversedBooleanToVisibilityConverter}}">
+                        <Button Command="{Binding Path=SignInCommand}"
+                                Content="登录" />
+                    </Grid>
+                    <Grid Visibility="{Binding Path=IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0"
+                              Width="40"
+                              Height="40"
+                              HorizontalAlignment="Left">
+                            <Ellipse Width="32"
+                                     Height="32">
+                                <Ellipse.Fill>
+                                    <ImageBrush ImageSource="{Binding Path=User.Avatar.Small}" />
+                                </Ellipse.Fill>
+                            </Ellipse>
+                        </Grid>
+                        <TextBlock Grid.Column="1"
+                                   Margin="8,0,0,0"
+                                   VerticalAlignment="Center"
+                                   Text="{Binding Path=User.Nickname}" />
+                        <Button Grid.Column="2"
+                                Command="{Binding Path=SignOutCommand}">
+                            <SymbolIcon Symbol="ZoomOut" />
+                        </Button>
+                    </Grid>
+                </Grid>
+            </NavigationView.PaneCustomContent>
+            <NavigationView.MenuItems>
+                <NavigationViewItem Content="我的进度"
+                                    Icon="ProtectedDocument"
+                                    Tag="Progress"
+                                    Visibility="{Binding Path=IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}" />
+                <NavigationViewItem Content="每日放送"
+                                    Icon="Calendar"
+                                    Tag="Calendar" />
+                <NavigationViewItemHeader Content="aaa" />
+                <NavigationViewItem Content="ddd"
+                                    Icon="Accept" />
+            </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </NavigationView>
     </Grid>

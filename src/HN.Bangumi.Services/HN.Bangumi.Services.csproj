@@ -4,4 +4,9 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HN.Bangumi.API.Core\HN.Bangumi.API.Core.csproj" />
+    <ProjectReference Include="..\HN.Bangumi.Services.Abstractions\HN.Bangumi.Services.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>

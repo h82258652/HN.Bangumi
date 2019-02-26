@@ -8,7 +8,7 @@ namespace HN.Bangumi.API.Authorization
 {
     public class UwpAuthorizationProvider : AuthorizationProviderBase
     {
-        public UwpAuthorizationProvider(IOptions<BangumiOptions> bangumiOptions) : base(bangumiOptions)
+        public UwpAuthorizationProvider(IOptions<BangumiOptions> bangumiOptionsAccesser) : base(bangumiOptionsAccesser)
         {
         }
 

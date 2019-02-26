@@ -7,7 +7,7 @@ namespace HN.Bangumi.API.Authorization
 {
     public class DesktopAuthorizationProvider : AuthorizationProviderBase
     {
-        public DesktopAuthorizationProvider(IOptions<BangumiOptions> bangumiOptions) : base(bangumiOptions)
+        public DesktopAuthorizationProvider(IOptions<BangumiOptions> bangumiOptionsAccesser) : base(bangumiOptionsAccesser)
         {
         }
 

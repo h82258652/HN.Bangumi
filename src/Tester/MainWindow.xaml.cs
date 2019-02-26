@@ -25,7 +25,7 @@ namespace Tester
                 .UseDefaultAuthorizationProvider()
                 .UseDefaultAccessTokenStorage()
                 .Build();
-            
+
             await client.SignInAsync();
 
             var isSignIn = client.IsSignIn;
@@ -34,7 +34,8 @@ namespace Tester
 
             try
             {
-                var json = await client.UpdateStatus(850148, EpStatus.Watched);
+                await client.GetCalendarAsync();
+                //await client.GetA(userId, SubjectType.Anime, 26);
             }
             catch (Exception ex)
             {

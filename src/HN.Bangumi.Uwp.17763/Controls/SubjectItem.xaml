@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="HN.Bangumi.Uwp.Controls.SubjectItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:HN.Bangumi.API.Models"
+             d:DataContext="{d:DesignInstance Type=models:Subject}"
+             d:DesignHeight="300"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Image Grid.Row="0"
+               Width="162"
+               Height="162"
+               Source="{Binding Path=Images.Common}"
+               Stretch="UniformToFill" />
+        <Grid Grid.Row="1" Padding="4">
+            <TextBlock x:Name="PlaceholderTextBlock"
+                       AutomationProperties.AccessibilityView="Raw"
+                       Foreground="{x:Null}"
+                       IsHitTestVisible="False"
+                       MaxLines="2"
+                       Opacity="0"><Run Text="Xg" /><LineBreak /><Run Text="Xg" /></TextBlock>
+            <TextBlock MaxLines="2"
+                       Text="{Binding Converter={StaticResource SubjectNameConverter}}"
+                       TextTrimming="CharacterEllipsis"
+                       TextWrapping="Wrap" />
+        </Grid>
+    </Grid>
+</UserControl>
