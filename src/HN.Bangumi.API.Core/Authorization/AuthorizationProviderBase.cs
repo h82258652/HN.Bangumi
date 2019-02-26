@@ -12,9 +12,9 @@ namespace HN.Bangumi.API.Authorization
     {
         private readonly BangumiOptions _bangumiOptions;
 
-        protected AuthorizationProviderBase(IOptions<BangumiOptions> bangumiOptions)
+        protected AuthorizationProviderBase(IOptions<BangumiOptions> bangumiOptionsAccesser)
         {
-            _bangumiOptions = bangumiOptions.Value;
+            _bangumiOptions = bangumiOptionsAccesser.Value;
         }
 
         public async Task<AuthorizationResult> AuthorizeAsync(Uri authorizationUri, Uri callbackUri)
