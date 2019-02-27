@@ -28,6 +28,21 @@ namespace HN.Bangumi.API
             return builder;
         }
 
+        public static IBangumiClientBuilder WithConfig(this IBangumiClientBuilder builder, Action<BangumiOptions> configureOptions)
+        {
+            if (builder == null)
+            {
+                throw new ArgumentNullException(nameof(builder));
+            }
+            if (configureOptions == null)
+            {
+                throw new ArgumentNullException(nameof(configureOptions));
+            }
+
+            builder.Services.Configure(configureOptions);
+            return builder;
+        }
+
         public static IBangumiClientBuilder WithConfig(this IBangumiClientBuilder builder, string appKey, string appSecret, string redirectUri)
         {
             if (builder == null)
@@ -47,13 +62,12 @@ namespace HN.Bangumi.API
                 throw new ArgumentException("RedirectUri 为空");
             }
 
-            builder.Services.Configure<BangumiOptions>(options =>
+            return builder.WithConfig(options =>
             {
                 options.AppKey = appKey;
                 options.AppSecret = appSecret;
                 options.RedirectUri = redirectUri;
             });
-            return builder;
         }
     }
 }

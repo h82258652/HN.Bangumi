@@ -5,6 +5,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using Microsoft.Extensions.Options;
+using Polly;
+using Polly.Extensions.Http;
 
 namespace HN.Bangumi.API.Http
 {
@@ -33,7 +35,12 @@ namespace HN.Bangumi.API.Http
                 request.Headers.Authorization = new AuthenticationHeaderValue(accessToken.TokenType, accessToken.Value);
             }
 
-            return await base.SendAsync(request, cancellationToken);
+            var retryCount = _bangumiOptions.RetryCount;
+            var retryDelay = _bangumiOptions.RetryDelay;
+            var policy = HttpPolicyExtensions.HandleTransientHttpError()
+                .WaitAndRetryAsync(retryCount, count => retryDelay);
+
+            return await policy.ExecuteAsync(() => base.SendAsync(request, cancellationToken));
         }
     }
 }
