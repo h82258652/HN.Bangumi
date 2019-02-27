@@ -38,6 +38,7 @@ namespace HN.Bangumi.API.Http
             var retryCount = _bangumiOptions.RetryCount;
             var retryDelay = _bangumiOptions.RetryDelay;
             var policy = HttpPolicyExtensions.HandleTransientHttpError()
+                .OrResult(response => response.Content.Headers.ContentType.MediaType == "text/html")
                 .WaitAndRetryAsync(retryCount, count => retryDelay);
 
             return await policy.ExecuteAsync(() => base.SendAsync(request, cancellationToken));

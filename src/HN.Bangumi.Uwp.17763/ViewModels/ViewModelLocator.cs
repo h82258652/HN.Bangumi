@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using System;
+using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
 using GalaSoft.MvvmLight.Views;
@@ -48,6 +49,7 @@ namespace HN.Bangumi.Uwp.ViewModels
                         options.AppSecret = appConfiguration.AppSecret;
                         options.RedirectUri = appConfiguration.RedirectUri;
                         options.RetryCount = 3;
+                        options.RetryDelay = TimeSpan.FromSeconds(1);
                     })
                     .UseDefaultAuthorizationProvider()
                     .UseDefaultAccessTokenStorage()

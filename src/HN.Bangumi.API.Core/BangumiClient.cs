@@ -60,7 +60,14 @@ namespace HN.Bangumi.API
             {
                 var response = await client.SendAsync(request, cancellationToken);
                 var json = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<T>(json);
+                try
+                {
+                    return JsonConvert.DeserializeObject<T>(json);
+                }
+                catch (JsonReaderException ex)
+                {
+                    throw new HttpRequestException(ex.Message, ex);
+                }
             }
         }
 
