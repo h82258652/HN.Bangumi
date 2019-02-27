@@ -6,7 +6,6 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using HN.Bangumi.API.Models;
 using HN.Bangumi.Services;
-using Polly;
 
 namespace HN.Bangumi.ViewModels
 {
@@ -106,11 +105,14 @@ namespace HN.Bangumi.ViewModels
                         var result = await _subjectService.SearchAnimeAsync(_lastQuery, Animes.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
-                            foreach (var item in result.List)
+                            if (result.List != null)
                             {
-                                if (Animes.All(temp => temp.Id != item.Id))
+                                foreach (var item in result.List)
                                 {
-                                    Animes.Add(item);
+                                    if (Animes.All(temp => temp.Id != item.Id))
+                                    {
+                                        Animes.Add(item);
+                                    }
                                 }
                             }
 
@@ -152,11 +154,14 @@ namespace HN.Bangumi.ViewModels
                         var result = await _subjectService.SearchBookAsync(_lastQuery, Books.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
-                            foreach (var item in result.List)
+                            if (result.List != null)
                             {
-                                if (Books.All(temp => temp.Id != item.Id))
+                                foreach (var item in result.List)
                                 {
-                                    Books.Add(item);
+                                    if (Books.All(temp => temp.Id != item.Id))
+                                    {
+                                        Books.Add(item);
+                                    }
                                 }
                             }
 
@@ -198,11 +203,14 @@ namespace HN.Bangumi.ViewModels
                         var result = await _subjectService.SearchGameAsync(_lastQuery, Games.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
-                            foreach (var item in result.List)
+                            if (result.List != null)
                             {
-                                if (Games.All(temp => temp.Id != item.Id))
+                                foreach (var item in result.List)
                                 {
-                                    Games.Add(item);
+                                    if (Games.All(temp => temp.Id != item.Id))
+                                    {
+                                        Games.Add(item);
+                                    }
                                 }
                             }
 
@@ -246,11 +254,14 @@ namespace HN.Bangumi.ViewModels
                         var result = await _subjectService.SearchMusicAsync(_lastQuery, Musics.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
-                            foreach (var item in result.List)
+                            if (result.List != null)
                             {
-                                if (Musics.All(temp => temp.Id != item.Id))
+                                foreach (var item in result.List)
                                 {
-                                    Musics.Add(item);
+                                    if (Musics.All(temp => temp.Id != item.Id))
+                                    {
+                                        Musics.Add(item);
+                                    }
                                 }
                             }
 
@@ -292,11 +303,14 @@ namespace HN.Bangumi.ViewModels
                         var result = await _subjectService.SearchRealAsync(_lastQuery, Reals.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
-                            foreach (var item in result.List)
+                            if (result.List != null)
                             {
-                                if (Reals.All(temp => temp.Id != item.Id))
+                                foreach (var item in result.List)
                                 {
-                                    Reals.Add(item);
+                                    if (Reals.All(temp => temp.Id != item.Id))
+                                    {
+                                        Reals.Add(item);
+                                    }
                                 }
                             }
 
