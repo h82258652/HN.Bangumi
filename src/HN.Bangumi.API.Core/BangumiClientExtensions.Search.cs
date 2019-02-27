@@ -8,7 +8,7 @@ namespace HN.Bangumi.API
 {
     public static partial class BangumiClientExtensions
     {
-        public static Task<SearchResult> SearchAsync(this IBangumiClient client, string keywords, int start, int maxResults, SubjectType? type = null, ResponseGroup responseGroup = ResponseGroup.Small, CancellationToken cancellationToken = default(CancellationToken))
+        public static async Task<SearchResult> SearchAsync(this IBangumiClient client, string keywords, int start, int maxResults, SubjectType? type = null, ResponseGroup responseGroup = ResponseGroup.Small, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (client == null)
             {
@@ -21,7 +21,17 @@ namespace HN.Bangumi.API
                 url += $"type={(int)type}";
             }
             url += $"&responseGroup={responseGroup.ToString().ToLower()}&start={start}&max_results={maxResults}";
-            return client.GetAsync<SearchResult>(url, cancellationToken);
+
+            var result = await client.GetAsync<SearchResult>(url, cancellationToken);
+            if (result.ErrorCode == (int)HttpStatusCode.NotFound)
+            {
+                result = new SearchResult
+                {
+                    List = Array.Empty<Subject>()
+                };
+            }
+
+            return result;
         }
     }
 }
