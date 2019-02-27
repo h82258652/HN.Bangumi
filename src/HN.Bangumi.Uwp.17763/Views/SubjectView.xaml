@@ -3,18 +3,38 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+      xmlns:controls="using:HN.Bangumi.Uwp.Controls"
       DataContext="{Binding Source={StaticResource Locator}, Path=Subject}"
       mc:Ignorable="d">
     <Grid>
-        <TextBlock Text="{Binding Path=Subject.Summary}" />
-        <Image Source="{Binding Path=Subject.Images.Small}" />
-        <ItemsControl ItemsSource="{Binding Path=Subject.Crt}">
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding Path=Images.Small}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        <Pivot>
+            <PivotItem Header="角色信息">
+                <GridView ItemsSource="{Binding Path=Subject.Crt}"
+                          IsItemClickEnabled="False"
+                          SelectionMode="None">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Image Source="{Binding Path=Images.Small}" Grid.Row="0"></Image>
+                                <TextBlock Text="{Binding Path=Name}" Grid.Row="1"></TextBlock>
+                            </Grid>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </GridView>
+            </PivotItem>
+            <PivotItem Header="doge">
+                <ScrollViewer>
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="{Binding Path=Subject.Summary}" />
+                        <Image Source="{Binding Path=Subject.Images.Small}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </PivotItem>
+        </Pivot>
+        <controls:AppLoadingControl IsLoading="{Binding Path=IsLoading}" />
     </Grid>
 </Page>

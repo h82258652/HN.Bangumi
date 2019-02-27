@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Linq;
+using System.Net.Http;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using HN.Bangumi.API.Models;
 using HN.Bangumi.Services;
+using Polly;
 
 namespace HN.Bangumi.ViewModels
 {
     public class SearchViewModel : ViewModelBase
     {
+        private const int LoadCount = 20;
+        private readonly IAppToastService _appToastService;
         private readonly INavigationService _navigationService;
         private readonly ISubjectService _subjectService;
         private bool _isLoadingAnimes;
@@ -18,7 +21,7 @@ namespace HN.Bangumi.ViewModels
         private bool _isLoadingGames;
         private bool _isLoadingMusics;
         private bool _isLoadingReals;
-        private RelayCommand<Item> _itemClickCommand;
+        private RelayCommand<Subject> _itemClickCommand;
         private string _lastQuery;
         private RelayCommand _loadMoreAnimesCommand;
         private RelayCommand _loadMoreBooksCommand;
@@ -27,17 +30,21 @@ namespace HN.Bangumi.ViewModels
         private RelayCommand _loadMoreRealsCommand;
         private RelayCommand<string> _xCommand;
 
-        public SearchViewModel(INavigationService navigationService, ISubjectService subjectService)
+        public SearchViewModel(
+            INavigationService navigationService,
+            ISubjectService subjectService,
+            IAppToastService appToastService)
         {
             _navigationService = navigationService;
             _subjectService = subjectService;
+            _appToastService = appToastService;
         }
 
-        public ObservableCollection<Item> Animes { get; } = new ObservableCollection<Item>();
+        public ObservableCollection<Subject> Animes { get; } = new ObservableCollection<Subject>();
 
-        public ObservableCollection<Item> Books { get; } = new ObservableCollection<Item>();
+        public ObservableCollection<Subject> Books { get; } = new ObservableCollection<Subject>();
 
-        public ObservableCollection<Item> Games { get; } = new ObservableCollection<Item>();
+        public ObservableCollection<Subject> Games { get; } = new ObservableCollection<Subject>();
 
         public bool IsLoadingAnimes
         {
@@ -69,11 +76,11 @@ namespace HN.Bangumi.ViewModels
             private set => Set(ref _isLoadingReals, value);
         }
 
-        public RelayCommand<Item> ItemClickCommand
+        public RelayCommand<Subject> ItemClickCommand
         {
             get
             {
-                _itemClickCommand = _itemClickCommand ?? new RelayCommand<Item>(item =>
+                _itemClickCommand = _itemClickCommand ?? new RelayCommand<Subject>(item =>
                 {
                     _navigationService.NavigateTo(ViewKeys.SubjectViewKey, item.Id);
                 });
@@ -96,7 +103,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingAnimes = true;
 
-                        var result = await _subjectService.SearchAnimeAsync(_lastQuery, Animes.Count, 10);
+                        var result = await _subjectService.SearchAnimeAsync(_lastQuery, Animes.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
                             foreach (var item in result.List)
@@ -111,12 +118,12 @@ namespace HN.Bangumi.ViewModels
                         }
                         else
                         {
-                            // TODO
+                            _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
-                    catch (Exception ex)
+                    catch (HttpRequestException)
                     {
-                        // TODO
+                        _appToastService.ShowError("搜索动画失败，请稍后重试");
                     }
                     finally
                     {
@@ -142,7 +149,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingBooks = true;
 
-                        var result = await _subjectService.SearchBookAsync(_lastQuery, Books.Count, 10);
+                        var result = await _subjectService.SearchBookAsync(_lastQuery, Books.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
                             foreach (var item in result.List)
@@ -157,12 +164,12 @@ namespace HN.Bangumi.ViewModels
                         }
                         else
                         {
-                            // TODO
+                            _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
-                    catch (Exception ex)
+                    catch (HttpRequestException)
                     {
-                        // TODO
+                        _appToastService.ShowError("搜索书籍失败，请稍后重试");
                     }
                     finally
                     {
@@ -188,7 +195,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingGames = true;
 
-                        var result = await _subjectService.SearchGameAsync(_lastQuery, Games.Count, 10);
+                        var result = await _subjectService.SearchGameAsync(_lastQuery, Games.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
                             foreach (var item in result.List)
@@ -203,12 +210,12 @@ namespace HN.Bangumi.ViewModels
                         }
                         else
                         {
-                            // TODO
+                            _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
-                    catch (Exception ex)
+                    catch (HttpRequestException)
                     {
-                        // TODO
+                        _appToastService.ShowError("搜索游戏失败，请稍后重试");
                     }
                     finally
                     {
@@ -218,6 +225,8 @@ namespace HN.Bangumi.ViewModels
                 return _loadMoreGamesCommand;
             }
         }
+
+        private const int RetryCount = 5;
 
         public RelayCommand LoadMoreMusicsCommand
         {
@@ -234,7 +243,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingMusics = true;
 
-                        var result = await _subjectService.SearchMusicAsync(_lastQuery, Musics.Count, 10);
+                        var result = await _subjectService.SearchMusicAsync(_lastQuery, Musics.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
                             foreach (var item in result.List)
@@ -249,12 +258,12 @@ namespace HN.Bangumi.ViewModels
                         }
                         else
                         {
-                            // TODO
+                            _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
-                    catch (Exception ex)
+                    catch (HttpRequestException)
                     {
-                        // TODO
+                        _appToastService.ShowError("搜索音乐失败，请稍后重试");
                     }
                     finally
                     {
@@ -280,7 +289,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingReals = true;
 
-                        var result = await _subjectService.SearchRealAsync(_lastQuery, Reals.Count, 10);
+                        var result = await _subjectService.SearchRealAsync(_lastQuery, Reals.Count, LoadCount);
                         if (result.ErrorCode == 0)
                         {
                             foreach (var item in result.List)
@@ -295,12 +304,12 @@ namespace HN.Bangumi.ViewModels
                         }
                         else
                         {
-                            // TODO
+                            _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
-                    catch (Exception ex)
+                    catch (HttpRequestException)
                     {
-                        // TODO
+                        _appToastService.ShowError("搜索三次元失败，请稍后重试");
                     }
                     finally
                     {
@@ -311,9 +320,9 @@ namespace HN.Bangumi.ViewModels
             }
         }
 
-        public ObservableCollection<Item> Musics { get; } = new ObservableCollection<Item>();
+        public ObservableCollection<Subject> Musics { get; } = new ObservableCollection<Subject>();
 
-        public ObservableCollection<Item> Reals { get; } = new ObservableCollection<Item>();
+        public ObservableCollection<Subject> Reals { get; } = new ObservableCollection<Subject>();
 
         public RelayCommand<string> XCommand
         {

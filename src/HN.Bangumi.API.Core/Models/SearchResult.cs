@@ -8,6 +8,6 @@ namespace HN.Bangumi.API.Models
         public int Results { get; set; }
 
         [JsonProperty("list")]
-        public Item[] List { get; set; }
+        public Subject[] List { get; set; }
     }
 }

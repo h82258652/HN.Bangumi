@@ -20,16 +20,17 @@ namespace HN.Bangumi.Uwp.Views
             InitializeComponent();
         }
 
+        public SearchViewModel ViewModel => (SearchViewModel)DataContext;
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var query = e.Parameter as string;
             if (query != null)
             {
+                AutoSuggestBox.Text = query;
                 ViewModel.XCommand.Execute(query);
             }
         }
-
-        public SearchViewModel ViewModel => (SearchViewModel)DataContext;
 
         private void AnimeGridView_Loaded(object sender, RoutedEventArgs e)
         {
@@ -43,6 +44,11 @@ namespace HN.Bangumi.Uwp.Views
             Debug.WriteLine(_animeScrollViewer.ViewportHeight);
             Debug.WriteLine(_animeScrollViewer.ExtentHeight);
             Debug.WriteLine(_animeScrollViewer.VerticalOffset);
+        }
+
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            ViewModel.XCommand.Execute(args.QueryText);
         }
 
         private void BookGridView_Loaded(object sender, RoutedEventArgs e)

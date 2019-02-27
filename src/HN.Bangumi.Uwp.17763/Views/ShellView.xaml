@@ -3,10 +3,13 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:HN.Bangumi.Uwp.Controls"
       DataContext="{Binding Source={StaticResource Locator}, Path=Shell}"
       mc:Ignorable="d">
     <Grid>
-        <NavigationView ItemInvoked="NavigationView_ItemInvoked">
+        <NavigationView BackRequested="NavigationView_BackRequested"
+                        IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}"
+                        ItemInvoked="NavigationView_ItemInvoked">
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox PlaceholderText="搜索"
                                 QueryIcon="Find"
@@ -55,10 +58,9 @@
                                     Icon="Calendar"
                                     Tag="Calendar" />
                 <NavigationViewItemHeader Content="aaa" />
-                <NavigationViewItem Content="ddd"
-                                    Icon="Accept" />
             </NavigationView.MenuItems>
             <Frame x:Name="ContentFrame" />
         </NavigationView>
+        <controls:ToastPromptHost />
     </Grid>
 </Page>

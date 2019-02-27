@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Net.Http;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
 using HN.Bangumi.API.Models;
 using HN.Bangumi.Services;
+using Polly;
 
 namespace HN.Bangumi.ViewModels
 {
@@ -49,20 +51,22 @@ namespace HN.Bangumi.ViewModels
 
         private async void Load()
         {
-            try
-            {
-                IsLoading = true;
+            var policy = Policy.Handle<HttpRequestException>()
+                 .WaitAndRetryForeverAsync(count => TimeSpan.FromSeconds(3));
 
-                Calendar = await _calendarService.GetAsync();
-            }
-            catch (Exception ex)
+            await policy.ExecuteAsync(async () =>
             {
-                // TODO
-            }
-            finally
-            {
-                IsLoading = false;
-            }
+                try
+                {
+                    IsLoading = true;
+
+                    Calendar = await _calendarService.GetAsync();
+                }
+                finally
+                {
+                    IsLoading = false;
+                }
+            });
         }
     }
 }

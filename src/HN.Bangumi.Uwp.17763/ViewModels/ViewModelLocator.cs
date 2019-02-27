@@ -19,6 +19,8 @@ namespace HN.Bangumi.Uwp.ViewModels
             ServiceLocator.SetLocatorProvider(() => autofacServiceLocator);
         }
 
+        public CalendarViewModel Calendar => ServiceLocator.Current.GetInstance<CalendarViewModel>();
+
         public ProgressViewModel Progress => ServiceLocator.Current.GetInstance<ProgressViewModel>();
 
         public SearchViewModel Search => ServiceLocator.Current.GetInstance<SearchViewModel>();
@@ -40,7 +42,13 @@ namespace HN.Bangumi.Uwp.ViewModels
             {
                 var appConfiguration = context.Resolve<IAppConfiguration>();
                 return new BangumiClientBuilder()
-                    .WithConfig(appConfiguration.AppKey, appConfiguration.AppSecret, appConfiguration.RedirectUri)
+                    .WithConfig(options =>
+                    {
+                        options.AppKey = appConfiguration.AppKey;
+                        options.AppSecret = appConfiguration.AppSecret;
+                        options.RedirectUri = appConfiguration.RedirectUri;
+                        options.RetryCount = 3;
+                    })
                     .UseDefaultAuthorizationProvider()
                     .UseDefaultAccessTokenStorage()
                     .Build();
@@ -48,6 +56,7 @@ namespace HN.Bangumi.Uwp.ViewModels
 
             containerBuilder.RegisterInstance(CreateNavigationService());
             containerBuilder.RegisterType<AppDialogService>().As<IAppDialogService>();
+            containerBuilder.RegisterType<AppToastService>().As<IAppToastService>();
             containerBuilder.RegisterType<UserService>().As<IUserService>();
             containerBuilder.RegisterType<SubjectService>().As<ISubjectService>();
             containerBuilder.RegisterType<CalendarService>().As<ICalendarService>();
@@ -62,14 +71,9 @@ namespace HN.Bangumi.Uwp.ViewModels
             return containerBuilder.Build();
         }
 
-        public CalendarViewModel Calendar
-        {
-            get { return ServiceLocator.Current.GetInstance<CalendarViewModel>(); }
-        }
-
         private static INavigationService CreateNavigationService()
         {
-            var navigationService = new NavigationService();
+            var navigationService = new AppNavigationService();
             navigationService.Configure(ViewKeys.ShellViewKey, typeof(ShellView));
             navigationService.Configure(ViewKeys.SearchViewKey, typeof(SearchView));
             navigationService.Configure(ViewKeys.ProgressViewKey, typeof(ProgressView));

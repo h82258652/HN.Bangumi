@@ -1,0 +1,71 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:HN.Bangumi.Uwp.Controls"
+                    xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                    xmlns:interactivity="using:Microsoft.Xaml.Interactivity">
+    <Style TargetType="controls:ToastPrompt">
+        <Setter Property="Background"
+                Value="{ThemeResource SystemAccentColor}" />
+        <Setter Property="Foreground"
+                Value="White" />
+        <Setter Property="Padding"
+                Value="16,8,16,8" />
+        <Setter Property="HorizontalAlignment"
+                Value="Right" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
+        <Setter Property="IsHitTestVisible"
+                Value="False" />
+        <Setter Property="Duration"
+                Value="0:0:2" />
+        <Setter Property="FontSize"
+                Value="14" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ToastPrompt">
+                    <Border x:Name="PART_OuterBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            Opacity="0">
+                        <Border x:Name="PART_InnerBorder">
+                            <StackPanel Margin="{TemplateBinding Padding}"
+                                        Orientation="Horizontal">
+                                <ContentPresenter x:Name="IconPresenter"
+                                                  VerticalAlignment="Center"
+                                                  AutomationProperties.AccessibilityView="Raw"
+                                                  Content="{TemplateBinding Icon}"
+                                                  FontSize="{TemplateBinding FontSize}"
+                                                  Foreground="{TemplateBinding Foreground}">
+                                    <interactivity:Interaction.Behaviors>
+                                        <core:DataTriggerBehavior Binding="{Binding ElementName=IconPresenter}"
+                                                                  ComparisonCondition="Equal"
+                                                                  Value="{x:Null}">
+                                            <core:ChangePropertyAction PropertyName="Margin"
+                                                                       TargetObject="{Binding ElementName=MessageTextBlock}"
+                                                                       Value="0" />
+                                        </core:DataTriggerBehavior>
+                                        <core:DataTriggerBehavior Binding="{Binding ElementName=IconPresenter}"
+                                                                  ComparisonCondition="NotEqual"
+                                                                  Value="{x:Null}">
+                                            <core:ChangePropertyAction PropertyName="Margin"
+                                                                       TargetObject="{Binding ElementName=MessageTextBlock}"
+                                                                       Value="8,0,0,0" />
+                                        </core:DataTriggerBehavior>
+                                    </interactivity:Interaction.Behaviors>
+                                </ContentPresenter>
+                                <TextBlock x:Name="MessageTextBlock"
+                                           Margin="8,0,0,0"
+                                           VerticalAlignment="Center"
+                                           FontFamily="{TemplateBinding FontFamily}"
+                                           FontSize="{TemplateBinding FontSize}"
+                                           Foreground="{TemplateBinding Foreground}"
+                                           Text="{TemplateBinding Message}" />
+                            </StackPanel>
+                        </Border>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

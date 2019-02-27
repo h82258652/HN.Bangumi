@@ -18,6 +18,14 @@ namespace HN.Bangumi.Uwp.Views
             ContentFrame.Navigate(typeof(SearchView), query);
         }
 
+        private void NavigationView_BackRequested(NavigationView sender, NavigationViewBackRequestedEventArgs args)
+        {
+            if (ContentFrame.CanGoBack)
+            {
+                ContentFrame.GoBack();
+            }
+        }
+
         private void NavigationView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             if (args.IsSettingsInvoked)

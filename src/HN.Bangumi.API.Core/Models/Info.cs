@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using HN.Bangumi.API.Models.Converters;
 using Newtonsoft.Json;
 
 namespace HN.Bangumi.API.Models
@@ -27,7 +28,8 @@ namespace HN.Bangumi.API.Models
         public string Bwh { get; set; }
 
         [JsonProperty("source")]
-        public string Source { get; set; }
+        [JsonConverter(typeof(SingleItemArrayConverter))]
+        public string[] Source { get; set; }
 
         [JsonProperty("Twitter")]
         public string Twitter { get; set; }

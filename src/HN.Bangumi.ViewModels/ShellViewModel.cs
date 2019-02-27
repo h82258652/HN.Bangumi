@@ -19,11 +19,16 @@ namespace HN.Bangumi.ViewModels
         private RelayCommand _signOutCommand;
         private User _user;
 
-        public ShellViewModel(IBangumiClient client, IUserService userService, IAppDialogService appDialogService)
+        public ShellViewModel(
+            IBangumiClient client, 
+            IUserService userService, 
+            IAppDialogService appDialogService,
+            IAppToastService appToastService)
         {
             _client = client;
             _userService = userService;
             _appDialogService = appDialogService;
+            _appToastService = appToastService;
 
             if (IsSignIn)
             {
@@ -58,7 +63,7 @@ namespace HN.Bangumi.ViewModels
                     }
                     catch (Exception ex) when (ex is HttpErrorAuthorizationException || ex is HttpRequestException)
                     {
-                        // TODO
+                        _appToastService.ShowError("网络错误，请稍后重试");
                     }
                     finally
                     {
@@ -70,6 +75,8 @@ namespace HN.Bangumi.ViewModels
                 return _signInCommand;
             }
         }
+
+        private readonly IAppToastService _appToastService;
 
         public RelayCommand SignOutCommand
         {

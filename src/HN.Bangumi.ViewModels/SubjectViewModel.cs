@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using GalaSoft.MvvmLight;
 using HN.Bangumi.API.Models;
 using HN.Bangumi.Services;
@@ -9,6 +10,7 @@ namespace HN.Bangumi.ViewModels
     {
         private readonly ISubjectService _subjectService;
         private bool _isLoading;
+        private Subject _subject;
 
         public SubjectViewModel(ISubjectService subjectService)
         {
@@ -21,12 +23,10 @@ namespace HN.Bangumi.ViewModels
             private set => Set(ref _isLoading, value);
         }
 
-        private Subject _subject;
-
         public Subject Subject
         {
-            get { return _subject; }
-            private set { Set(ref _subject, value); }
+            get => _subject;
+            private set => Set(ref _subject, value);
         }
 
         public async void Load(int id)
@@ -35,10 +35,11 @@ namespace HN.Bangumi.ViewModels
             {
                 IsLoading = true;
 
-          Subject = await _subjectService.GetAsync(id);
+                Subject = await _subjectService.GetAsync(id);
             }
             catch (Exception ex)
             {
+                Debugger.Break();
             }
             finally
             {
