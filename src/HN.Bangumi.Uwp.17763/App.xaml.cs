@@ -15,6 +15,8 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using HN.Bangumi.Uwp.Views;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
 
 namespace HN.Bangumi.Uwp
 {
@@ -31,6 +33,8 @@ namespace HN.Bangumi.Uwp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+
+            AppCenter.Start("e7c4e864-a03a-412a-8bec-e3e45cb179ef", typeof(Analytics));
         }
 
         /// <summary>
