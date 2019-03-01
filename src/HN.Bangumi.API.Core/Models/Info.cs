@@ -10,7 +10,8 @@ namespace HN.Bangumi.API.Models
         public string NameCn { get; set; }
 
         [JsonProperty("alias")]
-        public Dictionary<string, string> Alias { get; set; }
+        [JsonConverter(typeof(AliasConverter))]
+        public string[] Alias { get; set; }
 
         [JsonProperty("gender")]
         public string Gender { get; set; }

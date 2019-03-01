@@ -2,7 +2,7 @@
 
 namespace HN.Bangumi.API.Models
 {
-    public class Dd
+    public class CollectionOverview
     {
         [JsonProperty("type")]
         public int Type { get; set; }
@@ -14,6 +14,6 @@ namespace HN.Bangumi.API.Models
         public string NameCn { get; set; }
 
         [JsonProperty("collects")]
-        public Collect[] Collects { get; set; }
+        public CollectionOverviewItem[] Collects { get; set; }
     }
 }

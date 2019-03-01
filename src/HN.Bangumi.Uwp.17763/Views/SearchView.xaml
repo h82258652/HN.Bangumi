@@ -7,6 +7,7 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       DataContext="{Binding Source={StaticResource Locator}, Path=Search}"
+      NavigationCacheMode="Enabled"
       mc:Ignorable="d">
     <Grid>
         <Grid.RowDefinitions>
@@ -18,10 +19,12 @@
                         QueryIcon="Find"
                         QuerySubmitted="AutoSuggestBox_QuerySubmitted" />
         <Pivot Grid.Row="1">
-            <PivotItem Header="动画">
+            <PivotItem Padding="0,12,0,0"
+                       Header="动画">
                 <Grid>
                     <GridView x:Name="AnimeGridView"
                               IsItemClickEnabled="True"
+                              ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Animes}"
                               Loaded="AnimeGridView_Loaded">
                         <interactivity:Interaction.Behaviors>
@@ -42,12 +45,15 @@
                             </Style>
                         </ItemsControl.ItemContainerStyle>
                     </GridView>
+                    <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingAnimes}" />
                 </Grid>
             </PivotItem>
-            <PivotItem Header="书籍">
+            <PivotItem Padding="0,12,0,0"
+                       Header="书籍">
                 <Grid>
                     <GridView x:Name="BookGridView"
                               IsItemClickEnabled="True"
+                              ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Books}"
                               Loaded="BookGridView_Loaded">
                         <interactivity:Interaction.Behaviors>
@@ -68,12 +74,15 @@
                             </Style>
                         </ItemsControl.ItemContainerStyle>
                     </GridView>
+                    <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingBooks}" />
                 </Grid>
             </PivotItem>
-            <PivotItem Header="音乐">
+            <PivotItem Padding="0,12,0,0"
+                       Header="音乐">
                 <Grid>
                     <GridView x:Name="MusicGridView"
                               IsItemClickEnabled="True"
+                              ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Musics}"
                               Loaded="MusicGridView_Loaded">
                         <interactivity:Interaction.Behaviors>
@@ -94,12 +103,15 @@
                             </Style>
                         </ItemsControl.ItemContainerStyle>
                     </GridView>
+                    <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingMusics}" />
                 </Grid>
             </PivotItem>
-            <PivotItem Header="游戏">
+            <PivotItem Padding="0,12,0,0"
+                       Header="游戏">
                 <Grid>
                     <GridView x:Name="GameGridView"
                               IsItemClickEnabled="True"
+                              ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Games}"
                               Loaded="GameGridView_Loaded">
                         <interactivity:Interaction.Behaviors>
@@ -120,12 +132,15 @@
                             </Style>
                         </ItemsControl.ItemContainerStyle>
                     </GridView>
+                    <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingGames}" />
                 </Grid>
             </PivotItem>
-            <PivotItem Header="三次元">
+            <PivotItem Padding="0,12,0,0"
+                       Header="三次元">
                 <Grid>
                     <GridView x:Name="RealGridView"
                               IsItemClickEnabled="True"
+                              ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Reals}"
                               Loaded="RealGridView_Loaded">
                         <interactivity:Interaction.Behaviors>
@@ -146,6 +161,7 @@
                             </Style>
                         </ItemsControl.ItemContainerStyle>
                     </GridView>
+                    <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingReals}" />
                 </Grid>
             </PivotItem>
         </Pivot>

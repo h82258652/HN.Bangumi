@@ -13,24 +13,40 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <Image Grid.Row="0"
+        <Image x:Name="SubjectImage"
+               Grid.Row="0"
                Width="162"
                Height="162"
                Source="{Binding Path=Images.Common}"
                Stretch="UniformToFill" />
         <Grid Grid.Row="1"
               Width="162"
-              Padding="4">
-            <TextBlock x:Name="PlaceholderTextBlock"
-                       AutomationProperties.AccessibilityView="Raw"
-                       Foreground="{x:Null}"
-                       IsHitTestVisible="False"
-                       MaxLines="2"
-                       Opacity="0"><Run Text="Xg" /><LineBreak /><Run Text="Xg" /></TextBlock>
-            <TextBlock MaxLines="2"
-                       Text="{Binding Converter={StaticResource SubjectNameConverter}}"
-                       TextTrimming="CharacterEllipsis"
-                       TextWrapping="Wrap" />
+              Padding="8,4,8,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Viewbox Grid.Row="0"
+                     Height="24"
+                     Margin="0,0,0,-4"
+                     HorizontalAlignment="Left"
+                     Visibility="{Binding Path=Rating, Converter={StaticResource InversedIsNullToVisibilityConverter}}">
+                <RatingControl IsEnabled="False"
+                               IsReadOnly="True"
+                               Value="{Binding Path=Rating.Score, Converter={StaticResource MultiplyConverter}, ConverterParameter='0.5'}" />
+            </Viewbox>
+            <Grid Grid.Row="1">
+                <TextBlock x:Name="PlaceholderTextBlock"
+                           AutomationProperties.AccessibilityView="Raw"
+                           Foreground="{x:Null}"
+                           IsHitTestVisible="False"
+                           MaxLines="2"
+                           Opacity="0"><Run Text="Xg" /><LineBreak /><Run Text="Xg" /></TextBlock>
+                <TextBlock MaxLines="2"
+                           Text="{Binding Converter={StaticResource SubjectNameConverter}}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="Wrap" />
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

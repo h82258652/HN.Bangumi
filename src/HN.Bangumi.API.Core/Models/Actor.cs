@@ -13,7 +13,7 @@ namespace HN.Bangumi.API.Models
         [JsonProperty("name")]
         public string Name { get; set; }
 
-        [JsonProperty("image")]
+        [JsonProperty("images")]
         public Images Images { get; set; }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Threading;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -15,6 +16,11 @@ namespace HN.Bangumi.ViewModels
         private readonly IAppToastService _appToastService;
         private readonly INavigationService _navigationService;
         private readonly ISubjectService _subjectService;
+        private bool _hasMoreAnimeItems;
+        private bool _hasMoreBookItems;
+        private bool _hasMoreGameItems;
+        private bool _hasMoreMusicItems;
+        private bool _hasMoreRealItems;
         private bool _isLoadingAnimes;
         private bool _isLoadingBooks;
         private bool _isLoadingGames;
@@ -22,12 +28,13 @@ namespace HN.Bangumi.ViewModels
         private bool _isLoadingReals;
         private RelayCommand<Subject> _itemClickCommand;
         private string _lastQuery;
+        private CancellationTokenSource _lastQueryCts;
         private RelayCommand _loadMoreAnimesCommand;
         private RelayCommand _loadMoreBooksCommand;
         private RelayCommand _loadMoreGamesCommand;
         private RelayCommand _loadMoreMusicsCommand;
         private RelayCommand _loadMoreRealsCommand;
-        private RelayCommand<string> _xCommand;
+        private RelayCommand<string> _searchCommand;
 
         public SearchViewModel(
             INavigationService navigationService,
@@ -44,6 +51,36 @@ namespace HN.Bangumi.ViewModels
         public ObservableCollection<Subject> Books { get; } = new ObservableCollection<Subject>();
 
         public ObservableCollection<Subject> Games { get; } = new ObservableCollection<Subject>();
+
+        public bool HasMoreAnimeItems
+        {
+            get => _hasMoreAnimeItems;
+            private set => Set(ref _hasMoreAnimeItems, value);
+        }
+
+        public bool HasMoreBookItems
+        {
+            get => _hasMoreBookItems;
+            private set => Set(ref _hasMoreBookItems, value);
+        }
+
+        public bool HasMoreGameItems
+        {
+            get => _hasMoreGameItems;
+            private set => Set(ref _hasMoreGameItems, value);
+        }
+
+        public bool HasMoreMusicItems
+        {
+            get => _hasMoreMusicItems;
+            private set => Set(ref _hasMoreMusicItems, value);
+        }
+
+        public bool HasMoreRealItems
+        {
+            get => _hasMoreRealItems;
+            private set => Set(ref _hasMoreRealItems, value);
+        }
 
         public bool IsLoadingAnimes
         {
@@ -93,7 +130,7 @@ namespace HN.Bangumi.ViewModels
             {
                 _loadMoreAnimesCommand = _loadMoreAnimesCommand ?? new RelayCommand(async () =>
                 {
-                    if (IsLoadingAnimes)
+                    if (IsLoadingAnimes || !HasMoreAnimeItems)
                     {
                         return;
                     }
@@ -102,7 +139,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingAnimes = true;
 
-                        var result = await _subjectService.SearchAnimeAsync(_lastQuery, Animes.Count, LoadCount);
+                        var result = await _subjectService.SearchAnimeAsync(_lastQuery, Animes.Count, LoadCount, _lastQueryCts.Token);
                         if (result.ErrorCode == 0)
                         {
                             if (result.List != null)
@@ -116,7 +153,10 @@ namespace HN.Bangumi.ViewModels
                                 }
                             }
 
-                            // TODO result.Count
+                            if (result.List == null || result.List.Length == 0)
+                            {
+                                HasMoreAnimeItems = false;
+                            }
                         }
                         else
                         {
@@ -142,7 +182,7 @@ namespace HN.Bangumi.ViewModels
             {
                 _loadMoreBooksCommand = _loadMoreBooksCommand ?? new RelayCommand(async () =>
                 {
-                    if (IsLoadingBooks)
+                    if (IsLoadingBooks || !HasMoreBookItems)
                     {
                         return;
                     }
@@ -151,7 +191,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingBooks = true;
 
-                        var result = await _subjectService.SearchBookAsync(_lastQuery, Books.Count, LoadCount);
+                        var result = await _subjectService.SearchBookAsync(_lastQuery, Books.Count, LoadCount, _lastQueryCts.Token);
                         if (result.ErrorCode == 0)
                         {
                             if (result.List != null)
@@ -165,7 +205,10 @@ namespace HN.Bangumi.ViewModels
                                 }
                             }
 
-                            // TODO result.Count
+                            if (result.List == null || result.List.Length == 0)
+                            {
+                                HasMoreBookItems = false;
+                            }
                         }
                         else
                         {
@@ -191,7 +234,7 @@ namespace HN.Bangumi.ViewModels
             {
                 _loadMoreGamesCommand = _loadMoreGamesCommand ?? new RelayCommand(async () =>
                 {
-                    if (IsLoadingGames)
+                    if (IsLoadingGames || !HasMoreGameItems)
                     {
                         return;
                     }
@@ -200,7 +243,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingGames = true;
 
-                        var result = await _subjectService.SearchGameAsync(_lastQuery, Games.Count, LoadCount);
+                        var result = await _subjectService.SearchGameAsync(_lastQuery, Games.Count, LoadCount, _lastQueryCts.Token);
                         if (result.ErrorCode == 0)
                         {
                             if (result.List != null)
@@ -214,7 +257,10 @@ namespace HN.Bangumi.ViewModels
                                 }
                             }
 
-                            // TODO result.Count
+                            if (result.List == null || result.List.Length == 0)
+                            {
+                                HasMoreGameItems = true;
+                            }
                         }
                         else
                         {
@@ -234,15 +280,13 @@ namespace HN.Bangumi.ViewModels
             }
         }
 
-        private const int RetryCount = 5;
-
         public RelayCommand LoadMoreMusicsCommand
         {
             get
             {
                 _loadMoreMusicsCommand = _loadMoreMusicsCommand ?? new RelayCommand(async () =>
                 {
-                    if (IsLoadingMusics)
+                    if (IsLoadingMusics || !HasMoreMusicItems)
                     {
                         return;
                     }
@@ -251,7 +295,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingMusics = true;
 
-                        var result = await _subjectService.SearchMusicAsync(_lastQuery, Musics.Count, LoadCount);
+                        var result = await _subjectService.SearchMusicAsync(_lastQuery, Musics.Count, LoadCount, _lastQueryCts.Token);
                         if (result.ErrorCode == 0)
                         {
                             if (result.List != null)
@@ -265,7 +309,10 @@ namespace HN.Bangumi.ViewModels
                                 }
                             }
 
-                            // TODO result.Count
+                            if (result.List == null || result.List.Length == 0)
+                            {
+                                HasMoreMusicItems = false;
+                            }
                         }
                         else
                         {
@@ -291,7 +338,7 @@ namespace HN.Bangumi.ViewModels
             {
                 _loadMoreRealsCommand = _loadMoreRealsCommand ?? new RelayCommand(async () =>
                 {
-                    if (IsLoadingReals)
+                    if (IsLoadingReals || !HasMoreRealItems)
                     {
                         return;
                     }
@@ -300,7 +347,7 @@ namespace HN.Bangumi.ViewModels
                     {
                         IsLoadingReals = true;
 
-                        var result = await _subjectService.SearchRealAsync(_lastQuery, Reals.Count, LoadCount);
+                        var result = await _subjectService.SearchRealAsync(_lastQuery, Reals.Count, LoadCount, _lastQueryCts.Token);
                         if (result.ErrorCode == 0)
                         {
                             if (result.List != null)
@@ -314,7 +361,10 @@ namespace HN.Bangumi.ViewModels
                                 }
                             }
 
-                            // TODO result.Count
+                            if (result.List == null || result.List.Length == 0)
+                            {
+                                HasMoreRealItems = false;
+                            }
                         }
                         else
                         {
@@ -338,20 +388,33 @@ namespace HN.Bangumi.ViewModels
 
         public ObservableCollection<Subject> Reals { get; } = new ObservableCollection<Subject>();
 
-        public RelayCommand<string> XCommand
+        public RelayCommand<string> SearchCommand
         {
             get
             {
-                _xCommand = _xCommand ?? new RelayCommand<string>(query =>
+                _searchCommand = _searchCommand ?? new RelayCommand<string>(query =>
                 {
+                    if (query == _lastQuery)
+                    {
+                        return;
+                    }
+
+                    _lastQueryCts?.Cancel();
+
                     Animes.Clear();
                     Books.Clear();
                     Musics.Clear();
                     Games.Clear();
                     Reals.Clear();
-                    // TODO
 
                     _lastQuery = query;
+                    _lastQueryCts = new CancellationTokenSource();
+
+                    HasMoreAnimeItems = true;
+                    HasMoreBookItems = true;
+                    HasMoreMusicItems = true;
+                    HasMoreGameItems = true;
+                    HasMoreRealItems = true;
 
                     LoadMoreAnimesCommand.Execute(null);
                     LoadMoreBooksCommand.Execute(null);
@@ -359,7 +422,7 @@ namespace HN.Bangumi.ViewModels
                     LoadMoreGamesCommand.Execute(null);
                     LoadMoreRealsCommand.Execute(null);
                 });
-                return _xCommand;
+                return _searchCommand;
             }
         }
     }

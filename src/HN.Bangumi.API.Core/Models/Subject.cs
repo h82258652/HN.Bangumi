@@ -25,7 +25,7 @@ namespace HN.Bangumi.API.Models
 
         [JsonProperty("eps")]
         [JsonConverter(typeof(TryParseConverter))]
-        public Ep2[] Eps { get; set; }
+        public Ep[] Eps { get; set; }
 
         [JsonProperty("eps_count")]
         public int EpsCount { get; set; }

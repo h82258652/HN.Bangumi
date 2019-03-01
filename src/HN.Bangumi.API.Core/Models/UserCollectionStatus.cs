@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace HN.Bangumi.API.Models.Preview
+namespace HN.Bangumi.API.Models
 {
-    public class Ff
+    public class UserCollectionStatus
     {
         [JsonProperty("type")]
         public int Type { get; set; }
@@ -14,6 +14,6 @@ namespace HN.Bangumi.API.Models.Preview
         public string NameCn { get; set; }
 
         [JsonProperty("collects")]
-        public Gg[] Collects { get; set; }
+        public Collect[] Collects { get; set; }
     }
 }

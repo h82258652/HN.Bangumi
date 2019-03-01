@@ -2,7 +2,7 @@
 
 namespace HN.Bangumi.API.Models
 {
-    public class Bb
+    public class EpProgressStatus
     {
         [JsonProperty("id")]
         public int Id { get; set; }

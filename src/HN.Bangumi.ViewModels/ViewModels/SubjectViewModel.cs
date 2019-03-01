@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Net.Http;
 using GalaSoft.MvvmLight;
 using HN.Bangumi.API.Models;
 using HN.Bangumi.Services;
@@ -8,13 +7,17 @@ namespace HN.Bangumi.ViewModels
 {
     public class SubjectViewModel : ViewModelBase
     {
+        private readonly IAppToastService _appToastService;
         private readonly ISubjectService _subjectService;
         private bool _isLoading;
         private Subject _subject;
 
-        public SubjectViewModel(ISubjectService subjectService)
+        public SubjectViewModel(
+            ISubjectService subjectService,
+            IAppToastService appToastService)
         {
             _subjectService = subjectService;
+            _appToastService = appToastService;
         }
 
         public bool IsLoading
@@ -37,9 +40,9 @@ namespace HN.Bangumi.ViewModels
 
                 Subject = await _subjectService.GetAsync(id);
             }
-            catch (Exception ex)
+            catch (HttpRequestException)
             {
-                Debugger.Break();
+                _appToastService.ShowError("加载条目信息失败，请稍后重试");
             }
             finally
             {

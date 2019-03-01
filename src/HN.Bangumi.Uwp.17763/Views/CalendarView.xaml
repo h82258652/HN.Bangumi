@@ -9,6 +9,7 @@
       xmlns:models="using:HN.Bangumi.API.Models"
       x:Name="Root"
       DataContext="{Binding Source={StaticResource Locator}, Path=Calendar}"
+      NavigationCacheMode="Enabled"
       mc:Ignorable="d">
     <Grid>
         <Pivot ItemsSource="{Binding Path=Calendar}">
@@ -21,6 +22,7 @@
                 <DataTemplate>
                     <PivotItem>
                         <GridView IsItemClickEnabled="True"
+                                  ItemClick="SubjectGridView_ItemClick"
                                   ItemsSource="{Binding Path=Items}">
                             <interactivity:Interaction.Behaviors>
                                 <core:EventTriggerBehavior EventName="ItemClick">
@@ -43,6 +45,12 @@
                     </PivotItem>
                 </DataTemplate>
             </Pivot.ItemTemplate>
+            <Pivot.ItemContainerStyle>
+                <Style TargetType="PivotItem">
+                    <Setter Property="Padding"
+                            Value="0,12,0,0" />
+                </Style>
+            </Pivot.ItemContainerStyle>
         </Pivot>
         <controls:AppLoadingControl IsLoading="{Binding Path=IsLoading}" />
     </Grid>

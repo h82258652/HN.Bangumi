@@ -8,6 +8,17 @@ namespace HN.Bangumi.API
 {
     public static partial class BangumiClientExtensions
     {
+        /// <summary>
+        /// 条目搜索
+        /// </summary>
+        /// <param name="client"></param>
+        /// <param name="keywords">关键词</param>
+        /// <param name="start">开始条数</param>
+        /// <param name="maxResults">每页条数</param>
+        /// <param name="type">类型</param>
+        /// <param name="responseGroup">返回数据大小</param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
         public static async Task<SearchResult> SearchAsync(this IBangumiClient client, string keywords, int start, int maxResults, SubjectType? type = null, ResponseGroup responseGroup = ResponseGroup.Small, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (client == null)
@@ -20,7 +31,7 @@ namespace HN.Bangumi.API
             {
                 url += $"type={(int)type}";
             }
-            url += $"&responseGroup={responseGroup.ToString().ToLower()}&start={start}&max_results={maxResults}";
+            url += $"&responseGroup={responseGroup.GetValue()}&start={start}&max_results={maxResults}";
 
             var result = await client.GetAsync<SearchResult>(url, cancellationToken);
             if (result.ErrorCode == (int)HttpStatusCode.NotFound)

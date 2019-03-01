@@ -123,8 +123,17 @@
     <Compile Include="Controls\BindableMargin.xaml.cs">
       <DependentUpon>BindableMargin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\BlogItem.xaml.cs">
+      <DependentUpon>BlogItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\CharacterItem.xaml.cs">
       <DependentUpon>CharacterItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EpItem.xaml.cs">
+      <DependentUpon>EpItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StaffItem.xaml.cs">
+      <DependentUpon>StaffItem.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\SubjectItem.xaml.cs">
       <DependentUpon>SubjectItem.xaml</DependentUpon>
@@ -133,8 +142,14 @@
     <Compile Include="Controls\ToastPromptHost.xaml.cs">
       <DependentUpon>ToastPromptHost.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\TopicItem.xaml.cs">
+      <DependentUpon>TopicItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\CharacterNameConverter.cs" />
     <Compile Include="Converters\IsNullToVisibilityConverter.cs" />
     <Compile Include="Converters\ItemClickEventArgsConverter.cs" />
+    <Compile Include="Converters\MultiplyConverter.cs" />
+    <Compile Include="Converters\StaffNameConverter.cs" />
     <Compile Include="Converters\SubjectNameConverter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\AppDialogService.cs" />
@@ -290,7 +305,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\BlogItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\CharacterItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EpItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StaffItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -303,6 +330,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ToastPromptHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TopicItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

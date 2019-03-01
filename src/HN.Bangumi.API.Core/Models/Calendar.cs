@@ -1,5 +1,4 @@
-﻿using HN.Bangumi.API.Models.Preview;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace HN.Bangumi.API.Models
 {

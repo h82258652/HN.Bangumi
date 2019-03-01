@@ -1,30 +1,30 @@
 ﻿namespace HN.Bangumi.API.Models
 {
-    public enum SubjectType
+    public enum CollectionStatus
     {
         /// <summary>
-        /// 书籍
+        /// 想做
         /// </summary>
-        Book = 1,
+        Wish,
 
         /// <summary>
-        /// 动画
+        /// 做过
         /// </summary>
-        Anime = 2,
+        Collect,
 
         /// <summary>
-        /// 音乐
+        /// 在做
         /// </summary>
-        Music = 3,
+        Do,
 
         /// <summary>
-        /// 游戏
+        /// 搁置
         /// </summary>
-        Game = 4,
+        OnHold,
 
         /// <summary>
-        /// 三次元
+        /// 抛弃
         /// </summary>
-        Real = 6
+        Dropped
     }
 }

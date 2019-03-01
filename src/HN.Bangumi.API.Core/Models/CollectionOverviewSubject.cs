@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace HN.Bangumi.API.Models.Preview
+namespace HN.Bangumi.API.Models
 {
-    public class Jj
+    public class CollectionOverviewSubject
     {
         [JsonProperty("subject_id")]
         public int SubjectId { get; set; }

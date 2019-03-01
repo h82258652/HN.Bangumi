@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="HN.Bangumi.Uwp.Controls.EpItem"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:models="using:HN.Bangumi.API.Models"
+             d:DataContext="{d:DesignInstance Type=models:Ep}"
+             d:DesignHeight="300"
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+    <Grid>
+        <Border x:Name="Border"
+                BorderThickness="1">
+            <interactivity:Interaction.Behaviors>
+                <!--  TODO  -->
+                <!--<core:DataTriggerBehavior Binding="{Binding Path=Status}"
+                                          ComparisonCondition="Equal"
+                                          Value="TODOOOOOOOOOOOOOOOOOOOOOOO">
+                    <core:ChangePropertyAction PropertyName="Background"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#4897FF" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="BorderBrush"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#1175A8" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="Foreground"
+                                               TargetObject="{Binding ElementName=TextBlock}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#FFFFFF" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                </core:DataTriggerBehavior>-->
+                <core:DataTriggerBehavior Binding="{Binding Path=Status}"
+                                          ComparisonCondition="Equal"
+                                          Value="Air">
+                    <core:ChangePropertyAction PropertyName="Background"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#DAEAFF" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="BorderBrush"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#00A8FF" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="Foreground"
+                                               TargetObject="{Binding ElementName=TextBlock}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#0066CC" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                </core:DataTriggerBehavior>
+                <core:DataTriggerBehavior Binding="{Binding Path=Status}"
+                                          ComparisonCondition="Equal"
+                                          Value="Today">
+                    <core:ChangePropertyAction PropertyName="Background"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#C7E2BD" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="BorderBrush"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#229100" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="Foreground"
+                                               TargetObject="{Binding ElementName=TextBlock}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#229100" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                </core:DataTriggerBehavior>
+                <core:DataTriggerBehavior Binding="{Binding Path=Status}"
+                                          ComparisonCondition="Equal"
+                                          Value="NA">
+                    <core:ChangePropertyAction PropertyName="Background"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#E0E0E0" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="BorderBrush"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#B6B6B6" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="Foreground"
+                                               TargetObject="{Binding ElementName=TextBlock}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#909090" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                </core:DataTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <TextBlock x:Name="TextBlock" HorizontalAlignment="Center" 
+                    VerticalAlignment="Center"
+                       Text="{Binding Path=Sort}" />
+        </Border>
+    </Grid>
+</UserControl>

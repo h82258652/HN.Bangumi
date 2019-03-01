@@ -65,8 +65,8 @@ namespace HN.Bangumi.Uwp.ViewModels
 
             containerBuilder.RegisterType<ShellViewModel>().SingleInstance();
             containerBuilder.RegisterType<SearchViewModel>();
-            containerBuilder.RegisterType<ProgressViewModel>();
-            containerBuilder.RegisterType<CalendarViewModel>();
+            containerBuilder.RegisterType<ProgressViewModel>().SingleInstance();
+            containerBuilder.RegisterType<CalendarViewModel>().SingleInstance();
             containerBuilder.RegisterType<SettingViewModel>();
             containerBuilder.RegisterType<SubjectViewModel>();
 

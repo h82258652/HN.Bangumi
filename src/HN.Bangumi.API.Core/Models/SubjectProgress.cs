@@ -2,12 +2,12 @@
 
 namespace HN.Bangumi.API.Models
 {
-    public class Aa : BangumiResult
+    public class SubjectProgress : BangumiResult
     {
         [JsonProperty("subject_id")]
         public int SubjectId { get; set; }
 
         [JsonProperty("eps")]
-        public Ep[] Eps { get; set; }
+        public EpProgress[] Eps { get; set; }
     }
 }

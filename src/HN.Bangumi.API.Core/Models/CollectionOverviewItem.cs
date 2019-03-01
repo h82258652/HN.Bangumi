@@ -1,16 +1,16 @@
 ﻿using Newtonsoft.Json;
 
-namespace HN.Bangumi.API.Models.Preview
+namespace HN.Bangumi.API.Models
 {
-    public class Gg
+    public class CollectionOverviewItem
     {
         [JsonProperty("status")]
-        public Hh Status { get; set; }
+        public Status Status { get; set; }
 
         [JsonProperty("count")]
         public int Count { get; set; }
 
         [JsonProperty("list")]
-        public Jj[] List { get; set; }
+        public CollectionOverviewSubject[] List { get; set; }
     }
 }

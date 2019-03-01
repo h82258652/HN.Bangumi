@@ -1,7 +1,7 @@
-﻿using System.Diagnostics;
-using HN.Bangumi.ViewModels;
+﻿using HN.Bangumi.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using WinRTXamlToolkit.Controls.Extensions;
 
@@ -9,6 +9,7 @@ namespace HN.Bangumi.Uwp.Views
 {
     public sealed partial class SearchView
     {
+        private const double IncrementalLoadingThreshold = 300;
         private ScrollViewer _animeScrollViewer;
         private ScrollViewer _bookScrollViewer;
         private ScrollViewer _gameScrollViewer;
@@ -28,7 +29,7 @@ namespace HN.Bangumi.Uwp.Views
             if (query != null)
             {
                 AutoSuggestBox.Text = query;
-                ViewModel.XCommand.Execute(query);
+                ViewModel.SearchCommand.Execute(query);
             }
         }
 
@@ -40,15 +41,15 @@ namespace HN.Bangumi.Uwp.Views
 
         private void AnimeScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            Debug.WriteLine(_animeScrollViewer.ScrollableHeight);
-            Debug.WriteLine(_animeScrollViewer.ViewportHeight);
-            Debug.WriteLine(_animeScrollViewer.ExtentHeight);
-            Debug.WriteLine(_animeScrollViewer.VerticalOffset);
+            if (_animeScrollViewer.VerticalOffset >= _animeScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            {
+                ViewModel.LoadMoreAnimesCommand.Execute(null);
+            }
         }
 
         private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
         {
-            ViewModel.XCommand.Execute(args.QueryText);
+            ViewModel.SearchCommand.Execute(args.QueryText);
         }
 
         private void BookGridView_Loaded(object sender, RoutedEventArgs e)
@@ -59,22 +60,59 @@ namespace HN.Bangumi.Uwp.Views
 
         private void BookScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            // TODO
+            if (_bookScrollViewer.VerticalOffset >= _bookScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            {
+                ViewModel.LoadMoreBooksCommand.Execute(null);
+            }
         }
 
         private void GameGridView_Loaded(object sender, RoutedEventArgs e)
         {
-            // TODO
+            _gameScrollViewer = GameGridView.GetScrollViewer();
+            _gameScrollViewer.ViewChanged += GameScrollViewer_ViewChanged;
+        }
+
+        private void GameScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (_gameScrollViewer.VerticalOffset >= _gameScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            {
+                ViewModel.LoadMoreGamesCommand.Execute(null);
+            }
         }
 
         private void MusicGridView_Loaded(object sender, RoutedEventArgs e)
         {
-            // TODO
+            _musicScrollViewer = MusicGridView.GetScrollViewer();
+            _musicScrollViewer.ViewChanged += MusicScrollViewer_ViewChanged;
+        }
+
+        private void MusicScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (_musicScrollViewer.VerticalOffset >= _musicScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            {
+                ViewModel.LoadMoreMusicsCommand.Execute(null);
+            }
         }
 
         private void RealGridView_Loaded(object sender, RoutedEventArgs e)
         {
-            // TODO
+            _realScrollViewer = RealGridView.GetScrollViewer();
+            _realScrollViewer.ViewChanged += RealScrollViewer_ViewChanged;
+        }
+
+        private void RealScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
+        {
+            if (_realScrollViewer.VerticalOffset >= _realScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            {
+                ViewModel.LoadMoreRealsCommand.Execute(null);
+            }
+        }
+
+        private void SubjectGridView_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var itemsView = (ListViewBase)sender;
+            var animation = itemsView.PrepareConnectedAnimation("SubjectForwardAnimation", e.ClickedItem, "SubjectImage");
+            animation.Configuration = new BasicConnectedAnimationConfiguration();
         }
     }
 }

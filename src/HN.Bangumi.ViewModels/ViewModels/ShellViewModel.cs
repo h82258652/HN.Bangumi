@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using HN.Bangumi.API;
 using HN.Bangumi.API.Authorization;
 using HN.Bangumi.API.Models;
+using HN.Bangumi.Messages;
 using HN.Bangumi.Services;
 
 namespace HN.Bangumi.ViewModels
@@ -20,8 +21,8 @@ namespace HN.Bangumi.ViewModels
         private User _user;
 
         public ShellViewModel(
-            IBangumiClient client, 
-            IUserService userService, 
+            IBangumiClient client,
+            IUserService userService,
             IAppDialogService appDialogService,
             IAppToastService appToastService)
         {
@@ -55,6 +56,8 @@ namespace HN.Bangumi.ViewModels
                         IsBusy = true;
 
                         await _client.SignInAsync();
+
+                        MessengerInstance.Send(new SignedInMessage());
 
                         LoadUser();
                     }
@@ -95,6 +98,8 @@ namespace HN.Bangumi.ViewModels
                         IsBusy = true;
 
                         await _client.SignOutAsync();
+
+                        MessengerInstance.Send(new SignedOutMessage());
                     }
                     finally
                     {
@@ -122,7 +127,7 @@ namespace HN.Bangumi.ViewModels
                     return;
                 }
 
-                var result = await _userService.GetUserAsync(_client.UserId);
+                var result = await _userService.GetAsync(_client.UserId);
                 if (result.ErrorCode == 0)
                 {
                     User = result;

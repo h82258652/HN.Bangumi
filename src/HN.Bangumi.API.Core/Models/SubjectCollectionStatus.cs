@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
 
-namespace HN.Bangumi.API.Models.Preview
+namespace HN.Bangumi.API.Models
 {
-    public class Xx : BangumiResult
+    public class SubjectCollectionStatus : BangumiResult
     {
         [JsonProperty("status")]
         public Status Status { get; set; }
@@ -23,7 +23,7 @@ namespace HN.Bangumi.API.Models.Preview
         public int EpStatus { get; set; }
 
         [JsonProperty("lasttouch")]
-        public int LastTouch { get; set; }
+        public long LastTouch { get; set; }
 
         [JsonProperty("user")]
         public User User { get; set; }

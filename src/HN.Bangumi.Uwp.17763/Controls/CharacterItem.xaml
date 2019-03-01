@@ -1,15 +1,89 @@
 ﻿<UserControl x:Class="HN.Bangumi.Uwp.Controls.CharacterItem"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             d:DataContext="{d:DesignInstance Type=models:Character}"
+             xmlns:core="using:Microsoft.Xaml.Interactions.Core"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="using:HN.Bangumi.API.Models"
-             mc:Ignorable="d"
+             d:DataContext="{d:DesignInstance Type=models:Character}"
              d:DesignHeight="300"
-             d:DesignWidth="400">
-    <Grid>
-        <Image Source="{Binding Path=Images.Small}" />
-        <TextBlock Text="{Binding Path=Name}" />
+             d:DesignWidth="400"
+             mc:Ignorable="d">
+    <Grid Background="White">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0"
+              Width="162"
+              Height="162">
+            <Image Source="{Binding Path=Images.Medium}"
+                   Stretch="UniformToFill" />
+            <Border x:Name="RoleNameBorder"
+                    Margin="8,0,0,8"
+                    Padding="6,3,6,3"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Bottom"
+                    CornerRadius="4">
+                <Border.Background>
+                    <AcrylicBrush TintColor="Gray" />
+                </Border.Background>
+                <interactivity:Interaction.Behaviors>
+                    <core:DataTriggerBehavior Binding="{Binding Path=RoleName}"
+                                              ComparisonCondition="Equal"
+                                              Value="主角">
+                        <core:ChangePropertyAction PropertyName="Background"
+                                                   TargetObject="{Binding ElementName=RoleNameBorder}">
+                            <core:ChangePropertyAction.Value>
+                                <AcrylicBrush TintColor="HotPink" />
+                            </core:ChangePropertyAction.Value>
+                        </core:ChangePropertyAction>
+                    </core:DataTriggerBehavior>
+                    <core:DataTriggerBehavior Binding="{Binding Path=RoleName}"
+                                              ComparisonCondition="Equal"
+                                              Value="配角">
+                        <core:ChangePropertyAction PropertyName="Background"
+                                                   TargetObject="{Binding ElementName=RoleNameBorder}">
+                            <core:ChangePropertyAction.Value>
+                                <AcrylicBrush TintColor="Pink" />
+                            </core:ChangePropertyAction.Value>
+                        </core:ChangePropertyAction>
+                    </core:DataTriggerBehavior>
+                    <core:DataTriggerBehavior Binding="{Binding Path=RoleName}"
+                                              ComparisonCondition="Equal"
+                                              Value="客串">
+                        <core:ChangePropertyAction PropertyName="Background"
+                                                   TargetObject="{Binding ElementName=RoleNameBorder}">
+                            <core:ChangePropertyAction.Value>
+                                <AcrylicBrush TintColor="ForestGreen" />
+                            </core:ChangePropertyAction.Value>
+                        </core:ChangePropertyAction>
+                    </core:DataTriggerBehavior>
+                </interactivity:Interaction.Behaviors>
+                <TextBlock FontSize="11"
+                           Foreground="White"
+                           Text="{Binding Path=RoleName}" />
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1"
+              Width="162"
+              Padding="8,4,8,4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid Grid.Row="0">
+                <TextBlock x:Name="PlaceholderTextBlock"
+                           AutomationProperties.AccessibilityView="Raw"
+                           Foreground="{x:Null}"
+                           IsHitTestVisible="False"
+                           MaxLines="2"
+                           Opacity="0"><Run Text="Xg" /><LineBreak /><Run Text="Xg" /></TextBlock>
+                <TextBlock MaxLines="2"
+                           Text="{Binding Converter={StaticResource CharacterNameConverter}}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="Wrap" />
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

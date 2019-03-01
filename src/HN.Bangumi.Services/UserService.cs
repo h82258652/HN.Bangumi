@@ -1,5 +1,4 @@
-﻿using System;
-using System.Threading;
+﻿using System.Threading;
 using System.Threading.Tasks;
 using HN.Bangumi.API;
 using HN.Bangumi.API.Models;
@@ -15,14 +14,14 @@ namespace HN.Bangumi.Services
             _client = client;
         }
 
-        public Task<object> X(long userId)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Task<User> GetUserAsync(long userId, CancellationToken cancellationToken = default(CancellationToken))
+        public Task<User> GetAsync(long userId, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _client.GetUserAsync(userId, cancellationToken);
+        }
+
+        public Task<CollectionSubject[]> GetCollectionAsync(long userId, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _client.GetUserCollectionAsync(userId, CollectionType.AllWatching, cancellationToken: cancellationToken);
         }
     }
 }

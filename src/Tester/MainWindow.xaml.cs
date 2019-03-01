@@ -34,7 +34,6 @@ namespace Tester
 
             try
             {
-                await client.GetCalendarAsync();
                 //await client.GetA(userId, SubjectType.Anime, 26);
             }
             catch (Exception ex)

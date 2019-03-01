@@ -1,4 +1,6 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace HN.Bangumi.API.Models
 {
@@ -20,7 +22,8 @@ namespace HN.Bangumi.API.Models
         public long Timestamp { get; set; }
 
         [JsonProperty("lastpost")]
-        public long LastPost { get; set; }
+        [JsonConverter(typeof(UnixDateTimeConverter))]
+        public DateTime LastPost { get; set; }
 
         [JsonProperty("replies")]
         public int Replies { get; set; }
