@@ -8,6 +8,8 @@ namespace HN.Bangumi.Services
     {
         Task<Subject> GetAsync(int id, CancellationToken cancellationToken = default(CancellationToken));
 
+        Task<SubjectProgress> GetProgressAsync(int id, CancellationToken cancellationToken = default(CancellationToken));
+
         Task<SearchResult> SearchAnimeAsync(string query, int skip, int count, CancellationToken cancellationToken = default(CancellationToken));
 
         Task<SearchResult> SearchBookAsync(string query, int skip, int count, CancellationToken cancellationToken = default(CancellationToken));

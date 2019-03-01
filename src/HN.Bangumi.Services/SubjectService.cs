@@ -19,6 +19,11 @@ namespace HN.Bangumi.Services
             return _client.GetSubjectAsync(id, ResponseGroup.Large, cancellationToken);
         }
 
+        public Task<SubjectProgress> GetProgressAsync(int id, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _client.GetSubjectProgressAsync(_client.UserId, id, cancellationToken);
+        }
+
         public Task<SearchResult> SearchAnimeAsync(string query, int skip, int count, CancellationToken cancellationToken = default(CancellationToken))
         {
             return _client.SearchAsync(query, skip, count, SubjectType.Anime, ResponseGroup.Large, cancellationToken);
