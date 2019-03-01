@@ -14,10 +14,9 @@
         <Border x:Name="Border"
                 BorderThickness="1">
             <interactivity:Interaction.Behaviors>
-                <!--  TODO  -->
-                <!--<core:DataTriggerBehavior Binding="{Binding Path=Status}"
+                <core:DataTriggerBehavior Binding="{Binding Path=Status}"
                                           ComparisonCondition="Equal"
-                                          Value="TODOOOOOOOOOOOOOOOOOOOOOOO">
+                                          Value="Watched">
                     <core:ChangePropertyAction PropertyName="Background"
                                                TargetObject="{Binding ElementName=Border}">
                         <core:ChangePropertyAction.Value>
@@ -36,7 +35,57 @@
                             <SolidColorBrush Color="#FFFFFF" />
                         </core:ChangePropertyAction.Value>
                     </core:ChangePropertyAction>
-                </core:DataTriggerBehavior>-->
+                </core:DataTriggerBehavior>
+                <core:DataTriggerBehavior Binding="{Binding Path=Status}"
+                                          ComparisonCondition="Equal"
+                                          Value="Queue">
+                    <core:ChangePropertyAction PropertyName="Background"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#FFADD1" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="BorderBrush"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#FF2293" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="Foreground"
+                                               TargetObject="{Binding ElementName=TextBlock}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#FF2293" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                </core:DataTriggerBehavior>
+                <core:DataTriggerBehavior Binding="{Binding Path=Status}"
+                                          ComparisonCondition="Equal"
+                                          Value="Drop">
+                    <core:ChangePropertyAction PropertyName="Background"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#CCCCCC" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="BorderBrush"
+                                               TargetObject="{Binding ElementName=Border}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#666666" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="Foreground"
+                                               TargetObject="{Binding ElementName=TextBlock}">
+                        <core:ChangePropertyAction.Value>
+                            <SolidColorBrush Color="#FFFFFF" />
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                    <core:ChangePropertyAction PropertyName="TextDecorations"
+                                               TargetObject="{Binding ElementName=TextBlock}">
+                        <core:ChangePropertyAction.Value>
+                            <TextDecorations>Strikethrough</TextDecorations>
+                        </core:ChangePropertyAction.Value>
+                    </core:ChangePropertyAction>
+                </core:DataTriggerBehavior>
                 <core:DataTriggerBehavior Binding="{Binding Path=Status}"
                                           ComparisonCondition="Equal"
                                           Value="Air">
@@ -104,8 +153,9 @@
                     </core:ChangePropertyAction>
                 </core:DataTriggerBehavior>
             </interactivity:Interaction.Behaviors>
-            <TextBlock x:Name="TextBlock" HorizontalAlignment="Center" 
-                    VerticalAlignment="Center"
+            <TextBlock x:Name="TextBlock"
+                       HorizontalAlignment="Center"
+                       VerticalAlignment="Center"
                        Text="{Binding Path=Sort}" />
         </Border>
     </Grid>
