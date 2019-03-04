@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using System.Net.Http;
 using GalaSoft.MvvmLight;
+using GalaSoft.MvvmLight.Messaging;
 using HN.Bangumi.API;
 using HN.Bangumi.API.Models;
 using HN.Bangumi.Messages;
@@ -19,17 +20,18 @@ namespace HN.Bangumi.ViewModels
         public SubjectViewModel(
             IBangumiClient client,
             ISubjectService subjectService,
-            IAppToastService appToastService)
+            IAppToastService appToastService,
+            IMessenger messenger)
         {
             _client = client;
             _subjectService = subjectService;
             _appToastService = appToastService;
 
-            MessengerInstance.Register<SignedInMessage>(this, message =>
+            messenger.Register<SignedInMessage>(this, message =>
             {
                 // TODO reload
             });
-            MessengerInstance.Register<SignedOutMessage>(this, message =>
+            messenger.Register<SignedOutMessage>(this, message =>
             {
                 // TODO reload
             });

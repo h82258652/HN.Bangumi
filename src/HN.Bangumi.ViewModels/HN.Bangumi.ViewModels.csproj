@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <RootNamespace>HN.Bangumi</RootNamespace>
+    <RootNamespace>HN.Bangumi.ViewModels</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\HN.Bangumi.API.Core\HN.Bangumi.API.Core.csproj" />
     <ProjectReference Include="..\HN.Bangumi.Configuration.Abstractions\HN.Bangumi.Configuration.Abstractions.csproj" />
+    <ProjectReference Include="..\HN.Bangumi.Messages\HN.Bangumi.Messages.csproj" />
     <ProjectReference Include="..\HN.Bangumi.Services.Abstractions\HN.Bangumi.Services.Abstractions.csproj" />
   </ItemGroup>
 

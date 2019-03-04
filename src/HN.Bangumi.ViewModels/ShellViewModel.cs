@@ -2,6 +2,7 @@
 using System.Net.Http;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using HN.Bangumi.API;
 using HN.Bangumi.API.Authorization;
 using HN.Bangumi.API.Models;
@@ -13,7 +14,9 @@ namespace HN.Bangumi.ViewModels
     public class ShellViewModel : ViewModelBase
     {
         private readonly IAppDialogService _appDialogService;
+        private readonly IAppToastService _appToastService;
         private readonly IBangumiClient _client;
+        private readonly IMessenger _messenger;
         private readonly IUserService _userService;
         private bool _isBusy;
         private RelayCommand _signInCommand;
@@ -24,12 +27,14 @@ namespace HN.Bangumi.ViewModels
             IBangumiClient client,
             IUserService userService,
             IAppDialogService appDialogService,
-            IAppToastService appToastService)
+            IAppToastService appToastService,
+            IMessenger messenger)
         {
             _client = client;
             _userService = userService;
             _appDialogService = appDialogService;
             _appToastService = appToastService;
+            _messenger = messenger;
 
             if (IsSignIn)
             {
@@ -57,7 +62,7 @@ namespace HN.Bangumi.ViewModels
 
                         await _client.SignInAsync();
 
-                        MessengerInstance.Send(new SignedInMessage());
+                        _messenger.Send(new SignedInMessage());
 
                         LoadUser();
                     }
@@ -79,8 +84,6 @@ namespace HN.Bangumi.ViewModels
             }
         }
 
-        private readonly IAppToastService _appToastService;
-
         public RelayCommand SignOutCommand
         {
             get
@@ -99,7 +102,7 @@ namespace HN.Bangumi.ViewModels
 
                         await _client.SignOutAsync();
 
-                        MessengerInstance.Send(new SignedOutMessage());
+                        _messenger.Send(new SignedOutMessage());
                     }
                     finally
                     {
