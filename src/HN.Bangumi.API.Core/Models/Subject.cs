@@ -28,7 +28,7 @@ namespace HN.Bangumi.API.Models
         public Ep[] Eps { get; set; }
 
         [JsonProperty("eps_count")]
-        public int EpsCount { get; set; }
+        public int? EpsCount { get; set; }
 
         [JsonProperty("air_date")]
         public string AirDate { get; set; }
