@@ -15,7 +15,7 @@ namespace HN.Bangumi.API
         /// <param name="status">收视类型</param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        public static Task<BangumiResult> UpdateStatusAsync(this IBangumiClient client, int epId, EpStatus status, CancellationToken cancellationToken = default(CancellationToken))
+        public static Task<BangumiResult> UpdateEpStatusAsync(this IBangumiClient client, int epId, EpStatus status, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (client == null)
             {
