@@ -33,6 +33,6 @@ namespace HN.Bangumi.API.Models
         public string[] Source { get; set; }
 
         [JsonProperty("Twitter")]
-        public string Twitter { get; set; }
+        public object Twitter { get; set; }
     }
 }
