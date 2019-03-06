@@ -48,5 +48,10 @@ namespace HN.Bangumi.Services
         {
             return _client.SearchAsync(query, skip, count, SubjectType.Real, ResponseGroup.Large, cancellationToken);
         }
+
+        public Task<BangumiResult> UpdateEpStatusAsync(int epId, EpStatus status, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _client.UpdateEpStatusAsync(epId, status, cancellationToken);
+        }
     }
 }

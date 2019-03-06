@@ -19,5 +19,7 @@ namespace HN.Bangumi.Services
         Task<SearchResult> SearchMusicAsync(string query, int skip, int count, CancellationToken cancellationToken = default(CancellationToken));
 
         Task<SearchResult> SearchRealAsync(string query, int skip, int count, CancellationToken cancellationToken = default(CancellationToken));
+
+        Task<BangumiResult> UpdateEpStatusAsync(int epId, EpStatus status, CancellationToken cancellationToken = default(CancellationToken));
     }
 }
