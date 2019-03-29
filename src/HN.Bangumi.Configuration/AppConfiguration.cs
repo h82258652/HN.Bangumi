@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HN.Bangumi.Configuration
+﻿namespace HN.Bangumi.Configuration
 {
     public class AppConfiguration : IAppConfiguration
     {
