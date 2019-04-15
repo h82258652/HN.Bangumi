@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using HN.Bangumi.API.Models;
 using Windows.UI.Xaml.Data;
 
@@ -14,7 +15,8 @@ namespace HN.Bangumi.Uwp.Converters
                 return null;
             }
 
-            return string.IsNullOrEmpty(subject.NameCn) ? subject.Name : subject.NameCn;
+            var result = string.IsNullOrEmpty(subject.NameCn) ? subject.Name : subject.NameCn;
+            return WebUtility.HtmlDecode(result);
         }
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
