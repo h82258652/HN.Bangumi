@@ -38,6 +38,31 @@ namespace HN.Bangumi.API
             return accessToken;
         }
 
+        internal async Task RefreshAsync()
+        {
+            var accessToken = _accessTokenStorage.Load();
+            var refreshToken = accessToken?.RefreshToken;
+            if (refreshToken == null)
+            {
+                return;
+            }
+
+            var requestTime = DateTime.Now;
+
+            var refreshResult = await _authorizationProvider.RefreshAsync(refreshToken);
+
+            accessToken = new AccessToken
+            {
+                Value = refreshResult.AccessToken,
+                ExpiresAt = requestTime.AddSeconds(refreshResult.ExiresIn).AddMinutes(-5),// 5 分钟用作缓冲
+                TokenType = refreshResult.TokenType,
+                Scope = refreshResult.Scope,
+                RefreshToken = refreshResult.RefreshToken,
+                UserId = accessToken.UserId
+            };
+            _accessTokenStorage.Save(accessToken);
+        }
+
         internal async Task SignInAsync()
         {
             var accessToken = GetAccessToken();

@@ -7,5 +7,7 @@ namespace HN.Bangumi.API.Authorization
     public interface IAuthorizationProvider
     {
         Task<AuthorizationResult> AuthorizeAsync(Uri authorizationUri, Uri callbackUri);
+
+        Task<AuthorizationResult> RefreshAsync(string refreshToken);
     }
 }

@@ -39,6 +39,27 @@ namespace HN.Bangumi.API.Authorization
             }
         }
 
+        public async Task<AuthorizationResult> RefreshAsync(string refreshToken)
+        {
+            using (var client = new HttpClient())
+            {
+                var postData = new Dictionary<string, string>
+                {
+                    ["grant_type"] = "refresh_token",
+                    ["client_id"] = _bangumiOptions.AppKey,
+                    ["client_secret"] = _bangumiOptions.AppSecret,
+                    ["refresh_token"] = refreshToken,
+                    ["redirect_uri"] = _bangumiOptions.RedirectUri
+                };
+
+                var postContent = new FormUrlEncodedContent(postData);
+
+                var response = await client.PostAsync("https://bgm.tv/oauth/access_token", postContent);
+                var json = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<AuthorizationResult>(json);
+            }
+        }
+
         protected abstract Task<string> GetAuthorizationCodeAsync(Uri authorizationUri, Uri callbackUri);
     }
 }

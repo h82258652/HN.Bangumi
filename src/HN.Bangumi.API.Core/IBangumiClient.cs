@@ -14,6 +14,8 @@ namespace HN.Bangumi.API
 
         Task<T> PostAsync<T>(string uri, HttpContent content, CancellationToken cancellationToken = default(CancellationToken));
 
+        Task RefreshTokenAsync();
+
         Task<T> SendAsync<T>(HttpRequestMessage request, CancellationToken cancellationToken = default(CancellationToken));
 
         Task SignInAsync();

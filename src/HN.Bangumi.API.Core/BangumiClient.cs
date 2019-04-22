@@ -49,6 +49,11 @@ namespace HN.Bangumi.API
             }, cancellationToken);
         }
 
+        public Task RefreshTokenAsync()
+        {
+            return _signInManager.RefreshAsync();
+        }
+
         public async Task<T> SendAsync<T>(HttpRequestMessage request, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (request == null)
