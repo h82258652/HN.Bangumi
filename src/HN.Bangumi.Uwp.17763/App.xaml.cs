@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -42,7 +44,7 @@ namespace HN.Bangumi.Uwp
         /// 将在启动应用程序以打开特定文件等情况下使用。
         /// </summary>
         /// <param name="e">有关启动请求和过程的详细信息。</param>
-        protected override void OnLaunched(LaunchActivatedEventArgs e)
+        protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
             Frame rootFrame = Window.Current.Content as Frame;
 
@@ -73,9 +75,43 @@ namespace HN.Bangumi.Uwp
                     // 参数
                     rootFrame.Navigate(typeof(ShellView), e.Arguments);
                 }
+
+                // 注册后台任务
+                await RegisterBackgroundTask();
+
                 // 确保当前窗口处于活动状态
                 Window.Current.Activate();
             }
+        }
+
+        private async Task RegisterBackgroundTask()
+        {
+            const string refreshTokenTaskName = "RefreshTokenTask";
+
+            var backgroundTaskRegistration = BackgroundTaskRegistration.AllTasks.Values.OfType<BackgroundTaskRegistration>()
+                .FirstOrDefault(temp => temp.Name == refreshTokenTaskName);
+
+            if (backgroundTaskRegistration != null)
+            {
+                // 已经注册后台任务。
+                return;
+            }
+
+            var access = await BackgroundExecutionManager.RequestAccessAsync();
+            if (access != BackgroundAccessStatus.AlwaysAllowed)
+            {
+                // 没有权限。
+                return;
+            }
+
+            var builder = new BackgroundTaskBuilder();
+            // 仅在网络可用下执行后台任务。
+            builder.AddCondition(new SystemCondition(SystemConditionType.InternetAvailable));
+
+            builder.Name = refreshTokenTaskName;
+            builder.TaskEntryPoint = "HN.Bangumi.Uwp.BackgroundTasks.RefreshTokenTask";
+            builder.SetTrigger(new TimeTrigger(60, false));
+            backgroundTaskRegistration = builder.Register();
         }
 
         /// <summary>
