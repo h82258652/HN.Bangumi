@@ -1,22 +1,49 @@
 ﻿using System;
-using Windows.ApplicationModel.Background;
 using HN.Bangumi.API;
-using Microsoft.Extensions.Options;
+using Windows.ApplicationModel.Background;
+using HN.Bangumi.Configuration;
 
 namespace HN.Bangumi.Uwp.BackgroundTasks
 {
     public sealed class RefreshTokenTask : IBackgroundTask
     {
+        private readonly IBangumiClient _bangumiClient;
+
         public RefreshTokenTask()
         {
-            var bangumiClientBuilder = new BangumiClientBuilder();
-            bangumiClientBuilder.WithConfig("", "", "");
-      
+            var appConfiguration = new AppConfiguration();
+            _bangumiClient = new BangumiClientBuilder()
+                .WithConfig(options =>
+                {
+                    options.AppKey = appConfiguration.AppKey;
+                    options.AppSecret = appConfiguration.AppSecret;
+                    options.RedirectUri = appConfiguration.RedirectUri;
+                    options.RetryCount = 3;
+                    options.RetryDelay = TimeSpan.FromSeconds(1);
+                })
+                .UseDefaultAuthorizationProvider()
+                .UseDefaultAccessTokenStorage()
+                .Build();
         }
 
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
-            throw new NotImplementedException();
+            BackgroundTaskDeferral deferral = null;
+
+            try
+            {
+                deferral = taskInstance.GetDeferral();
+
+                await _bangumiClient.RefreshTokenAsync();
+            }
+            catch
+            {
+                // ignored
+            }
+            finally
+            {
+                deferral?.Complete();
+            }
         }
     }
 }

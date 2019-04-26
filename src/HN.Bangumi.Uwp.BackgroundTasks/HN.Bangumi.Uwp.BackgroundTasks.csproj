@@ -134,9 +134,17 @@
       <Project>{4edf132f-64be-48f2-889e-0d5133a5e3ad}</Project>
       <Name>HN.Bangumi.API.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\HN.Bangumi.API.Uwp.BackgroundTasks\HN.Bangumi.API.Uwp.BackgroundTasks.csproj">
-      <Project>{d5da721a-c0ef-4338-bd0c-c035006501ae}</Project>
-      <Name>HN.Bangumi.API.Uwp.BackgroundTasks</Name>
+    <ProjectReference Include="..\HN.Bangumi.API.Uwp\HN.Bangumi.API.Uwp.csproj">
+      <Project>{6cd071e7-fe8e-47c3-ba4f-e5f5008f318e}</Project>
+      <Name>HN.Bangumi.API.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.Configuration.Abstractions\HN.Bangumi.Configuration.Abstractions.csproj">
+      <Project>{c091a433-3f6a-4dce-a81c-803f779d334f}</Project>
+      <Name>HN.Bangumi.Configuration.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.Configuration\HN.Bangumi.Configuration.csproj">
+      <Project>{2dddefe3-e65c-48e3-b8f5-591bf5ef74cb}</Project>
+      <Name>HN.Bangumi.Configuration</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
