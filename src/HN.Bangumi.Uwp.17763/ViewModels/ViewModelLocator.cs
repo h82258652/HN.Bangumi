@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extras.CommonServiceLocator;
 using CommonServiceLocator;
+using GalaSoft.MvvmLight.Messaging;
 using GalaSoft.MvvmLight.Views;
 using HN.Bangumi.API;
 using HN.Bangumi.Configuration;
@@ -9,6 +10,7 @@ using HN.Bangumi.Services;
 using HN.Bangumi.Uwp.Services;
 using HN.Bangumi.Uwp.Views;
 using HN.Bangumi.ViewModels;
+using HN.Cache;
 
 namespace HN.Bangumi.Uwp.ViewModels
 {
@@ -62,7 +64,10 @@ namespace HN.Bangumi.Uwp.ViewModels
             containerBuilder.RegisterType<UserService>().As<IUserService>();
             containerBuilder.RegisterType<SubjectService>().As<ISubjectService>();
             containerBuilder.RegisterType<CalendarService>().As<ICalendarService>();
+            containerBuilder.RegisterType<DiskCache>().As<IDiskCache>();
 
+            containerBuilder.Register(context => Messenger.Default).SingleInstance();
+            
             containerBuilder.RegisterType<ShellViewModel>().SingleInstance();
             containerBuilder.RegisterType<SearchViewModel>();
             containerBuilder.RegisterType<ProgressViewModel>().SingleInstance();
