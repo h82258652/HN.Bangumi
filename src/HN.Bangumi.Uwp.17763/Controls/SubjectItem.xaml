@@ -4,21 +4,22 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:models="using:HN.Bangumi.API.Models"
+             xmlns:controls="using:HN.Controls"
              d:DataContext="{d:DesignInstance Type=models:Subject}"
              d:DesignHeight="300"
              d:DesignWidth="400"
              mc:Ignorable="d">
     <Grid Background="White">
         <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Image x:Name="SubjectImage"
-               Grid.Row="0"
-               Width="162"
-               Height="162"
-               Source="{Binding Path=Images.Common}"
-               Stretch="UniformToFill" />
+        <controls:ImageEx x:Name="SubjectImage"
+                          Grid.Row="0"
+                          Width="162"
+                          Height="162"
+                          Source="{Binding Path=Images.Common}"
+                          Stretch="UniformToFill" />
         <Grid Grid.Row="1"
               Width="162"
               Padding="8,4,8,4">
