@@ -11,6 +11,7 @@ using HN.Bangumi.Uwp.Services;
 using HN.Bangumi.Uwp.Views;
 using HN.Bangumi.ViewModels;
 using HN.Cache;
+using HN.Services;
 
 namespace HN.Bangumi.Uwp.ViewModels
 {
@@ -18,6 +19,13 @@ namespace HN.Bangumi.Uwp.ViewModels
     {
         static ViewModelLocator()
         {
+            ImageExService.ConfigureImageSource(options =>
+            {
+                options.WithDefaultServices();
+                options.WithDefaultPipes();
+                options.UseHttpHandler<BangumiHttpHandler>();
+            });
+
             var autofacServiceLocator = new AutofacServiceLocator(ConfigureAutofacContainer());
             ServiceLocator.SetLocatorProvider(() => autofacServiceLocator);
         }
@@ -67,7 +75,7 @@ namespace HN.Bangumi.Uwp.ViewModels
             containerBuilder.RegisterType<DiskCache>().As<IDiskCache>();
 
             containerBuilder.Register(context => Messenger.Default).SingleInstance();
-            
+
             containerBuilder.RegisterType<ShellViewModel>().SingleInstance();
             containerBuilder.RegisterType<SearchViewModel>();
             containerBuilder.RegisterType<ProgressViewModel>().SingleInstance();
