@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Messaging;
 using HN.Bangumi.API;
 using HN.Bangumi.API.Authorization;
 using HN.Bangumi.API.Models;
+using HN.Bangumi.Configuration;
 using HN.Bangumi.Messages;
 using HN.Bangumi.Services;
 
@@ -13,6 +14,7 @@ namespace HN.Bangumi.ViewModels
 {
     public class ShellViewModel : ViewModelBase
     {
+        private readonly IAppCache _appCache;
         private readonly IAppDialogService _appDialogService;
         private readonly IAppToastService _appToastService;
         private readonly IBangumiClient _client;
@@ -28,12 +30,14 @@ namespace HN.Bangumi.ViewModels
             IUserService userService,
             IAppDialogService appDialogService,
             IAppToastService appToastService,
+            IAppCache appCache,
             IMessenger messenger)
         {
             _client = client;
             _userService = userService;
             _appDialogService = appDialogService;
             _appToastService = appToastService;
+            _appCache = appCache;
             _messenger = messenger;
 
             if (IsSignIn)
@@ -102,6 +106,8 @@ namespace HN.Bangumi.ViewModels
 
                         await _client.SignOutAsync();
 
+                        _appCache.User = null;
+
                         _messenger.Send(new SignedOutMessage());
                     }
                     finally
@@ -130,10 +136,13 @@ namespace HN.Bangumi.ViewModels
                     return;
                 }
 
+                User = _appCache.User;
+
                 var result = await _userService.GetAsync(_client.UserId);
                 if (result.ErrorCode == 0)
                 {
                     User = result;
+                    _appCache.User = result;
                 }
             }
             catch

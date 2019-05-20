@@ -9,6 +9,6 @@ namespace HN.Bangumi.Uwp.Views
             InitializeComponent();
         }
 
-        public SettingViewModel ViewModel => (SettingViewModel) DataContext;
+        public SettingViewModel ViewModel => (SettingViewModel)DataContext;
     }
 }

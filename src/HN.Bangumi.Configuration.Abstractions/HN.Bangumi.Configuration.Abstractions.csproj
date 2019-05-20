@@ -5,4 +5,8 @@
     <RootNamespace>HN.Bangumi.Configuration</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\HN.Bangumi.API.Core\HN.Bangumi.API.Core.csproj" />
+  </ItemGroup>
+
 </Project>

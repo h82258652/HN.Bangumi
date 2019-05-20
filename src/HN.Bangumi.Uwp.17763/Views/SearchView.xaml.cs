@@ -3,6 +3,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using HN.Bangumi.API.Models;
+using HN.Bangumi.Uwp.Extensions;
 using WinRTXamlToolkit.Controls.Extensions;
 
 namespace HN.Bangumi.Uwp.Views
@@ -111,8 +113,10 @@ namespace HN.Bangumi.Uwp.Views
         private void SubjectGridView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var itemsView = (ListViewBase)sender;
-            var animation = itemsView.PrepareConnectedAnimation("SubjectForwardAnimation", e.ClickedItem, "SubjectImage");
+            var subject = (Subject)e.ClickedItem;
+            var animation = itemsView.PrepareConnectedAnimation("SubjectForwardAnimation", subject, "SubjectImage");
             animation.Configuration = new BasicConnectedAnimationConfiguration();
+            animation.SetExtraData("SubjectImageUrl", subject.Images.Common);
         }
     }
 }

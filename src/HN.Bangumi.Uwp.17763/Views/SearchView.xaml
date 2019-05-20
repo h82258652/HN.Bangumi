@@ -17,6 +17,8 @@
         </Grid.RowDefinitions>
         <AutoSuggestBox x:Name="AutoSuggestBox"
                         Grid.Row="0"
+                        Margin="12,12,12,0"
+                        PlaceholderText="搜索"
                         QueryIcon="Find"
                         QuerySubmitted="AutoSuggestBox_QuerySubmitted" />
         <Pivot Grid.Row="1">
@@ -24,7 +26,6 @@
                        Header="动画">
                 <Grid>
                     <GridView x:Name="AnimeGridView"
-                              animations:ReorderGridAnimation.Duration="250"
                               IsItemClickEnabled="True"
                               ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Animes}"
@@ -40,12 +41,6 @@
                                 <controls:SubjectItem />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="SelectorItem">
-                                <Setter Property="Margin"
-                                        Value="0,0,12,12" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
                     </GridView>
                     <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingAnimes}" />
                 </Grid>
@@ -54,7 +49,6 @@
                        Header="书籍">
                 <Grid>
                     <GridView x:Name="BookGridView"
-                              animations:ReorderGridAnimation.Duration="250"
                               IsItemClickEnabled="True"
                               ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Books}"
@@ -70,12 +64,6 @@
                                 <controls:SubjectItem />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="SelectorItem">
-                                <Setter Property="Margin"
-                                        Value="0,0,12,12" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
                     </GridView>
                     <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingBooks}" />
                 </Grid>
@@ -84,7 +72,6 @@
                        Header="音乐">
                 <Grid>
                     <GridView x:Name="MusicGridView"
-                              animations:ReorderGridAnimation.Duration="250"
                               IsItemClickEnabled="True"
                               ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Musics}"
@@ -100,12 +87,6 @@
                                 <controls:SubjectItem />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="SelectorItem">
-                                <Setter Property="Margin"
-                                        Value="0,0,12,12" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
                     </GridView>
                     <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingMusics}" />
                 </Grid>
@@ -114,7 +95,6 @@
                        Header="游戏">
                 <Grid>
                     <GridView x:Name="GameGridView"
-                              animations:ReorderGridAnimation.Duration="250"
                               IsItemClickEnabled="True"
                               ItemClick="SubjectGridView_ItemClick"
                               ItemsSource="{Binding Path=Games}"
@@ -130,12 +110,6 @@
                                 <controls:SubjectItem />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="SelectorItem">
-                                <Setter Property="Margin"
-                                        Value="0,0,12,12" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
                     </GridView>
                     <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingGames}" />
                 </Grid>
@@ -159,12 +133,6 @@
                                 <controls:SubjectItem />
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="SelectorItem">
-                                <Setter Property="Margin"
-                                        Value="0,0,12,12" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
                     </GridView>
                     <controls:AppLoadingControl IsLoading="{Binding Path=IsLoadingReals}" />
                 </Grid>

@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Views;
 using HN.Bangumi.API;
 using HN.Bangumi.Configuration;
 using HN.Bangumi.Services;
+using HN.Bangumi.Uwp.Configuration;
 using HN.Bangumi.Uwp.Services;
 using HN.Bangumi.Uwp.Views;
 using HN.Bangumi.ViewModels;
@@ -48,6 +49,7 @@ namespace HN.Bangumi.Uwp.ViewModels
 
             containerBuilder.RegisterType<AppConfiguration>().As<IAppConfiguration>();
             containerBuilder.RegisterType<AppSettings>().As<IAppSettings>();
+            containerBuilder.RegisterType<AppCache>().As<IAppCache>();
 
             containerBuilder.Register(context =>
             {

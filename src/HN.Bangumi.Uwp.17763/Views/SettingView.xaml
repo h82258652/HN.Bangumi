@@ -7,8 +7,31 @@
       DataContext="{Binding Source={StaticResource Locator}, Path=Setting}"
       mc:Ignorable="d">
     <Grid>
-        <ToggleButton x:Name="Button"
-                      HorizontalAlignment="Center" />
-        <controls:AppLoadingControl IsLoading="{Binding ElementName=Button, Path=IsChecked}" />
+        <ScrollViewer Padding="12">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="20"
+                           Text="图片数据" />
+                <Button Margin="0,8,0,0"
+                        Command="{Binding Path=ClearCacheCommand}">
+                    <Grid>
+                        <Grid Visibility="{Binding Path=IsCleaningCache, Converter={StaticResource InversedBooleanToVisibilityConverter}}">
+                            <TextBlock><Run Text="清理缓存 (" /><Run Text="{Binding Path=CacheSize, Converter={StaticResource FileSizeToStringConverter}}" /><Run Text=")" /></TextBlock>
+                        </Grid>
+                        <Grid Visibility="{Binding Path=IsCleaningCache, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="清理中" />
+                                <ProgressRing IsActive="{Binding Path=IsCleaningCache}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Button>
+                <TextBlock Margin="0,12,0,0"
+                           FontSize="20"
+                           Text="关于" />
+                <TextBlock Margin="0,8,0,0"
+                           Text="这是一个第三方 Bangumi 客户端，若干功能处于开发过程中。"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
     </Grid>
 </Page>

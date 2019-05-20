@@ -3,7 +3,11 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations"
       xmlns:controls="using:HN.Bangumi.Uwp.Controls"
+      xmlns:controls1="using:HN.Controls"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:extensions="using:WinRTXamlToolkit.Controls.Extensions"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       DataContext="{Binding Source={StaticResource Locator}, Path=Subject}"
       mc:Ignorable="d">
@@ -14,7 +18,7 @@
             </NavigationThemeTransition>
         </TransitionCollection>
     </Page.Transitions>
-    <Grid>
+    <Grid x:Name="RootGrid">
         <ScrollViewer Padding="12">
             <Grid>
                 <Grid.RowDefinitions>
@@ -27,12 +31,13 @@
                         <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
                     <Grid Grid.Column="0">
-                        <Grid VerticalAlignment="Top">
-                            <Image x:Name="SubjectImage"
-                                   Width="150"
-                                   Height="214"
-                                   Source="{Binding Path=Subject.Images.Common}"
-                                   Stretch="Uniform" />
+                        <Grid VerticalAlignment="Top"
+                              Background="White">
+                            <controls1:ImageEx x:Name="SubjectImage"
+                                               Width="150"
+                                               Height="214"
+                                               Source="{Binding Path=Subject.Images.Common}"
+                                               Stretch="Uniform" />
                         </Grid>
                     </Grid>
                     <Grid x:Name="DescriptionGrid"
@@ -52,61 +57,147 @@
                 <Pivot Grid.Row="1">
                     <PivotItem Padding="0,12,0,0"
                                Header="章节">
-                        <GridView IsItemClickEnabled="True"
-                                  ItemsSource="{Binding Path=Subject.Eps}"
-                                  ScrollViewer.VerticalScrollMode="Disabled">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <controls:EpItem />
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemContainerStyle>
-                                <Style TargetType="SelectorItem">
-                                    <Setter Property="HorizontalContentAlignment"
-                                            Value="Stretch" />
-                                    <Setter Property="VerticalContentAlignment"
-                                            Value="Stretch" />
-                                </Style>
-                            </ItemsControl.ItemContainerStyle>
-                        </GridView>
+                        <StackPanel>
+                            <GridView Padding="8,8,0,0"
+                                      ItemsSource="{Binding Path=NormalEps}"
+                                      ScrollViewer.VerticalScrollMode="Disabled">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls:EpItem2 AirDate="{Binding Path=AirDate}"
+                                                          EpChineseName="{Binding Path=NameCn}"
+                                                          EpName="{Binding Path=Name}"
+                                                          Sort="{Binding Path=Sort}"
+                                                          Status="{Binding Path=Status}"
+                                                          UpdateStatusButtonVisibility="{Binding ElementName=RootGrid, Path=DataContext.IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                          Duration="{Binding Path=Duration}">
+                                            <interactivity:Interaction.Behaviors>
+                                                <core:EventTriggerBehavior EventName="WatchedButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.WatchedEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                                <core:EventTriggerBehavior EventName="QueueButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.QueueEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                                <core:EventTriggerBehavior EventName="DropButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.DropEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                                <core:EventTriggerBehavior EventName="RemoveButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.RemoveEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                            </interactivity:Interaction.Behaviors>
+                                        </controls:EpItem2>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="SelectorItem">
+                                        <Setter Property="HorizontalContentAlignment"
+                                                Value="Stretch" />
+                                        <Setter Property="Margin"
+                                                Value="0,0,8,8" />
+                                        <Setter Property="VerticalContentAlignment"
+                                                Value="Stretch" />
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                            </GridView>
+                            <GridView Margin="0,8,0,0"
+                                      Padding="8,8,0,0"
+                                      ItemsSource="{Binding Path=SpecialEps}"
+                                      ScrollViewer.VerticalScrollMode="Disabled"
+                                      Visibility="{Binding Path=SpecialEps, Converter={StaticResource InversedIsEmptyCollectionToVisibilityConverter}}">
+                                <ListViewBase.Header>
+                                    <StackPanel Margin="0,0,0,8"
+                                                Orientation="Horizontal">
+                                        <Rectangle Width="6">
+                                            <Shape.Fill>
+                                                <SolidColorBrush Color="{ThemeResource SystemAccentColor}" />
+                                            </Shape.Fill>
+                                        </Rectangle>
+                                        <TextBlock Margin="4,0,0,0"
+                                                   VerticalAlignment="Center"
+                                                   FontSize="18"
+                                                   Text="SP" />
+                                    </StackPanel>
+                                </ListViewBase.Header>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <controls:EpItem2 AirDate="{Binding Path=AirDate}"
+                                                          EpChineseName="{Binding Path=NameCn}"
+                                                          EpName="{Binding Path=Name}"
+                                                          Sort="{Binding Path=Sort}"
+                                                          Status="{Binding Path=Status}"
+                                                          UpdateStatusButtonVisibility="{Binding ElementName=RootGrid, Path=DataContext.IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}"
+                                                          Duration="{Binding Path=Duration}">
+                                            <interactivity:Interaction.Behaviors>
+                                                <core:EventTriggerBehavior EventName="WatchedButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.WatchedEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                                <core:EventTriggerBehavior EventName="QueueButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.QueueEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                                <core:EventTriggerBehavior EventName="DropButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.DropEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                                <core:EventTriggerBehavior EventName="RemoveButtonClick">
+                                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.RemoveEpCommand}"
+                                                                              CommandParameter="{Binding}" />
+                                                </core:EventTriggerBehavior>
+                                            </interactivity:Interaction.Behaviors>
+                                        </controls:EpItem2>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="SelectorItem">
+                                        <Setter Property="HorizontalContentAlignment"
+                                                Value="Stretch" />
+                                        <Setter Property="Margin"
+                                                Value="0,0,8,8" />
+                                        <Setter Property="VerticalContentAlignment"
+                                                Value="Stretch" />
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                            </GridView>
+                        </StackPanel>
                     </PivotItem>
                     <PivotItem Padding="0,12,0,0"
                                Header="角色介绍">
-                        <GridView animations:ReorderGridAnimation.Duration="250"
-                                  ItemsSource="{Binding Path=Subject.Crt}"
+                        <GridView ItemsSource="{Binding Path=Subject.Crt}"
                                   ScrollViewer.VerticalScrollMode="Disabled">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
-                                    <controls:CharacterItem />
+                                    <controls:CharacterItem2 CharacterName="{Binding Converter={StaticResource CharacterNameConverter}}"
+                                                             ImageSource="{Binding Path=Images.Medium}"
+                                                             RoleName="{Binding Path=RoleName}">
+                                        <FlyoutBase.AttachedFlyout>
+                                            <Flyout>
+                                                <Grid>
+                                                    <Image Source="{Binding Path=Images.Medium}" />
+                                                    <TextBlock Text="{Binding Path=Name}" />
+                                                </Grid>
+                                            </Flyout>
+                                        </FlyoutBase.AttachedFlyout>
+                                    </controls:CharacterItem2>
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemContainerStyle>
-                                <Style TargetType="SelectorItem">
-                                    <Setter Property="Margin"
-                                            Value="0,0,12,12" />
-                                </Style>
-                            </ItemsControl.ItemContainerStyle>
                         </GridView>
                     </PivotItem>
                     <PivotItem Padding="0,12,0,0"
                                Header="制作人员">
-                        <GridView animations:ReorderGridAnimation.Duration="250"
-                                  ItemsSource="{Binding Path=Subject.Staff}"
+                        <GridView ItemsSource="{Binding Path=Subject.Staff}"
                                   ScrollViewer.VerticalScrollMode="Disabled">
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <controls:StaffItem />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
-                            <ItemsControl.ItemContainerStyle>
-                                <Style TargetType="SelectorItem">
-                                    <Setter Property="Margin"
-                                            Value="0,0,12,12" />
-                                </Style>
-                            </ItemsControl.ItemContainerStyle>
                         </GridView>
                     </PivotItem>
-                    <PivotItem Padding="0,12,0,0"
+                    <!--<PivotItem Padding="0,12,0,0"
                                Header="讨论">
                         <ListView ItemsSource="{Binding Path=Subject.Topic}"
                                   ScrollViewer.VerticalScrollMode="Disabled">
@@ -139,10 +230,16 @@
                                 </Style>
                             </ItemsControl.ItemContainerStyle>
                         </ListView>
-                    </PivotItem>
+                    </PivotItem>-->
                 </Pivot>
             </Grid>
         </ScrollViewer>
+        <Border Background="#40000000"
+                Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <ProgressRing Width="80"
+                          Height="80"
+                          IsActive="{Binding Path=IsBusy}" />
+        </Border>
         <controls:AppLoadingControl IsLoading="{Binding Path=IsLoading}" />
     </Grid>
 </Page>

@@ -4,6 +4,7 @@
       xmlns:controls="using:HN.Bangumi.Uwp.Controls"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:media="using:HN.Media"
       xmlns:uwp="using:FontAwesome5.UWP"
       Background="#E3E3E3"
       DataContext="{Binding Source={StaticResource Locator}, Path=Shell}"
@@ -12,6 +13,20 @@
         <NavigationView BackRequested="NavigationView_BackRequested"
                         IsBackEnabled="{Binding ElementName=ContentFrame, Path=CanGoBack}"
                         ItemInvoked="NavigationView_ItemInvoked">
+            <NavigationView.Resources>
+                <ResourceDictionary>
+                    <AcrylicBrush x:Key="NavigationViewDefaultPaneBackground"
+                                  BackgroundSource="HostBackdrop"
+                                  FallbackColor="#E3E3E3"
+                                  TintColor="#E3E3E3"
+                                  TintOpacity="0.6" />
+                    <AcrylicBrush x:Key="NavigationViewExpandedPaneBackground"
+                                  BackgroundSource="HostBackdrop"
+                                  FallbackColor="#E3E3E3"
+                                  TintColor="#E3E3E3"
+                                  TintOpacity="0.6" />
+                </ResourceDictionary>
+            </NavigationView.Resources>
             <NavigationView.AutoSuggestBox>
                 <AutoSuggestBox PlaceholderText="搜索"
                                 QueryIcon="Find"
@@ -30,7 +45,8 @@
                         <Ellipse Width="32"
                                  Height="32">
                             <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding Path=User.Avatar.Small}" />
+                                <media:ImageBrushEx ImageSource="{Binding Path=User.Avatar.Small}"
+                                                    RetryCount="5" />
                             </Ellipse.Fill>
                         </Ellipse>
                     </Grid>
@@ -69,7 +85,20 @@
                     </NavigationViewItem.Icon>
                 </NavigationViewItem>
             </NavigationView.MenuItems>
-            <Frame x:Name="ContentFrame" />
+            <Frame x:Name="ContentFrame">
+                <Grid>
+                    <StackPanel HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Vertical">
+                        <Image Width="200"
+                               Height="200" Margin="-60"
+                               Source="/Assets/LargeTile.png"
+                               Stretch="Fill" />
+                        <TextBlock Text="Welcome to Bangumi!"
+                                   TextAlignment="Center" />
+                    </StackPanel>
+                </Grid>
+            </Frame>
         </NavigationView>
         <controls:ToastPromptHost />
     </Grid>

@@ -1,0 +1,6 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Styles/Buttons/EpItemButtonStyle.xaml" />
+        <ResourceDictionary Source="/Styles/Buttons/EpItemCancelButtonStyle.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

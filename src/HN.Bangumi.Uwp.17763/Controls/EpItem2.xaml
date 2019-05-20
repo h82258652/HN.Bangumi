@@ -5,20 +5,18 @@
                     xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                     xmlns:interactivity="using:Microsoft.Xaml.Interactivity">
     <Style TargetType="controls:EpItem2">
-        <Setter Property="BorderThickness"
-                Value="1" />
-        <Setter Property="VerticalContentAlignment"
-                Value="Center" />
-        <Setter Property="HorizontalContentAlignment"
-                Value="Center" />
-        <Setter Property="BorderBrush"
-                Value="Transparent" />
-        <Setter Property="Padding"
-                Value="0" />
         <Setter Property="Background"
                 Value="Transparent" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="1" />
         <Setter Property="Foreground"
                 Value="Black" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Center" />
+        <Setter Property="Padding"
+                Value="0" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:EpItem2">
@@ -54,6 +52,14 @@
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RemoveButton"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>
                                 <VisualState x:Name="Queue">
@@ -79,6 +85,14 @@
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <SolidColorBrush Color="#FF2293" />
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RemoveButton"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
@@ -115,6 +129,14 @@
                                             <DiscreteObjectKeyFrame KeyTime="0:0:0">
                                                 <DiscreteObjectKeyFrame.Value>
                                                     <TextDecorations>Strikethrough</TextDecorations>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="PART_RemoveButton"
+                                                                       Storyboard.TargetProperty="Visibility">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
@@ -218,12 +240,12 @@
                                     <Style TargetType="FlyoutPresenter">
                                         <Setter Property="CornerRadius"
                                                 Value="12" />
+                                        <Setter Property="MaxWidth"
+                                                Value="340" />
                                         <Setter Property="Padding"
                                                 Value="0" />
                                         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
                                                 Value="Disabled" />
-                                        <Setter Property="MaxWidth"
-                                                Value="340" />
                                     </Style>
                                 </Flyout.FlyoutPresenterStyle>
                                 <Grid>
@@ -244,10 +266,24 @@
                                         <TextBlock Foreground="#666666"
                                                    TextWrapping="Wrap"
                                                    Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=EpChineseName, Converter={StaticResource InversedIsNullOrEmptyStringConverter}}"><Run Text="中文标题：" /><Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=EpChineseName}" /></TextBlock>
-                                        <Grid Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=UpdateStatusButtonVisibility}">
-                                            <StackPanel Orientation="Horizontal">
+                                        <Border Margin="0,6,0,6"
+                                                CornerRadius="4"
+                                                Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=UpdateStatusButtonVisibility}">
+                                            <Border.Background>
+                                                <SolidColorBrush Color="LightGray" />
+                                            </Border.Background>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                </Grid.ColumnDefinitions>
                                                 <Button x:Name="PART_WatchedButton"
-                                                        Content="看过">
+                                                        Grid.Column="0"
+                                                        Content="看过"
+                                                        Style="{StaticResource EpItemButtonStyle}"
+                                                        Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Status, Converter={StaticResource InversedIsEqualsToVisibilityConverter}, ConverterParameter='Watched'}">
                                                     <interactivity:Interaction.Behaviors>
                                                         <core:EventTriggerBehavior EventName="Click">
                                                             <core:CallMethodAction MethodName="Hide"
@@ -256,7 +292,10 @@
                                                     </interactivity:Interaction.Behaviors>
                                                 </Button>
                                                 <Button x:Name="PART_QueueButton"
-                                                        Content="想看">
+                                                        Grid.Column="1"
+                                                        Content="想看"
+                                                        Style="{StaticResource EpItemButtonStyle}"
+                                                        Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Status, Converter={StaticResource InversedIsEqualsToVisibilityConverter}, ConverterParameter='Queue'}">
                                                     <interactivity:Interaction.Behaviors>
                                                         <core:EventTriggerBehavior EventName="Click">
                                                             <core:CallMethodAction MethodName="Hide"
@@ -265,7 +304,10 @@
                                                     </interactivity:Interaction.Behaviors>
                                                 </Button>
                                                 <Button x:Name="PART_DropButton"
-                                                        Content="抛弃">
+                                                        Grid.Column="2"
+                                                        Content="抛弃"
+                                                        Style="{StaticResource EpItemButtonStyle}"
+                                                        Visibility="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Status, Converter={StaticResource InversedIsEqualsToVisibilityConverter}, ConverterParameter='Drop'}">
                                                     <interactivity:Interaction.Behaviors>
                                                         <core:EventTriggerBehavior EventName="Click">
                                                             <core:CallMethodAction MethodName="Hide"
@@ -274,7 +316,11 @@
                                                     </interactivity:Interaction.Behaviors>
                                                 </Button>
                                                 <Button x:Name="PART_RemoveButton"
-                                                        Content="撤消">
+                                                        Grid.Column="3"
+                                                        HorizontalAlignment="Right"
+                                                        Content="撤消"
+                                                        Style="{StaticResource EpItemClearButtonStyle}"
+                                                        Visibility="Collapsed">
                                                     <interactivity:Interaction.Behaviors>
                                                         <core:EventTriggerBehavior EventName="Click">
                                                             <core:CallMethodAction MethodName="Hide"
@@ -282,8 +328,8 @@
                                                         </core:EventTriggerBehavior>
                                                     </interactivity:Interaction.Behaviors>
                                                 </Button>
-                                            </StackPanel>
-                                        </Grid>
+                                            </Grid>
+                                        </Border>
                                         <TextBlock Foreground="#666666"><Run Text="首播：" /><Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=AirDate}" /></TextBlock>
                                         <TextBlock Foreground="#666666"><Run Text="时长：" /><Run Text="{Binding RelativeSource={RelativeSource Mode=TemplatedParent}, Path=Duration}" /></TextBlock>
                                     </StackPanel>
@@ -300,5 +346,7 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
     </Style>
 </ResourceDictionary>

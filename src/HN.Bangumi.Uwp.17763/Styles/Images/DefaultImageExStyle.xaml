@@ -1,0 +1,38 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:HN.Controls">
+    <Style TargetType="controls:ImageEx">
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="FailedTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Image Source="/Assets/Images/failed.png" 
+                           Margin="4" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="LoadingTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="Loading..." />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="PlaceholderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Image HorizontalAlignment="Center"
+                           Source="/Assets/Images/no_image_available.jpg"
+                           Stretch="UniformToFill" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RetryCount"
+                Value="10" />
+        <Setter Property="RetryDelay"
+                Value="0:0:0.3" />
+    </Style>
+</ResourceDictionary>

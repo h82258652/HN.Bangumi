@@ -6,10 +6,14 @@ namespace HN.Bangumi.Uwp.Services
 {
     public class BangumiHttpHandler : DelegatingHandler
     {
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            InnerHandler = new HttpClientHandler();
-            return base.SendAsync(request, cancellationToken);
+            var innerHandler = new HttpClientHandler();
+            InnerHandler = innerHandler;
+            using (innerHandler)
+            {
+                return await base.SendAsync(request, cancellationToken);
+            }
         }
     }
 }

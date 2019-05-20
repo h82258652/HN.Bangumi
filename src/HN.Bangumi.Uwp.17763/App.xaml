@@ -6,6 +6,11 @@
              xmlns:viewModels="using:HN.Bangumi.Uwp.ViewModels">
     <Application.Resources>
         <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/AppButtonStyles.xaml" />
+                <ResourceDictionary Source="/Styles/AppImageStyles.xaml" />
+                <ResourceDictionary Source="/Styles/AppItemsViewStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
             <viewModels:ViewModelLocator x:Key="Locator" />
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
             <converters:BooleanToVisibilityConverter x:Key="InversedBooleanToVisibilityConverter"
@@ -14,10 +19,20 @@
             <localConverters:IsNullToVisibilityConverter x:Key="IsNullToVisibilityConverter" />
             <localConverters:IsNullToVisibilityConverter x:Key="InversedIsNullToVisibilityConverter"
                                                          IsInversed="True" />
+            <localConverters:IsNullOrEmptyStringConverter x:Key="IsNullOrEmptyStringConverter" />
+            <localConverters:IsNullOrEmptyStringConverter x:Key="InversedIsNullOrEmptyStringConverter"
+                                                          IsInversed="True" />
+            <localConverters:IsEmptyCollectionToVisibilityConverter x:Key="IsEmptyCollectionToVisibilityConverter" />
+            <localConverters:IsEmptyCollectionToVisibilityConverter x:Key="InversedIsEmptyCollectionToVisibilityConverter"
+                                                                    IsInversed="True" />
+            <localConverters:IsEqualsToVisibilityConverter x:Key="IsEqualsToVisibilityConverter" />
+            <localConverters:IsEqualsToVisibilityConverter x:Key="InversedIsEqualsToVisibilityConverter"
+                                                           IsInversed="True" />
             <localConverters:SubjectNameConverter x:Key="SubjectNameConverter" />
             <localConverters:CharacterNameConverter x:Key="CharacterNameConverter" />
             <localConverters:StaffNameConverter x:Key="StaffNameConverter" />
             <localConverters:MultiplyConverter x:Key="MultiplyConverter" />
+            <localConverters:FileSizeToStringConverter x:Key="FileSizeToStringConverter" />
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="04234413-3f43-40e3-bb22-cc92e1c1b195" Publisher="CN=hzf" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="04234413-3f43-40e3-bb22-cc92e1c1b195" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="18174h82258652.BangumiH" Publisher="CN=D8CBB42C-5DD4-4A02-8424-31AF9627DADA" Version="1.0.0.0" />
+  <mp:PhoneIdentity PhoneProductId="9ac2f191-e247-461b-b3c7-aa84879cfd36" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>HN.Bangumi.Uwp.17763</DisplayName>
-    <PublisherDisplayName>hzf</PublisherDisplayName>
+    <DisplayName>Bangumi H</DisplayName>
+    <PublisherDisplayName>h82258652</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>
