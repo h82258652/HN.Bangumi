@@ -16,7 +16,7 @@ namespace HN.Bangumi.API.Http
         private readonly BangumiOptions _bangumiOptions;
         private readonly SignInManager _signInManager;
 
-        internal BangumiHttpClientHandler(SignInManager signInManager, IOptions<BangumiOptions> bangumiOptionsAccesser) : base(CreateInnerHandler())
+        internal BangumiHttpClientHandler(SignInManager signInManager, IOptions<BangumiOptions> bangumiOptionsAccesser)
         {
             _signInManager = signInManager;
             _bangumiOptions = bangumiOptionsAccesser.Value;
@@ -24,6 +24,8 @@ namespace HN.Bangumi.API.Http
 
         protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
+            InnerHandler = CreateInnerHandler(request.RequestUri);
+
             var uriBuilder = new UriBuilder(request.RequestUri);
             var query = HttpUtility.ParseQueryString(uriBuilder.Query);
             query["app_id"] = _bangumiOptions.AppKey;
@@ -45,10 +47,10 @@ namespace HN.Bangumi.API.Http
             return await policy.ExecuteAsync(() => base.SendAsync(request, cancellationToken));
         }
 
-        private static HttpMessageHandler CreateInnerHandler()
+        private static HttpMessageHandler CreateInnerHandler(Uri requestUri)
         {
             var cookieContainer = new CookieContainer();
-            cookieContainer.Add(new Cookie("chii_searchDateLine", "0"));
+            cookieContainer.Add(requestUri, new Cookie("chii_searchDateLine", "0"));
             return new HttpClientHandler
             {
                 CookieContainer = cookieContainer
