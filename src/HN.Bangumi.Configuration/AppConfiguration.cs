@@ -6,6 +6,6 @@
 
         public string AppSecret => "2b709137d48c1fb50895f2defd017cba";
 
-        public string RedirectUri => "https://github.com/";
+        public string RedirectUri => "https://github.com/h82258652/HN.Bangumi";
     }
 }
