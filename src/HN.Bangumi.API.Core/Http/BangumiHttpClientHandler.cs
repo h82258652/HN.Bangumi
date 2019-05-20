@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -15,7 +16,7 @@ namespace HN.Bangumi.API.Http
         private readonly BangumiOptions _bangumiOptions;
         private readonly SignInManager _signInManager;
 
-        internal BangumiHttpClientHandler(SignInManager signInManager, IOptions<BangumiOptions> bangumiOptionsAccesser) : base(new HttpClientHandler())
+        internal BangumiHttpClientHandler(SignInManager signInManager, IOptions<BangumiOptions> bangumiOptionsAccesser) : base(CreateInnerHandler())
         {
             _signInManager = signInManager;
             _bangumiOptions = bangumiOptionsAccesser.Value;
@@ -42,6 +43,16 @@ namespace HN.Bangumi.API.Http
                 .WaitAndRetryAsync(retryCount, count => retryDelay);
 
             return await policy.ExecuteAsync(() => base.SendAsync(request, cancellationToken));
+        }
+
+        private static HttpMessageHandler CreateInnerHandler()
+        {
+            var cookieContainer = new CookieContainer();
+            cookieContainer.Add(new Cookie("chii_searchDateLine", "0"));
+            return new HttpClientHandler
+            {
+                CookieContainer = cookieContainer
+            };
         }
     }
 }
