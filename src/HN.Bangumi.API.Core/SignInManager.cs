@@ -54,7 +54,7 @@ namespace HN.Bangumi.API
             accessToken = new AccessToken
             {
                 Value = refreshResult.AccessToken,
-                ExpiresAt = requestTime.AddSeconds(refreshResult.ExiresIn).AddMinutes(-5),// 5 分钟用作缓冲
+                ExpiresAt = requestTime.AddSeconds(refreshResult.ExpiresIn).AddMinutes(-5),// 5 分钟用作缓冲
                 TokenType = refreshResult.TokenType,
                 Scope = refreshResult.Scope,
                 RefreshToken = refreshResult.RefreshToken,
@@ -78,7 +78,7 @@ namespace HN.Bangumi.API
             accessToken = new AccessToken
             {
                 Value = authorizationResult.AccessToken,
-                ExpiresAt = requestTime.AddSeconds(authorizationResult.ExiresIn).AddMinutes(-5),// 5 分钟用作缓冲
+                ExpiresAt = requestTime.AddSeconds(authorizationResult.ExpiresIn).AddMinutes(-5),// 5 分钟用作缓冲
                 TokenType = authorizationResult.TokenType,
                 Scope = authorizationResult.Scope,
                 RefreshToken = authorizationResult.RefreshToken,
