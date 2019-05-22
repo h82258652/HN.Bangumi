@@ -211,7 +211,7 @@ namespace HN.Bangumi.ViewModels
                         IsBusy = true;
 
                         var result = await _subjectService.UpdateEpStatusAsync(ep.Id, EpStatus.Watched);
-                        if (result.ErrorCode == 0)
+                        if (result.ErrorCode == 0 || result.ErrorCode == 200)
                         {
                             ep.Status = "Watched";
 
