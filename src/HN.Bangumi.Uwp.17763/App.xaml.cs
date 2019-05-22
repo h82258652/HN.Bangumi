@@ -1,24 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
-using Windows.ApplicationModel.Background;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
-using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
 using HN.Bangumi.Uwp.Views;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
+using Windows.ApplicationModel;
+using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.Background;
+using Windows.UI.Popups;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace HN.Bangumi.Uwp
 {
@@ -35,6 +27,8 @@ namespace HN.Bangumi.Uwp
         {
             this.InitializeComponent();
             this.Suspending += OnSuspending;
+            this.UnhandledException += App_UnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
             AppCenter.Start("e7c4e864-a03a-412a-8bec-e3e45cb179ef", typeof(Analytics));
         }
@@ -84,6 +78,63 @@ namespace HN.Bangumi.Uwp
             }
         }
 
+        private async void App_UnhandledException(object sender, Windows.UI.Xaml.UnhandledExceptionEventArgs e)
+        {
+            var exception = e.Exception;
+            var content = e.Message +
+                          Environment.NewLine +
+                          exception.Message + Environment.NewLine + Environment.NewLine +
+                          exception.StackTrace;
+            try
+            {
+                await new MessageDialog(content, "oh shit, 炸了").ShowAsync();
+            }
+            catch
+            {
+                // ignored
+            }
+        }
+
+        private async void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEventArgs e)
+        {
+            if (e.ExceptionObject is Exception exception)
+            {
+                var content = exception.Message + Environment.NewLine + Environment.NewLine + exception.StackTrace;
+                try
+                {
+                    await new MessageDialog(content, "oh shit, 炸了").ShowAsync();
+                }
+                catch
+                {
+                    // ignored
+                }
+            }
+        }
+
+        /// <summary>
+        /// 导航到特定页失败时调用
+        /// </summary>
+        ///<param name="sender">导航失败的框架</param>
+        ///<param name="e">有关导航失败的详细信息</param>
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        {
+            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
+        }
+
+        /// <summary>
+        /// 在将要挂起应用程序执行时调用。  在不知道应用程序
+        /// 无需知道应用程序会被终止还是会恢复，
+        /// 并让内存内容保持不变。
+        /// </summary>
+        /// <param name="sender">挂起的请求的源。</param>
+        /// <param name="e">有关挂起请求的详细信息。</param>
+        private void OnSuspending(object sender, SuspendingEventArgs e)
+        {
+            var deferral = e.SuspendingOperation.GetDeferral();
+            //TODO: 保存应用程序状态并停止任何后台活动
+            deferral.Complete();
+        }
+
         private async Task RegisterBackgroundTask()
         {
             const string refreshTokenTaskName = "RefreshTokenTask";
@@ -112,30 +163,6 @@ namespace HN.Bangumi.Uwp
             builder.TaskEntryPoint = "HN.Bangumi.Uwp.BackgroundTasks.RefreshTokenTask";
             builder.SetTrigger(new TimeTrigger(60, false));
             backgroundTaskRegistration = builder.Register();
-        }
-
-        /// <summary>
-        /// 导航到特定页失败时调用
-        /// </summary>
-        ///<param name="sender">导航失败的框架</param>
-        ///<param name="e">有关导航失败的详细信息</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
-        {
-            throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
-        }
-
-        /// <summary>
-        /// 在将要挂起应用程序执行时调用。  在不知道应用程序
-        /// 无需知道应用程序会被终止还是会恢复，
-        /// 并让内存内容保持不变。
-        /// </summary>
-        /// <param name="sender">挂起的请求的源。</param>
-        /// <param name="e">有关挂起请求的详细信息。</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
-        {
-            var deferral = e.SuspendingOperation.GetDeferral();
-            //TODO: 保存应用程序状态并停止任何后台活动
-            deferral.Complete();
         }
     }
 }
