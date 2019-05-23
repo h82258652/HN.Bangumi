@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Net.Http;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
@@ -72,6 +73,10 @@ namespace HN.Bangumi.ViewModels
                     }
                     catch (UserCancelAuthorizationException)
                     {
+                    }
+                    catch (FileNotFoundException)
+                    {
+                        _appToastService.ShowError("不明原因炸了，麻烦重试一遍");
                     }
                     catch (Exception ex) when (ex is HttpErrorAuthorizationException || ex is HttpRequestException)
                     {
