@@ -28,7 +28,7 @@ namespace HN.Bangumi.Uwp.Views
             {
                 var animation = ConnectedAnimationService.GetForCurrentView().PrepareToAnimate("SubjectForwardAnimation", image);
                 animation.Configuration = new BasicConnectedAnimationConfiguration();
-                animation.SetExtraData("SubjectImageUrl", collectionSubject.Subject.Images.Common);
+                animation.SetExtraData("SubjectImageUrl", collectionSubject.Subject.Images?.Common);
             }
         }
 

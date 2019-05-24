@@ -26,25 +26,21 @@ namespace HN.Bangumi.Uwp.Views
             var animation = ConnectedAnimationService.GetForCurrentView().GetAnimation("SubjectForwardAnimation");
             if (animation != null)
             {
+                SubjectImage.Opacity = 0;
+                EventHandler handler = null;
+                handler = delegate
+                {
+                    SubjectImage.ImageOpened -= handler;
+
+                    SubjectImage.Opacity = 1;
+                    animation.TryStart(SubjectImage);
+                };
+                SubjectImage.ImageOpened += handler;
+
                 var subjectImageUrl = animation.GetExtraData("SubjectImageUrl");
                 if (subjectImageUrl != null)
                 {
-                    SubjectImage.Opacity = 0;
-                    EventHandler handler = null;
-                    handler = delegate
-                    {
-                        SubjectImage.ImageOpened -= handler;
-
-                        SubjectImage.Opacity = 1;
-                        animation.TryStart(SubjectImage);
-                    };
-                    SubjectImage.ImageOpened += handler;
-
                     SubjectImage.Source = subjectImageUrl;
-                }
-                else
-                {
-                    animation.Cancel();
                 }
             }
         }

@@ -116,7 +116,7 @@ namespace HN.Bangumi.Uwp.Views
             var subject = (Subject)e.ClickedItem;
             var animation = itemsView.PrepareConnectedAnimation("SubjectForwardAnimation", subject, "SubjectImage");
             animation.Configuration = new BasicConnectedAnimationConfiguration();
-            animation.SetExtraData("SubjectImageUrl", subject.Images.Common);
+            animation.SetExtraData("SubjectImageUrl", subject.Images?.Common);
         }
     }
 }
