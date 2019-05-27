@@ -17,19 +17,12 @@ namespace HN.Bangumi.ViewModels
         private readonly ISubjectService _subjectService;
         private RelayCommand<Ep> _dropEpCommand;
         private int _id;
+        private bool _isBusy;
         private bool _isLoading;
         private RelayCommand<Ep> _queueEpCommand;
+        private RelayCommand _refreshCommand;
         private RelayCommand<Ep> _removeEpCommand;
         private Subject _subject;
-
-        private bool _isBusy;
-
-        public bool IsBusy
-        {
-            get => _isBusy;
-            private set => Set(ref _isBusy, value);
-        }
-
         private RelayCommand<Ep> _watchedEpCommand;
 
         public SubjectViewModel(
@@ -94,6 +87,12 @@ namespace HN.Bangumi.ViewModels
             }
         }
 
+        public bool IsBusy
+        {
+            get => _isBusy;
+            private set => Set(ref _isBusy, value);
+        }
+
         public bool IsLoading
         {
             get => _isLoading;
@@ -141,6 +140,18 @@ namespace HN.Bangumi.ViewModels
                     }
                 });
                 return _queueEpCommand;
+            }
+        }
+
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                _refreshCommand = _refreshCommand ?? new RelayCommand(() =>
+                {
+                    Load(_id);
+                });
+                return _refreshCommand;
             }
         }
 

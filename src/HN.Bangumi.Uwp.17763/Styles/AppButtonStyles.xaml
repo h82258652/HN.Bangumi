@@ -2,5 +2,6 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Styles/Buttons/EpItemButtonStyle.xaml" />
         <ResourceDictionary Source="/Styles/Buttons/EpItemCancelButtonStyle.xaml" />
+        <ResourceDictionary Source="/Styles/Buttons/RefreshButtonStyle.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

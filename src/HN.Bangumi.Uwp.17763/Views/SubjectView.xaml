@@ -234,6 +234,11 @@
                 </Pivot>
             </Grid>
         </ScrollViewer>
+        <Button Margin="0,0,24,24"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Bottom"
+                Command="{Binding Path=RefreshCommand}"
+                Style="{StaticResource RefreshButtonStyle}" />
         <Border Background="#40000000"
                 Visibility="{Binding Path=IsBusy, Converter={StaticResource BooleanToVisibilityConverter}}">
             <ProgressRing Width="80"
