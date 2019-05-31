@@ -1,17 +1,16 @@
-﻿using HN.Bangumi.ViewModels;
+﻿using HN.Bangumi.API.Models;
+using HN.Bangumi.Uwp.Extensions;
+using HN.Bangumi.ViewModels;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
-using HN.Bangumi.API.Models;
-using HN.Bangumi.Uwp.Extensions;
 using WinRTXamlToolkit.Controls.Extensions;
 
 namespace HN.Bangumi.Uwp.Views
 {
     public sealed partial class SearchView
     {
-        private const double IncrementalLoadingThreshold = 300;
         private ScrollViewer _animeScrollViewer;
         private ScrollViewer _bookScrollViewer;
         private ScrollViewer _gameScrollViewer;
@@ -43,9 +42,15 @@ namespace HN.Bangumi.Uwp.Views
 
         private void AnimeScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if (_animeScrollViewer.VerticalOffset >= _animeScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            if (!e.IsIntermediate)
             {
-                ViewModel.LoadMoreAnimesCommand.Execute(null);
+                var scrollViewer = (ScrollViewer)sender;
+                var distanceToEnd = scrollViewer.ExtentHeight - (scrollViewer.VerticalOffset + scrollViewer.ViewportHeight);
+
+                if (distanceToEnd <= 2 * scrollViewer.ViewportHeight && ViewModel.HasMoreAnimeItems && !ViewModel.IsLoadingAnimes)
+                {
+                    ViewModel.LoadMoreAnimesCommand.Execute(null);
+                }
             }
         }
 
@@ -62,9 +67,15 @@ namespace HN.Bangumi.Uwp.Views
 
         private void BookScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if (_bookScrollViewer.VerticalOffset >= _bookScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            if (!e.IsIntermediate)
             {
-                ViewModel.LoadMoreBooksCommand.Execute(null);
+                var scrollViewer = (ScrollViewer)sender;
+                var distanceToEnd = scrollViewer.ExtentHeight - (scrollViewer.VerticalOffset + scrollViewer.ViewportHeight);
+
+                if (distanceToEnd <= 2 * scrollViewer.ViewportHeight && ViewModel.HasMoreBookItems && !ViewModel.IsLoadingBooks)
+                {
+                    ViewModel.LoadMoreBooksCommand.Execute(null);
+                }
             }
         }
 
@@ -76,9 +87,15 @@ namespace HN.Bangumi.Uwp.Views
 
         private void GameScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if (_gameScrollViewer.VerticalOffset >= _gameScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            if (!e.IsIntermediate)
             {
-                ViewModel.LoadMoreGamesCommand.Execute(null);
+                var scrollViewer = (ScrollViewer)sender;
+                var distanceToEnd = scrollViewer.ExtentHeight - (scrollViewer.VerticalOffset + scrollViewer.ViewportHeight);
+
+                if (distanceToEnd <= 2 * scrollViewer.ViewportHeight && ViewModel.HasMoreGameItems && !ViewModel.IsLoadingGames)
+                {
+                    ViewModel.LoadMoreGamesCommand.Execute(null);
+                }
             }
         }
 
@@ -90,9 +107,15 @@ namespace HN.Bangumi.Uwp.Views
 
         private void MusicScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if (_musicScrollViewer.VerticalOffset >= _musicScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            if (!e.IsIntermediate)
             {
-                ViewModel.LoadMoreMusicsCommand.Execute(null);
+                var scrollViewer = (ScrollViewer)sender;
+                var distanceToEnd = scrollViewer.ExtentHeight - (scrollViewer.VerticalOffset + scrollViewer.ViewportHeight);
+
+                if (distanceToEnd <= 2 * scrollViewer.ViewportHeight && ViewModel.HasMoreMusicItems && !ViewModel.IsLoadingMusics)
+                {
+                    ViewModel.LoadMoreMusicsCommand.Execute(null);
+                }
             }
         }
 
@@ -104,9 +127,15 @@ namespace HN.Bangumi.Uwp.Views
 
         private void RealScrollViewer_ViewChanged(object sender, ScrollViewerViewChangedEventArgs e)
         {
-            if (_realScrollViewer.VerticalOffset >= _realScrollViewer.ScrollableHeight - IncrementalLoadingThreshold)
+            if (!e.IsIntermediate)
             {
-                ViewModel.LoadMoreRealsCommand.Execute(null);
+                var scrollViewer = (ScrollViewer)sender;
+                var distanceToEnd = scrollViewer.ExtentHeight - (scrollViewer.VerticalOffset + scrollViewer.ViewportHeight);
+
+                if (distanceToEnd <= 2 * scrollViewer.ViewportHeight && ViewModel.HasMoreRealItems && !ViewModel.IsLoadingReals)
+                {
+                    ViewModel.LoadMoreRealsCommand.Execute(null);
+                }
             }
         }
 
