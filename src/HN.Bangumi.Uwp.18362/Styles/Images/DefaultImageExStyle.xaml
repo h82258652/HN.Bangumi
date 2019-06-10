@@ -1,0 +1,17 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:controls="using:HN.Controls">
+    <Style TargetType="controls:ImageEx">
+        <Setter Property="FailedTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Image Margin="4"
+                           Source="/Assets/Images/failed.png" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="RetryCount"
+                Value="5" />
+        <Setter Property="RetryDelay"
+                Value="0:0:0.3" />
+    </Style>
+</ResourceDictionary>

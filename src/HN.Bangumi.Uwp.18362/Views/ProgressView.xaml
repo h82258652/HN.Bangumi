@@ -1,0 +1,41 @@
+﻿<Page x:Class="HN.Bangumi.Uwp.Views.ProgressView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:HN.Bangumi.Uwp.Controls"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Progress}"
+      NavigationCacheMode="Enabled"
+      mc:Ignorable="d">
+    <Grid>
+        <GridView IsItemClickEnabled="True"
+                  ItemClick="SubjectGridView_ItemClick"
+                  ItemsSource="{Binding Path=Collection}"
+                  Loaded="SubjectGridView_Loaded">
+            <interactivity:Interaction.Behaviors>
+                <core:EventTriggerBehavior EventName="ItemClick">
+                    <core:InvokeCommandAction Command="{Binding Path=ItemClickCommand}"
+                                              InputConverter="{StaticResource ItemClickEventArgsConverter}" />
+                </core:EventTriggerBehavior>
+            </interactivity:Interaction.Behaviors>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Grid Background="White">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <controls:SubjectItem Grid.Row="0"
+                                              DataContext="{Binding Path=Subject}" />
+                        <controls:EpProgressControl Grid.Row="1"
+                                                    Current="{Binding Path=EpStatus}"
+                                                    Total="{Binding Path=Subject.EpsCount}" />
+                    </Grid>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </GridView>
+        <controls:AppLoadingControl IsLoading="{Binding Path=IsLoading}" />
+    </Grid>
+</Page>

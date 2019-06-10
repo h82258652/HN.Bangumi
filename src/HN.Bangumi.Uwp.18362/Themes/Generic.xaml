@@ -1,0 +1,9 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/Controls/AppLoadingControl.xaml" />
+        <ResourceDictionary Source="/Controls/AppLoadingControlItem.xaml" />
+        <ResourceDictionary Source="/Controls/EpItem.xaml" />
+        <ResourceDictionary Source="/Controls/EpProgressControl.xaml" />
+        <ResourceDictionary Source="/Controls/ToastPrompt.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+</ResourceDictionary>

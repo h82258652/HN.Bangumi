@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:animations="using:Microsoft.Toolkit.Uwp.UI.Animations">
+    <Style TargetType="GridView">
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="SelectorItem">
+                    <Setter Property="VerticalContentAlignment"
+                            Value="Stretch" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="animations:ReorderGridAnimation.Duration"
+                Value="250" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,43 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:HN.Bangumi.Uwp.Controls">
+    <Style TargetType="controls:EpProgressControl">
+        <Setter Property="BackTextBrush"
+                Value="#333333" />
+        <Setter Property="Background"
+                Value="LightGray" />
+        <Setter Property="FrontTextBrush"
+                Value="White" />
+        <Setter Property="Padding"
+                Value="8,4,8,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:EpProgressControl">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid x:Name="PART_OuterGrid">
+                            <TextBlock x:Name="PART_BackProgressTextBlock"
+                                       Padding="{TemplateBinding Padding}"
+                                       VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                       Foreground="{TemplateBinding BackTextBrush}"
+                                       TextAlignment="{TemplateBinding TextAlignment}" />
+                            <Grid x:Name="PART_ProgressGrid"
+                                  Background="{TemplateBinding Foreground}">
+                                <TextBlock x:Name="PART_FrontProgressTextBlock"
+                                           Padding="{TemplateBinding Padding}"
+                                           VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                           Foreground="{TemplateBinding FrontTextBrush}"
+                                           TextAlignment="{TemplateBinding TextAlignment}" />
+                            </Grid>
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="TextAlignment"
+                Value="Right" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Center" />
+    </Style>
+</ResourceDictionary>

@@ -1,0 +1,48 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:HN.Bangumi.Uwp.Controls">
+    <Style TargetType="controls:AppLoadingControl">
+        <Setter Property="HorizontalAlignment"
+                Value="Center" />
+        <Setter Property="IsHitTestVisible"
+                Value="False" />
+        <Setter Property="Padding"
+                Value="4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AppLoadingControl">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="LoadingStates">
+                                <VisualState x:Name="Unloading" />
+                                <VisualState x:Name="Loading" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <controls:AppLoadingControlItem x:Name="PART_Item1"
+                                                        Grid.Column="0"
+                                                        Margin="{TemplateBinding Padding}" />
+                        <controls:AppLoadingControlItem x:Name="PART_Item2"
+                                                        Grid.Column="1"
+                                                        Margin="{TemplateBinding Padding}" />
+                        <controls:AppLoadingControlItem x:Name="PART_Item3"
+                                                        Grid.Column="2"
+                                                        Margin="{TemplateBinding Padding}" />
+                        <controls:AppLoadingControlItem x:Name="PART_Item4"
+                                                        Grid.Column="3"
+                                                        Margin="{TemplateBinding Padding}" />
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="VerticalAlignment"
+                Value="Center" />
+    </Style>
+</ResourceDictionary>

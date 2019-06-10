@@ -1,0 +1,51 @@
+﻿<Page x:Class="HN.Bangumi.Uwp.Views.CalendarView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:HN.Bangumi.Uwp.Controls"
+      xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:models="using:HN.Bangumi.API.Models"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Calendar}"
+      NavigationCacheMode="Enabled"
+      mc:Ignorable="d">
+    <Grid x:Name="RootGrid">
+        <Pivot ItemsSource="{Binding Path=Calendar}">
+            <Pivot.HeaderTemplate>
+                <DataTemplate x:DataType="models:Calendar">
+                    <PivotHeaderItem Content="{Binding Path=Weekday.Cn}" />
+                </DataTemplate>
+            </Pivot.HeaderTemplate>
+            <Pivot.ItemTemplate>
+                <DataTemplate>
+                    <PivotItem>
+                        <GridView IsItemClickEnabled="True"
+                                  ItemClick="SubjectGridView_ItemClick"
+                                  ItemsSource="{Binding Path=Items}"
+                                  Loaded="SubjectGridView_Loaded">
+                            <interactivity:Interaction.Behaviors>
+                                <core:EventTriggerBehavior EventName="ItemClick">
+                                    <core:InvokeCommandAction Command="{Binding ElementName=RootGrid, Path=DataContext.ItemClickCommand}"
+                                                              InputConverter="{StaticResource ItemClickEventArgsConverter}" />
+                                </core:EventTriggerBehavior>
+                            </interactivity:Interaction.Behaviors>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <controls:SubjectItem />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </GridView>
+                    </PivotItem>
+                </DataTemplate>
+            </Pivot.ItemTemplate>
+            <Pivot.ItemContainerStyle>
+                <Style TargetType="PivotItem">
+                    <Setter Property="Padding"
+                            Value="0,12,0,0" />
+                </Style>
+            </Pivot.ItemContainerStyle>
+        </Pivot>
+        <controls:AppLoadingControl IsLoading="{Binding Path=IsLoading}" />
+    </Grid>
+</Page>

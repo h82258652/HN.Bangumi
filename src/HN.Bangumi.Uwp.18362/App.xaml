@@ -1,0 +1,23 @@
+﻿<Application x:Class="HN.Bangumi.Uwp.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:converters="using:WinRTXamlToolkit.Converters"
+             xmlns:localConverters="using:HN.Bangumi.Uwp.Converters"
+             xmlns:viewModels="using:HN.Bangumi.Uwp.ViewModels">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Styles/AppButtonStyles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+            <viewModels:ViewModelLocator x:Key="Locator" />
+            <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="InversedBooleanToVisibilityConverter"
+                                                     IsInversed="True" />
+            <converters:MultiplyConverter x:Key="MultiplyConverter" />
+            <localConverters:FileSizeToStringConverter x:Key="FileSizeToStringConverter" />
+            <localConverters:IsNullToVisibilityConverter IsInversed="True" x:Key="InversedIsNullToVisibilityConverter" />
+            <localConverters:ItemClickEventArgsConverter x:Key="ItemClickEventArgsConverter" />
+            <localConverters:SubjectNameConverter x:Key="SubjectNameConverter" />
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

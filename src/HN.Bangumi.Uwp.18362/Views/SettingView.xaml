@@ -1,0 +1,40 @@
+﻿<Page x:Class="HN.Bangumi.Uwp.Views.SettingView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:controls="using:HN.Bangumi.Uwp.Controls"
+      DataContext="{Binding Source={StaticResource Locator}, Path=Setting}"
+      mc:Ignorable="d">
+    <Grid>
+        <ScrollViewer Padding="12">
+            <StackPanel Orientation="Vertical">
+                <TextBlock FontSize="20"
+                           Text="图片数据" />
+                <Button Margin="0,8,0,0"
+                        Command="{Binding Path=ClearCacheCommand}"
+                        CornerRadius="2">
+                    <Grid>
+                        <Grid Visibility="{Binding Path=IsCleaningCache, Converter={StaticResource InversedBooleanToVisibilityConverter}}">
+                            <TextBlock><Run Text="清理缓存 (" /><Run Text="{Binding Path=CacheSize, Converter={StaticResource FileSizeToStringConverter}}" /><Run Text=")" /></TextBlock>
+                        </Grid>
+                        <Grid Visibility="{Binding Path=IsCleaningCache, Converter={StaticResource BooleanToVisibilityConverter}}">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock VerticalAlignment="Center"
+                                           Text="清理中" />
+                                <ProgressRing IsActive="{Binding Path=IsCleaningCache}" />
+                            </StackPanel>
+                        </Grid>
+                    </Grid>
+                </Button>
+                <TextBlock Margin="0,12,0,0"
+                           FontSize="20"
+                           Text="关于" />
+                <TextBlock Margin="0,8,0,0"
+                           Text="这是一个第三方 Bangumi 客户端，更多功能处于开发过程中。"
+                           TextWrapping="Wrap" />
+            </StackPanel>
+        </ScrollViewer>
+        <controls:AppLoadingControl IsLoading="True" />
+    </Grid>
+</Page>

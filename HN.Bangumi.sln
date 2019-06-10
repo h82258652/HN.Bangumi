@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 15
-VisualStudioVersion = 15.0.28307.421
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.28922.388
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{CB5BA37C-057E-4666-B141-6D9597230005}"
 	ProjectSection(SolutionItems) = preProject
@@ -31,6 +31,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HN.Bangumi.Services.Abstractions", "src\HN.Bangumi.Services.Abstractions\HN.Bangumi.Services.Abstractions.csproj", "{42297821-8B96-4893-A4E7-55071CBF25ED}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HN.Bangumi.Messages", "src\HN.Bangumi.Messages\HN.Bangumi.Messages.csproj", "{8985C461-54F5-4404-B01F-AEA87B3C384D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HN.Bangumi.Uwp.18362", "src\HN.Bangumi.Uwp.18362\HN.Bangumi.Uwp.18362.csproj", "{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -292,6 +294,32 @@ Global
 		{8985C461-54F5-4404-B01F-AEA87B3C384D}.Release|x64.Build.0 = Release|Any CPU
 		{8985C461-54F5-4404-B01F-AEA87B3C384D}.Release|x86.ActiveCfg = Release|Any CPU
 		{8985C461-54F5-4404-B01F-AEA87B3C384D}.Release|x86.Build.0 = Release|Any CPU
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|ARM.ActiveCfg = Debug|ARM
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|ARM.Build.0 = Debug|ARM
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|ARM.Deploy.0 = Debug|ARM
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|ARM64.Build.0 = Debug|ARM64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|x64.ActiveCfg = Debug|x64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|x64.Build.0 = Debug|x64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|x64.Deploy.0 = Debug|x64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|x86.ActiveCfg = Debug|x86
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|x86.Build.0 = Debug|x86
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Debug|x86.Deploy.0 = Debug|x86
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|Any CPU.ActiveCfg = Release|x86
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|ARM.ActiveCfg = Release|ARM
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|ARM.Build.0 = Release|ARM
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|ARM.Deploy.0 = Release|ARM
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|ARM64.ActiveCfg = Release|ARM64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|ARM64.Build.0 = Release|ARM64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|ARM64.Deploy.0 = Release|ARM64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|x64.ActiveCfg = Release|x64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|x64.Build.0 = Release|x64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|x64.Deploy.0 = Release|x64
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|x86.ActiveCfg = Release|x86
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|x86.Build.0 = Release|x86
+		{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}.Release|x86.Deploy.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

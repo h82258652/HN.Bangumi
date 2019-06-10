@@ -1,0 +1,494 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{BA6498A1-8ED4-4920-9B1A-434298EE6E8D}</ProjectGuid>
+    <OutputType>AppContainerExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HN.Bangumi.Uwp</RootNamespace>
+    <AssemblyName>HN.Bangumi.Uwp.18362</AssemblyName>
+    <DefaultLanguage>zh-CN</DefaultLanguage>
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion Condition=" '$(TargetPlatformVersion)' == '' ">10.0.18362.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.18362.0</TargetPlatformMinVersion>
+    <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{A5A43C5B-DE2A-4C0C-9213-0A381AF9435A};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WindowsXamlEnableOverview>true</WindowsXamlEnableOverview>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM'">
+    <OutputPath>bin\ARM\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|ARM64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\ARM64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|ARM64'">
+    <OutputPath>bin\ARM64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>ARM64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x64'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x64\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x64'">
+    <OutputPath>bin\x64\Release\</OutputPath>
+    <DefineConstants>TRACE;NETFX_CORE;WINDOWS_UWP</DefineConstants>
+    <Optimize>true</Optimize>
+    <NoWarn>;2008</NoWarn>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x64</PlatformTarget>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <ErrorReport>prompt</ErrorReport>
+    <Prefer32Bit>true</Prefer32Bit>
+    <UseDotNetNativeToolchain>true</UseDotNetNativeToolchain>
+  </PropertyGroup>
+  <PropertyGroup>
+    <RestoreProjectStyle>PackageReference</RestoreProjectStyle>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Configuration\AppCache.cs" />
+    <Compile Include="Controls\AppLoadingControl.cs" />
+    <Compile Include="Controls\AppLoadingControlItem.cs" />
+    <Compile Include="Controls\BindableMargin.xaml.cs">
+      <DependentUpon>BindableMargin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\EpItem.cs" />
+    <Compile Include="Controls\EpProgressControl.cs" />
+    <Compile Include="Controls\SubjectItem.xaml.cs">
+      <DependentUpon>SubjectItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ToastPrompt.cs" />
+    <Compile Include="Controls\ToastPromptHost.xaml.cs">
+      <DependentUpon>ToastPromptHost.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Converters\FileSizeToStringConverter.cs" />
+    <Compile Include="Converters\IsNullToVisibilityConverter.cs" />
+    <Compile Include="Converters\ItemClickEventArgsConverter.cs" />
+    <Compile Include="Converters\SubjectNameConverter.cs" />
+    <Compile Include="Extensions\ConnectedAnimationExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\AppDialogService.cs" />
+    <Compile Include="Services\AppNavigationService.cs" />
+    <Compile Include="Services\AppToastService.cs" />
+    <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\CalendarView.xaml.cs">
+      <DependentUpon>CalendarView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProgressView.xaml.cs">
+      <DependentUpon>ProgressView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SearchView.xaml.cs">
+      <DependentUpon>SearchView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SettingView.xaml.cs">
+      <DependentUpon>SettingView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShellView.xaml.cs">
+      <DependentUpon>ShellView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SubjectView.xaml.cs">
+      <DependentUpon>SubjectView.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AppxManifest Include="Package.appxmanifest">
+      <SubType>Designer</SubType>
+    </AppxManifest>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Assets\Images\avatar.jpg" />
+    <Content Include="Assets\Images\failed.png" />
+    <Content Include="Assets\Images\no_image_available.jpg" />
+    <Content Include="Assets\Images\smiles\01.gif" />
+    <Content Include="Assets\Images\smiles\02.gif" />
+    <Content Include="Assets\Images\smiles\03.gif" />
+    <Content Include="Assets\Images\smiles\04.gif" />
+    <Content Include="Assets\Images\smiles\05.gif" />
+    <Content Include="Assets\Images\smiles\06.gif" />
+    <Content Include="Assets\Images\smiles\07.gif" />
+    <Content Include="Assets\Images\smiles\08.gif" />
+    <Content Include="Assets\Images\smiles\09.gif" />
+    <Content Include="Assets\Images\smiles\10.gif" />
+    <Content Include="Assets\Images\smiles\100.gif" />
+    <Content Include="Assets\Images\smiles\11.gif" />
+    <Content Include="Assets\Images\smiles\12.gif" />
+    <Content Include="Assets\Images\smiles\13.gif" />
+    <Content Include="Assets\Images\smiles\14.gif" />
+    <Content Include="Assets\Images\smiles\15.gif" />
+    <Content Include="Assets\Images\smiles\16.gif" />
+    <Content Include="Assets\Images\smiles\17.gif" />
+    <Content Include="Assets\Images\smiles\18.gif" />
+    <Content Include="Assets\Images\smiles\19.gif" />
+    <Content Include="Assets\Images\smiles\20.gif" />
+    <Content Include="Assets\Images\smiles\21.gif" />
+    <Content Include="Assets\Images\smiles\22.gif" />
+    <Content Include="Assets\Images\smiles\23.gif" />
+    <Content Include="Assets\Images\smiles\24.gif" />
+    <Content Include="Assets\Images\smiles\25.gif" />
+    <Content Include="Assets\Images\smiles\26.gif" />
+    <Content Include="Assets\Images\smiles\27.gif" />
+    <Content Include="Assets\Images\smiles\28.gif" />
+    <Content Include="Assets\Images\smiles\29.gif" />
+    <Content Include="Assets\Images\smiles\30.gif" />
+    <Content Include="Assets\Images\smiles\31.gif" />
+    <Content Include="Assets\Images\smiles\32.gif" />
+    <Content Include="Assets\Images\smiles\33.gif" />
+    <Content Include="Assets\Images\smiles\34.gif" />
+    <Content Include="Assets\Images\smiles\35.gif" />
+    <Content Include="Assets\Images\smiles\36.gif" />
+    <Content Include="Assets\Images\smiles\37.gif" />
+    <Content Include="Assets\Images\smiles\38.gif" />
+    <Content Include="Assets\Images\smiles\39.gif" />
+    <Content Include="Assets\Images\smiles\40.gif" />
+    <Content Include="Assets\Images\smiles\41.gif" />
+    <Content Include="Assets\Images\smiles\42.gif" />
+    <Content Include="Assets\Images\smiles\43.gif" />
+    <Content Include="Assets\Images\smiles\44.gif" />
+    <Content Include="Assets\Images\smiles\45.gif" />
+    <Content Include="Assets\Images\smiles\46.gif" />
+    <Content Include="Assets\Images\smiles\47.gif" />
+    <Content Include="Assets\Images\smiles\48.gif" />
+    <Content Include="Assets\Images\smiles\49.gif" />
+    <Content Include="Assets\Images\smiles\50.gif" />
+    <Content Include="Assets\Images\smiles\51.gif" />
+    <Content Include="Assets\Images\smiles\52.gif" />
+    <Content Include="Assets\Images\smiles\53.gif" />
+    <Content Include="Assets\Images\smiles\54.gif" />
+    <Content Include="Assets\Images\smiles\55.gif" />
+    <Content Include="Assets\Images\smiles\56.gif" />
+    <Content Include="Assets\Images\smiles\57.gif" />
+    <Content Include="Assets\Images\smiles\58.gif" />
+    <Content Include="Assets\Images\smiles\59.gif" />
+    <Content Include="Assets\Images\smiles\60.gif" />
+    <Content Include="Assets\Images\smiles\61.gif" />
+    <Content Include="Assets\Images\smiles\62.gif" />
+    <Content Include="Assets\Images\smiles\63.gif" />
+    <Content Include="Assets\Images\smiles\64.gif" />
+    <Content Include="Assets\Images\smiles\65.gif" />
+    <Content Include="Assets\Images\smiles\66.gif" />
+    <Content Include="Assets\Images\smiles\67.gif" />
+    <Content Include="Assets\Images\smiles\68.gif" />
+    <Content Include="Assets\Images\smiles\69.gif" />
+    <Content Include="Assets\Images\smiles\70.gif" />
+    <Content Include="Assets\Images\smiles\71.gif" />
+    <Content Include="Assets\Images\smiles\72.gif" />
+    <Content Include="Assets\Images\smiles\73.gif" />
+    <Content Include="Assets\Images\smiles\74.gif" />
+    <Content Include="Assets\Images\smiles\75.gif" />
+    <Content Include="Assets\Images\smiles\76.gif" />
+    <Content Include="Assets\Images\smiles\77.gif" />
+    <Content Include="Assets\Images\smiles\78.gif" />
+    <Content Include="Assets\Images\smiles\79.gif" />
+    <Content Include="Assets\Images\smiles\80.gif" />
+    <Content Include="Assets\Images\smiles\81.gif" />
+    <Content Include="Assets\Images\smiles\82.gif" />
+    <Content Include="Assets\Images\smiles\83.gif" />
+    <Content Include="Assets\Images\smiles\84.gif" />
+    <Content Include="Assets\Images\smiles\85.gif" />
+    <Content Include="Assets\Images\smiles\86.gif" />
+    <Content Include="Assets\Images\smiles\87.gif" />
+    <Content Include="Assets\Images\smiles\88.gif" />
+    <Content Include="Assets\Images\smiles\89.gif" />
+    <Content Include="Assets\Images\smiles\90.gif" />
+    <Content Include="Assets\Images\smiles\91.gif" />
+    <Content Include="Assets\Images\smiles\92.gif" />
+    <Content Include="Assets\Images\smiles\93.gif" />
+    <Content Include="Assets\Images\smiles\94.gif" />
+    <Content Include="Assets\Images\smiles\95.gif" />
+    <Content Include="Assets\Images\smiles\96.gif" />
+    <Content Include="Assets\Images\smiles\97.gif" />
+    <Content Include="Assets\Images\smiles\98.gif" />
+    <Content Include="Assets\Images\smiles\99.gif" />
+    <Content Include="Assets\LargeTile.scale-100.png" />
+    <Content Include="Assets\LargeTile.scale-125.png" />
+    <Content Include="Assets\LargeTile.scale-150.png" />
+    <Content Include="Assets\LargeTile.scale-200.png" />
+    <Content Include="Assets\LargeTile.scale-400.png" />
+    <Content Include="Assets\SmallTile.scale-100.png" />
+    <Content Include="Assets\SmallTile.scale-125.png" />
+    <Content Include="Assets\SmallTile.scale-150.png" />
+    <Content Include="Assets\SmallTile.scale-200.png" />
+    <Content Include="Assets\SmallTile.scale-400.png" />
+    <Content Include="Assets\SplashScreen.scale-100.png" />
+    <Content Include="Assets\SplashScreen.scale-125.png" />
+    <Content Include="Assets\SplashScreen.scale-150.png" />
+    <Content Include="Assets\SplashScreen.scale-400.png" />
+    <Content Include="Assets\Square150x150Logo.scale-100.png" />
+    <Content Include="Assets\Square150x150Logo.scale-125.png" />
+    <Content Include="Assets\Square150x150Logo.scale-150.png" />
+    <Content Include="Assets\Square150x150Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.altform-unplated_targetsize-48.png" />
+    <Content Include="Assets\Square44x44Logo.scale-100.png" />
+    <Content Include="Assets\Square44x44Logo.scale-125.png" />
+    <Content Include="Assets\Square44x44Logo.scale-150.png" />
+    <Content Include="Assets\Square44x44Logo.scale-400.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-16.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-256.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-32.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-48.png" />
+    <Content Include="Assets\StoreLogo.backup.png" />
+    <Content Include="Assets\StoreLogo.scale-100.png" />
+    <Content Include="Assets\StoreLogo.scale-125.png" />
+    <Content Include="Assets\StoreLogo.scale-150.png" />
+    <Content Include="Assets\StoreLogo.scale-200.png" />
+    <Content Include="Assets\StoreLogo.scale-400.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-100.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-125.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-150.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Include="Properties\Default.rd.xml" />
+    <Content Include="Assets\LockScreenLogo.scale-200.png" />
+    <Content Include="Assets\SplashScreen.scale-200.png" />
+    <Content Include="Assets\Square150x150Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.scale-200.png" />
+    <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\StoreLogo.png" />
+    <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Autofac.Extras.CommonServiceLocator">
+      <Version>5.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="FontAwesome5">
+      <Version>1.0.11</Version>
+    </PackageReference>
+    <PackageReference Include="HN.Controls.ImageEx.Uwp">
+      <Version>1.0.10</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.AppCenter.Analytics">
+      <Version>2.0.0</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
+      <Version>6.2.8</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
+      <Version>2.0.1</Version>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>12.0.2</Version>
+    </PackageReference>
+    <PackageReference Include="WinRTXamlToolkit.UWP">
+      <Version>2.3.0</Version>
+    </PackageReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\HN.Bangumi.API.Core\HN.Bangumi.API.Core.csproj">
+      <Project>{4EDF132F-64BE-48F2-889E-0D5133A5E3AD}</Project>
+      <Name>HN.Bangumi.API.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.API.Uwp\HN.Bangumi.API.Uwp.csproj">
+      <Project>{6cd071e7-fe8e-47c3-ba4f-e5f5008f318e}</Project>
+      <Name>HN.Bangumi.API.Uwp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.Configuration.Abstractions\HN.Bangumi.Configuration.Abstractions.csproj">
+      <Project>{c091a433-3f6a-4dce-a81c-803f779d334f}</Project>
+      <Name>HN.Bangumi.Configuration.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.Configuration\HN.Bangumi.Configuration.csproj">
+      <Project>{2DDDEFE3-E65C-48E3-B8F5-591BF5EF74CB}</Project>
+      <Name>HN.Bangumi.Configuration</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.Services.Abstractions\HN.Bangumi.Services.Abstractions.csproj">
+      <Project>{42297821-8B96-4893-A4E7-55071CBF25ED}</Project>
+      <Name>HN.Bangumi.Services.Abstractions</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.Services\HN.Bangumi.Services.csproj">
+      <Project>{14f863b0-8eac-4cb6-8a69-b861b5d1b7aa}</Project>
+      <Name>HN.Bangumi.Services</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.Uwp.BackgroundTasks\HN.Bangumi.Uwp.BackgroundTasks.csproj">
+      <Project>{5c82a15c-a505-42d2-a31e-7a5b537affb9}</Project>
+      <Name>HN.Bangumi.Uwp.BackgroundTasks</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HN.Bangumi.ViewModels\HN.Bangumi.ViewModels.csproj">
+      <Project>{4C887DFC-BB80-4DA4-B919-0C04DF87907E}</Project>
+      <Name>HN.Bangumi.ViewModels</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <PRIResource Include="Strings\zh-CN\Resources.resw" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\AppLoadingControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\AppLoadingControlItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\BindableMargin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EpItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\EpProgressControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SubjectItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToastPrompt.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ToastPromptHost.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\AppButtonStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\AppImageStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\AppItemsViewStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Buttons\RefreshButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Images\DefaultImageExStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\ItemsViews\DefaultGridViewStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\CalendarView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProgressView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SettingView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShellView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SubjectView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup />
+  <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
+    <VisualStudioVersion>14.0</VisualStudioVersion>
+  </PropertyGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
