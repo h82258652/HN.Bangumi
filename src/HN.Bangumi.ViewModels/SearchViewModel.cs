@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading;
+using System.Threading.Tasks;
 using GalaSoft.MvvmLight;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Views;
@@ -163,6 +164,9 @@ namespace HN.Bangumi.ViewModels
                             _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
+                    catch (TaskCanceledException)
+                    {
+                    }
                     catch (HttpRequestException)
                     {
                         _appToastService.ShowError("搜索动画失败，请稍后重试");
@@ -214,6 +218,9 @@ namespace HN.Bangumi.ViewModels
                         {
                             _appToastService.ShowError(result.ErrorMessage);
                         }
+                    }
+                    catch (TaskCanceledException)
+                    {
                     }
                     catch (HttpRequestException)
                     {
@@ -267,6 +274,9 @@ namespace HN.Bangumi.ViewModels
                             _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
+                    catch (TaskCanceledException)
+                    {
+                    }
                     catch (HttpRequestException)
                     {
                         _appToastService.ShowError("搜索游戏失败，请稍后重试");
@@ -319,6 +329,9 @@ namespace HN.Bangumi.ViewModels
                             _appToastService.ShowError(result.ErrorMessage);
                         }
                     }
+                    catch (TaskCanceledException)
+                    {
+                    }
                     catch (HttpRequestException)
                     {
                         _appToastService.ShowError("搜索音乐失败，请稍后重试");
@@ -370,6 +383,9 @@ namespace HN.Bangumi.ViewModels
                         {
                             _appToastService.ShowError(result.ErrorMessage);
                         }
+                    }
+                    catch (TaskCanceledException)
+                    {
                     }
                     catch (HttpRequestException)
                     {
