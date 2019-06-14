@@ -23,21 +23,48 @@
                         <VisualStateManager.VisualStateGroups>
                             <VisualStateGroup x:Name="LoadingStates">
                                 <VisualState x:Name="Unloading" />
-                                <VisualState x:Name="Loading" />
+                                <VisualState x:Name="Loading">
+                                    <Storyboard>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Item1"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <DiscreteDoubleKeyFrame KeyTime="0:0:0"
+                                                                    Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Item2"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <DiscreteDoubleKeyFrame KeyTime="0:0:0"
+                                                                    Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Item3"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <DiscreteDoubleKeyFrame KeyTime="0:0:0"
+                                                                    Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_Item4"
+                                                                       Storyboard.TargetProperty="Opacity">
+                                            <DiscreteDoubleKeyFrame KeyTime="0:0:0"
+                                                                    Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <controls:AppLoadingControlItem x:Name="PART_Item1"
                                                         Grid.Column="0"
-                                                        Margin="{TemplateBinding Padding}" />
+                                                        Margin="{TemplateBinding Padding}"
+                                                        Opacity="0" />
                         <controls:AppLoadingControlItem x:Name="PART_Item2"
                                                         Grid.Column="1"
-                                                        Margin="{TemplateBinding Padding}" />
+                                                        Margin="{TemplateBinding Padding}"
+                                                        Opacity="0" />
                         <controls:AppLoadingControlItem x:Name="PART_Item3"
                                                         Grid.Column="2"
-                                                        Margin="{TemplateBinding Padding}" />
+                                                        Margin="{TemplateBinding Padding}"
+                                                        Opacity="0" />
                         <controls:AppLoadingControlItem x:Name="PART_Item4"
                                                         Grid.Column="3"
-                                                        Margin="{TemplateBinding Padding}" />
+                                                        Margin="{TemplateBinding Padding}"
+                                                        Opacity="0" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
