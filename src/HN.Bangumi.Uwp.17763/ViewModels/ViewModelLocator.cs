@@ -12,7 +12,6 @@ using HN.Bangumi.Uwp.Services;
 using HN.Bangumi.Uwp.Views;
 using HN.Bangumi.ViewModels;
 using HN.Cache;
-using HN.Services;
 
 namespace HN.Bangumi.Uwp.ViewModels
 {
