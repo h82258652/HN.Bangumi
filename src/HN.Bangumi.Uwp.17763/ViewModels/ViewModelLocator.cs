@@ -20,13 +20,6 @@ namespace HN.Bangumi.Uwp.ViewModels
     {
         static ViewModelLocator()
         {
-            ImageExService.ConfigureImageSource(options =>
-            {
-                options.WithDefaultServices();
-                options.WithDefaultPipes();
-                options.UseHttpHandler<BangumiHttpHandler>();
-            });
-
             var autofacServiceLocator = new AutofacServiceLocator(ConfigureAutofacContainer());
             ServiceLocator.SetLocatorProvider(() => autofacServiceLocator);
         }
