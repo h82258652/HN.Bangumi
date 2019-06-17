@@ -31,7 +31,7 @@
             </Setter.Value>
         </Setter>
         <Setter Property="RetryCount"
-                Value="10" />
+                Value="5" />
         <Setter Property="RetryDelay"
                 Value="0:0:0.3" />
     </Style>
