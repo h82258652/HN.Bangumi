@@ -8,6 +8,8 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Styles/AppButtonStyles.xaml" />
+                <ResourceDictionary Source="/Styles/AppImageStyles.xaml" />
+                <ResourceDictionary Source="/Styles/AppItemsViewStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <viewModels:ViewModelLocator x:Key="Locator" />
             <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter" />
