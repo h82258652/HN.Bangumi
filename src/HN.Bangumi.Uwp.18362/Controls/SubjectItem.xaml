@@ -9,7 +9,7 @@
              d:DesignHeight="300"
              d:DesignWidth="400"
              mc:Ignorable="d">
-    <Grid>
+    <Grid Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -32,7 +32,14 @@
                      HorizontalAlignment="Left"
                      Visibility="{Binding Path=Rating, Converter={StaticResource InversedIsNullToVisibilityConverter}}">
                 <RatingControl IsReadOnly="True"
-                               Value="{Binding Path=Rating.Score, Converter={StaticResource MultiplyConverter}, ConverterParameter='0.5'}" />
+                               Value="{Binding Path=Rating.Score, Converter={StaticResource MultiplyConverter}, ConverterParameter='0.5'}">
+                    <RatingControl.Resources>
+                        <ResourceDictionary>
+                            <SolidColorBrush x:Key="RatingControlSelectedForeground"
+                                             Color="#7A7A7A" />
+                        </ResourceDictionary>
+                    </RatingControl.Resources>
+                </RatingControl>
             </Viewbox>
             <Grid Grid.Row="1">
                 <TextBlock MaxLines="2"
