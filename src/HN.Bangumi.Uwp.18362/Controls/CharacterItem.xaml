@@ -1,0 +1,100 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:controls="using:HN.Controls"
+                    xmlns:localControls="using:HN.Bangumi.Uwp.Controls">
+    <Style TargetType="localControls:CharacterItem">
+        <Setter Property="Background"
+                Value="White" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="0" />
+        <Setter Property="RoleNameFontSize"
+                Value="11" />
+        <Setter Property="RoleNameForeground"
+                Value="White" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="localControls:CharacterItem">
+                    <Grid Background="{TemplateBinding Background}"
+                          BorderBrush="{TemplateBinding BorderBrush}"
+                          BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="RoleStates">
+                                <VisualState x:Name="Lead">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RoleNameBorder"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <AcrylicBrush TintColor="HotPink" />
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Minor">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RoleNameBorder"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <AcrylicBrush TintColor="Pink" />
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Aside">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetName="RoleNameBorder"
+                                                                       Storyboard.TargetProperty="Background">
+                                            <DiscreteObjectKeyFrame KeyTime="0:0:0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <AcrylicBrush TintColor="ForestGreen" />
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid Grid.Row="0"
+                              Width="162"
+                              Height="162">
+                            <controls:ImageEx Source="{TemplateBinding ImageSource}"
+                                              Stretch="UniformToFill" />
+                            <Border x:Name="RoleNameBorder"
+                                    Margin="8"
+                                    Padding="6,3,6,3"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Bottom"
+                                    CornerRadius="4">
+                                <TextBlock FontSize="{TemplateBinding RoleNameFontSize}"
+                                           Foreground="{TemplateBinding RoleNameForeground}"
+                                           Text="{TemplateBinding RoleName}" />
+                            </Border>
+                        </Grid>
+                        <Grid Grid.Row="1"
+                              Width="162"
+                              Padding="8,4,8,4">
+                            <TextBlock x:Name="PlaceholderTextBlock"
+                                       AutomationProperties.AccessibilityView="Raw"
+                                       IsHitTestVisible="False"
+                                       MaxLines="2"
+                                       Opacity="0"><Run Text="Xg" /><LineBreak /><Run Text="Xg" /></TextBlock>
+                            <TextBlock MaxLines="2"
+                                       Text="{TemplateBinding CharacterName}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap" />
+                        </Grid>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

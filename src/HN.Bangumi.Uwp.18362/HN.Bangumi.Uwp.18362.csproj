@@ -124,8 +124,11 @@
     <Compile Include="Controls\BindableMargin.xaml.cs">
       <DependentUpon>BindableMargin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CharacterItem.cs" />
     <Compile Include="Controls\EpItem.cs" />
     <Compile Include="Controls\EpProgressControl.cs" />
+    <Compile Include="Controls\LazyContentControl.cs" />
+    <Compile Include="Controls\StaffItem.cs" />
     <Compile Include="Controls\SubjectItem.xaml.cs">
       <DependentUpon>SubjectItem.xaml</DependentUpon>
     </Compile>
@@ -133,9 +136,14 @@
     <Compile Include="Controls\ToastPromptHost.xaml.cs">
       <DependentUpon>ToastPromptHost.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converters\CharacterNameConverter.cs" />
     <Compile Include="Converters\FileSizeToStringConverter.cs" />
+    <Compile Include="Converters\IsEmptyCollectionToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsEqualsToVisibilityConverter.cs" />
+    <Compile Include="Converters\IsNullOrEmptyStringConverter.cs" />
     <Compile Include="Converters\IsNullToVisibilityConverter.cs" />
     <Compile Include="Converters\ItemClickEventArgsConverter.cs" />
+    <Compile Include="Converters\StaffNameConverter.cs" />
     <Compile Include="Converters\SubjectNameConverter.cs" />
     <Compile Include="Extensions\ConnectedAnimationExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -335,7 +343,7 @@
       <Version>1.0.12</Version>
     </PackageReference>
     <PackageReference Include="HN.Controls.ImageEx.Uwp">
-      <Version>1.0.14</Version>
+      <Version>1.0.15</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Analytics">
       <Version>2.1.1</Version>
@@ -344,6 +352,9 @@
       <Version>6.2.8</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Animations">
+      <Version>5.1.1</Version>
+    </PackageReference>
+    <PackageReference Include="Microsoft.Toolkit.Uwp.UI.Controls">
       <Version>5.1.1</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Xaml.Behaviors.Uwp.Managed">
@@ -406,11 +417,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\CharacterItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\EpItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\EpProgressControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\LazyContentControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StaffItem.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -435,6 +458,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\AppItemsViewStyles.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Buttons\EpItemButtonStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Buttons\EpItemCancelButtonStyle.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -3,7 +3,6 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:controls="using:HN.Bangumi.Uwp.Controls"
       DataContext="{Binding Source={StaticResource Locator}, Path=Setting}"
       mc:Ignorable="d">
     <Grid>
@@ -22,7 +21,8 @@
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock VerticalAlignment="Center"
                                            Text="清理中" />
-                                <ProgressRing IsActive="{Binding Path=IsCleaningCache}" />
+                                <ProgressRing Margin="4,0,0,0"
+                                              IsActive="{Binding Path=IsCleaningCache}" />
                             </StackPanel>
                         </Grid>
                     </Grid>
@@ -35,6 +35,5 @@
                            TextWrapping="Wrap" />
             </StackPanel>
         </ScrollViewer>
-        <controls:AppLoadingControl IsLoading="True" />
     </Grid>
 </Page>

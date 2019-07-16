@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using HN.Bangumi.Uwp.Views;
 using Microsoft.AppCenter;
-using Windows.ApplicationModel;
 using Microsoft.AppCenter.Analytics;
+using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.ApplicationModel.Background;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
-using HN.Bangumi.Uwp.Views;
 
 namespace HN.Bangumi.Uwp
 {
@@ -110,12 +110,13 @@ namespace HN.Bangumi.Uwp
                 }
             }
         }
+
         /// <summary>
         /// 导航到特定页失败时调用
         /// </summary>
         ///<param name="sender">导航失败的框架</param>
         ///<param name="e">有关导航失败的详细信息</param>
-        void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
+        private void OnNavigationFailed(object sender, NavigationFailedEventArgs e)
         {
             throw new Exception("Failed to load Page " + e.SourcePageType.FullName);
         }

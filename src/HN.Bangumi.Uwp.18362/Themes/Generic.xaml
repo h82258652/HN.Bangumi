@@ -2,8 +2,10 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/Controls/AppLoadingControl.xaml" />
         <ResourceDictionary Source="/Controls/AppLoadingControlItem.xaml" />
+        <ResourceDictionary Source="/Controls/CharacterItem.xaml" />
         <ResourceDictionary Source="/Controls/EpItem.xaml" />
         <ResourceDictionary Source="/Controls/EpProgressControl.xaml" />
+        <ResourceDictionary Source="/Controls/StaffItem.xaml" />
         <ResourceDictionary Source="/Controls/ToastPrompt.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

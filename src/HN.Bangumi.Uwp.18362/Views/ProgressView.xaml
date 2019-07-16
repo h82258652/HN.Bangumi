@@ -35,6 +35,12 @@
                     </Grid>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid HorizontalAlignment="Center"
+                                   Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
         </GridView>
         <controls:AppLoadingControl IsLoading="{Binding Path=IsLoading}" />
     </Grid>

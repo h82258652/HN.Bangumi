@@ -19,6 +19,7 @@ namespace HN.Bangumi.Uwp.Controls
         public static readonly DependencyProperty EpNameProperty = DependencyProperty.Register(nameof(EpName), typeof(string), typeof(EpItem), new PropertyMetadata(default(string)));
         public static readonly DependencyProperty SortProperty = DependencyProperty.Register(nameof(Sort), typeof(float), typeof(EpItem), new PropertyMetadata(default(float)));
         public static readonly DependencyProperty StatusProperty = DependencyProperty.Register(nameof(Status), typeof(string), typeof(EpItem), new PropertyMetadata(default(string), OnStatusChanged));
+        public static readonly DependencyProperty UpdateStatusButtonVisibilityProperty = DependencyProperty.Register(nameof(UpdateStatusButtonVisibility), typeof(Visibility), typeof(EpItem), new PropertyMetadata(Visibility.Collapsed));
 
         private const string AirStateName = "Air";
         private const string DropButtonTemplateName = "PART_DropButton";
@@ -81,6 +82,12 @@ namespace HN.Bangumi.Uwp.Controls
         {
             get => (string)GetValue(StatusProperty);
             set => SetValue(StatusProperty, value);
+        }
+
+        public Visibility UpdateStatusButtonVisibility
+        {
+            get => (Visibility)GetValue(UpdateStatusButtonVisibilityProperty);
+            set => SetValue(UpdateStatusButtonVisibilityProperty, value);
         }
 
         protected override void OnApplyTemplate()

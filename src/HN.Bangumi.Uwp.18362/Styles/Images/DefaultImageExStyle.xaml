@@ -9,6 +9,24 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="LoadingTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Text="Loading..." />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="PlaceholderTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Image HorizontalAlignment="Center"
+                           Source="/Assets/Images/no_image_available.jpg"
+                           Stretch="UniformToFill" />
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="RetryCount"
                 Value="5" />
         <Setter Property="RetryDelay"

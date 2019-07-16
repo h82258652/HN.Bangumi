@@ -1,10 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 
 namespace HN.Bangumi.Uwp.Extensions
 {
+    public class X : ThemeShadow
+    {
+        public X():base()
+        {
+        }
+    }
+
     public static class ConnectedAnimationExtensions
     {
         private static readonly ConditionalWeakTable<ConnectedAnimation, Dictionary<string, object>> WeakTable = new ConditionalWeakTable<ConnectedAnimation, Dictionary<string, object>>();

@@ -6,6 +6,8 @@
                 Value="#333333" />
         <Setter Property="Background"
                 Value="LightGray" />
+        <Setter Property="Foreground"
+                Value="{ThemeResource SystemAccentColor}" />
         <Setter Property="FrontTextBrush"
                 Value="White" />
         <Setter Property="Padding"

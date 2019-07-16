@@ -29,6 +29,7 @@
             </Grid.RowDefinitions>
             <Viewbox Grid.Row="0"
                      Height="24"
+                     Margin="0,0,0,-4"
                      HorizontalAlignment="Left"
                      Visibility="{Binding Path=Rating, Converter={StaticResource InversedIsNullToVisibilityConverter}}">
                 <RatingControl IsReadOnly="True"
@@ -42,6 +43,11 @@
                 </RatingControl>
             </Viewbox>
             <Grid Grid.Row="1">
+                <TextBlock x:Name="PlaceholderTextBlock"
+                           AutomationProperties.AccessibilityView="Raw"
+                           IsHitTestVisible="False"
+                           MaxLines="2"
+                           Opacity="0"><Run Text="Xg" /><LineBreak /><Run Text="Xg" /></TextBlock>
                 <TextBlock MaxLines="2"
                            Text="{Binding Converter={StaticResource SubjectNameConverter}}"
                            TextTrimming="CharacterEllipsis"

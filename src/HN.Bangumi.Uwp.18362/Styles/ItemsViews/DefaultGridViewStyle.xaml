@@ -13,6 +13,13 @@
                 </Style>
             </Setter.Value>
         </Setter>
+        <Setter Property="ItemContainerTransitions">
+            <Setter.Value>
+                <TransitionCollection />
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Padding"
+                Value="12,12,0,0" />
         <Setter Property="animations:ReorderGridAnimation.Duration"
                 Value="250" />
     </Style>

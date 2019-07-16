@@ -8,7 +8,6 @@
       xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
       xmlns:localControls="using:HN.Bangumi.Uwp.Controls"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
       DataContext="{Binding Source={StaticResource Locator}, Path=Subject}"
       mc:Ignorable="d">
     <Page.Transitions>
@@ -57,13 +56,16 @@
                                Header="章节">
                         <StackPanel Orientation="Vertical">
                             <GridView animations:ReorderGridAnimation.Duration="NaN"
-                                      ItemsSource="{Binding Path=NormalEps}">
+                                      ItemsSource="{Binding Path=NormalEps}"
+                                      ScrollViewer.VerticalScrollMode="Disabled">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>
                                         <localControls:EpItem AirDate="{Binding Path=AirDate}"
                                                               EpChineseName="{Binding Path=NameCn}"
                                                               EpName="{Binding Path=Name}"
                                                               Sort="{Binding Path=Sort}"
+                                                              Status="{Binding Path=Status}"
+                                                              UpdateStatusButtonVisibility="{Binding ElementName=RootGrid, Path=DataContext.IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                               Duration="{Binding Path=Duration}">
                                             <interactivity:Interaction.Behaviors>
                                                 <core:EventTriggerBehavior EventName="WatchedButtonClick">
@@ -88,15 +90,19 @@
                                 </ItemsControl.ItemTemplate>
                             </GridView>
                             <GridView animations:ReorderGridAnimation.Duration="NaN"
-                                      ItemsSource="{Binding Path=SpecialEps}">
+                                      ItemsSource="{Binding Path=SpecialEps}"
+                                      ScrollViewer.VerticalScrollMode="Disabled"
+                                      Visibility="{Binding Path=SpecialEps, Converter={StaticResource InversedIsEmptyCollectionToVisibilityConverter}}">
                                 <ListViewBase.Header>
-                                    <StackPanel Orientation="Horizontal">
+                                    <StackPanel Margin="0,0,0,8"
+                                                Orientation="Horizontal">
                                         <Rectangle Width="6">
                                             <Shape.Fill>
                                                 <SolidColorBrush Color="{ThemeResource SystemAccentColor}" />
                                             </Shape.Fill>
                                         </Rectangle>
-                                        <TextBlock FontSize="18"
+                                        <TextBlock Margin="4,0,0,0"
+                                                   FontSize="18"
                                                    Text="SP" />
                                     </StackPanel>
                                 </ListViewBase.Header>
@@ -106,6 +112,8 @@
                                                               EpChineseName="{Binding Path=NameCn}"
                                                               EpName="{Binding Path=Name}"
                                                               Sort="{Binding Path=Sort}"
+                                                              Status="{Binding Path=Status}"
+                                                              UpdateStatusButtonVisibility="{Binding ElementName=RootGrid, Path=DataContext.IsSignIn, Converter={StaticResource BooleanToVisibilityConverter}}"
                                                               Duration="{Binding Path=Duration}">
                                             <interactivity:Interaction.Behaviors>
                                                 <core:EventTriggerBehavior EventName="WatchedButtonClick">
@@ -132,9 +140,30 @@
                         </StackPanel>
                     </PivotItem>
                     <PivotItem Padding="0,12,0,0"
-                               Header="角色介绍" />
+                               Header="角色介绍">
+                        <GridView ItemsSource="{Binding Path=Subject.Crt}"
+                                  ScrollViewer.VerticalScrollMode="Disabled">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <localControls:CharacterItem CharacterName="{Binding Converter={StaticResource CharacterNameConverter}}"
+                                                                 ImageSource="{Binding Path=Images.Medium}"
+                                                                 RoleName="{Binding Path=RoleName}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </GridView>
+                    </PivotItem>
                     <PivotItem Padding="0,12,0,0"
-                               Header="制作人员" />
+                               Header="制作人员">
+                        <GridView ItemsSource="{Binding Path=Subject.Staff}"
+                                  ScrollViewer.VerticalScrollMode="Disabled">
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <localControls:StaffItem ImageSource="{Binding Path=Images.Medium}"
+                                                             StaffName="{Binding Converter={StaticResource StaffNameConverter}}" />
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </GridView>
+                    </PivotItem>
                 </Pivot>
             </Grid>
         </ScrollViewer>
@@ -149,5 +178,6 @@
                           Height="80"
                           IsActive="{Binding Path=IsBusy}" />
         </Border>
+        <localControls:AppLoadingControl IsLoading="{Binding Path=IsLoading}" />
     </Grid>
 </Page>

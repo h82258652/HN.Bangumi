@@ -8,6 +8,9 @@ using Windows.UI.Xaml.Media;
 namespace HN.Bangumi.Uwp.Controls
 {
     [TemplatePart(Name = OuterGridTemplateName, Type = typeof(Grid))]
+    [TemplatePart(Name = BackProgressTextBlockTemplateName, Type = typeof(TextBlock))]
+    [TemplatePart(Name = ProgressGridTemplateName, Type = typeof(Grid))]
+    [TemplatePart(Name = FrontProgressTextBlockTemplateName, Type = typeof(TextBlock))]
     public class EpProgressControl : Control
     {
         public static readonly DependencyProperty BackTextBrushProperty = DependencyProperty.Register(nameof(BackTextBrush), typeof(Brush), typeof(EpProgressControl), new PropertyMetadata(default(Brush)));

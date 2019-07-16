@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using System;
+using System.Diagnostics;
 using HN.Bangumi.Uwp.Extensions;
 using HN.Bangumi.ViewModels;
 using Windows.UI.Xaml.Media.Animation;
@@ -32,9 +33,24 @@ namespace HN.Bangumi.Uwp.Views
                 var subjectImageUrl = animation.GetExtraData("SubjectImageUrl");
                 if (subjectImageUrl != null)
                 {
+                    SubjectImage.Opacity = 0;
+
+                    EventHandler handler = null;
+                    handler = (sender, args) =>
+                    {
+                        SubjectImage.ImageOpened -= handler;
+
+                        SubjectImage.Opacity = 1;
+                        animation.TryStart(SubjectImage);
+                    };
+                    SubjectImage.ImageOpened += handler;
+
                     SubjectImage.Source = subjectImageUrl;
                 }
-                animation.TryStart(SubjectImage);
+                else
+                {
+                    animation.TryStart(SubjectImage);
+                }
             }
         }
 
