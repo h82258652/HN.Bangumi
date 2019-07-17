@@ -343,7 +343,7 @@
       <Version>1.0.12</Version>
     </PackageReference>
     <PackageReference Include="HN.Controls.ImageEx.Uwp">
-      <Version>1.0.15</Version>
+      <Version>1.0.16</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.AppCenter.Analytics">
       <Version>2.1.1</Version>
