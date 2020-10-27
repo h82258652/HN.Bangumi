@@ -94,7 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="CefSharp.Common">
-      <Version>73.1.130</Version>
+      <Version>85.3.130</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
       <Version>73.1.130</Version>
