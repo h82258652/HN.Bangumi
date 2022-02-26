@@ -97,7 +97,7 @@
       <Version>73.1.130</Version>
     </PackageReference>
     <PackageReference Include="CefSharp.WinForms">
-      <Version>73.1.130</Version>
+      <Version>98.1.210</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.Options">
       <Version>2.2.0</Version>
